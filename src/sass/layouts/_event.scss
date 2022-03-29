@@ -111,40 +111,32 @@
     margin-bottom: 10px;
   }
 
-  &__title {
+  &__item--title {
     display: flex;
     font-size: 20px;
     line-height: 1.219;
     margin-bottom: 5px;
   }
 
-  &__text {
-    margin-top: 10px;
-    font-size: 12px;
-    line-height: 1.67;
+  &__item--info {
+    font-size: 16px;
+    line-height: 1.219;
   }
-  &__btn {
+  &__item--link {
     padding-top: 10px;
     padding-bottom: 10px;
   }
 }
 
-.buttons__container.movie__btn {
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
+.buttons__container.event__btn {
+  display: flex;
   align-items: center;
   width: 100%;
   @include mq(mobile) {
-    width: 240px;
+    width: 230px;
   }
   @include mq(tablet) {
-    width: 264px;
-    gap: 10px;
-  }
-  @include mq(desktop) {
-    width: 396px;
-    gap: 0 20px;
+    width: 255px;
   }
 }
 
