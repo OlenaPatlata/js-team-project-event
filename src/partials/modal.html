@@ -1,0 +1,65 @@
+<div class="backdrop is-hidden" data-modal="event-one">
+  <div class="modal">
+    <button class="modal-close modal__close" type="button" data-modal-close="event-one">
+      <svg class="modal__icon--close" id="close">
+        <!-- <use href="./images/sprite.svg#icon-close"></use> -->
+      </svg>
+    </button>
+    <div class="modal__wrapper"></div>
+  </div>
+</div>
+
+<div class="round__wrapper">
+  <picture>
+    <source srcset="${poster} 1x, ${poster2x} 2x" media="(max-width:1023px)" />
+    <source srcset="${posterBig} 1x, ${posterBig2x} 2x" media="(min-width:1024px)" />
+    <img class="round__img" alt="${title}" src="${poster}" loading="lazy" />
+  </picture>
+</div>
+<div class="modal__content">
+  <div class="poster__wrapper">
+    <picture>
+      <source srcset="${poster} 1x, ${poster2x} 2x" media="(max-width:1023px)" />
+      <source srcset="${posterBig} 1x, ${posterBig2x} 2x" media="(min-width:1024px)" />
+      <img class="poster__img" alt="${title}" src="${poster}" loading="lazy" />
+    </picture>
+  </div>
+  <div class="event">
+    <ul class="event__list">
+      <li class="event__item">
+        <h3 class="event__item--title uppercase">INFO</h3>
+        <p class="event__item--info">${info}</p>
+      </li>
+      <li class="event__item">
+        <h3 class="event__item--title uppercase">WHEN</h3>
+        <p class="event__item--info">${dates.start.localDate}</p>
+        <p class="event__item--info">${dates.start.localtime} (${dates.timezone})</p>
+      </li>
+      <li class="event__item">
+        <h3 class="event__item--title uppercase">WHERE</h3>
+        <p class="event__item--info"></p>
+        <p class="event__item--info"></p>
+      </li>
+      <li class="event__item">
+        <h3 class="event__item--title uppercase">WHO</h3>
+        <p class="event__item--info">${name}</p>
+      </li>
+      <li class="event__item">
+        <h3 class="event__item--title uppercase">PRICES</h3>
+        <p class="event__item--info">
+          ${priceRanges[0].type} ${priceRanges[0].min}-${priceRanges[0].max}
+          ${priceRanges[0].currency}
+        </p>
+        <a href="" class=""></a>
+        <p class="event__item--info">
+          ${priceRanges[1].type} ${priceRanges[1].min}-${priceRanges[1].max}
+          ${priceRanges[1].currency}
+        </p>
+        <a href="" class=""></a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="event__btn button__container">
+  <button type="button" class="btn--modal uppercase" data-btn="more">MORE FROM THIS AUTHOR</button>
+</div>
