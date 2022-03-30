@@ -34,17 +34,36 @@
     }
   }
 
-  &__logo {
+  &__logo-bg {
     display: block;
     position: absolute;
     top: 0;
     left: 0;
-    width: 200px;
-    height: 200px;
+    width: 110px;
+    height: 80px;
+
+    background: linear-gradient(
+      136.07deg,
+      rgba(196, 196, 196, 0.03) 10.75%,
+      rgba(196, 196, 196, 0) 92.33%
+    );
+    backdrop-filter: blur(30px);
+    border-bottom-right-radius: 100%;
+  }
+
+  &__logo {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 111px;
+    height: 95px;
+    z-index: 100;
   }
 
   &__title-wrapper {
     margin: 0 auto 25px;
+    width: 220px;
     @include mq(tablet) {
       width: 370px;
     }
@@ -71,10 +90,25 @@
   }
 
   &__search-wrapper {
+    position: relative;
     @include mq(tablet) {
       margin: 0 auto;
       display: flex;
       justify-content: center;
+    }
+  }
+
+  &__search-icon {
+    position: absolute;
+    top: 14px;
+    right: 35px;
+
+    @include mq(tablet) {
+      left: 240px;
+    }
+
+    @include mq(desktop) {
+      left: 280px;
     }
   }
 
@@ -84,7 +118,7 @@
     display: block;
     margin-bottom: 25px;
     padding-left: 30px;
-    padding-right: 30px;
+    padding-right: 50px;
     width: 270px;
     height: 40px;
     outline: transparent;
@@ -116,8 +150,10 @@
   &__countries {
     padding-right: 50px;
     margin-bottom: unset;
-    color: rgba(147, 147, 147, 1);
+    color: var(--input-gray-color);
     appearance: none;
+    position: relative;
+    order: 0;
   }
 
   &__custom-arrow {
@@ -150,6 +186,102 @@
   &__custom-arrow::before {
     border-left: 0.5em solid transparent;
     border-right: 0.5em solid transparent;
-    border-top: 0.5em solid rgba(147, 147, 147, 1);
+    border-top: 0.5em solid var(--input-gray-color);
   }
+}
+
+/////////////////////// Dropdown //////////////////////////
+
+.select-box {
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+.select-box .options-container {
+  position: absolute;
+  background-color: var(--tertiary-gray-color);
+  color: var(--primary-pink-color);
+  max-height: 0;
+  width: 270px;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.select-box .options-container.active {
+  position: absolute;
+  top: 86px;
+  left: 6px;
+  max-height: 240px;
+  opacity: 1;
+  overflow-y: scroll;
+
+  @include mq(tablet) {
+    left: 0;
+  }
+}
+
+.select-box .options-container::-webkit-scrollbar {
+  display: none;
+}
+
+.select-box .options-container::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+.select-box .option,
+.selected {
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.select-box .option:hover {
+  background-color: var(--tertiary-gray-color);
+  border-radius: 20px;
+}
+
+.select-box label {
+  cursor: pointer;
+}
+
+.select-box .option .radio {
+  display: none;
+}
+
+.search-box input {
+  position: absolute;
+  top: 43px;
+  left: 6px;
+  width: 270px;
+  height: 40px;
+  padding: 12px;
+  padding-left: 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  border-radius: 20px;
+  z-index: 100;
+  color: var(--primary-pink-color);
+  background-color: var(--tertiary-gray-color);
+  border: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+
+  @include mq(tablet) {
+    left: 0;
+  }
+}
+
+.search-box input::placeholder {
+  color: var(--input-gray-color);
+}
+
+.select-box .search-box input.active {
+  opacity: 1;
+}
+
+.search-box input:focus {
+  outline: none;
 }
