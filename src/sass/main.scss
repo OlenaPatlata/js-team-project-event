@@ -4,8 +4,11 @@
  */
 
 // Стили для файла с примером HTML-фрагмента
-@import './example';
 @import './layouts/mixins';
 @import './layouts/common';
-@import './layouts/modal';
-@import './layouts/event';
+@import './layouts/visually-hiden';
+
+// Gallery
+@import './layouts/searchbar';
+@import './components/loader';
+@import './components/gallery';
