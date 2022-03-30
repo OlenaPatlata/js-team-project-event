@@ -30,6 +30,7 @@ const eventCardMarkup = events =>
     .join('');
 
 const renderMarkup = events => {
+  eventList.innerHTML = '';
   const markup = eventCardMarkup(events);
   eventList.insertAdjacentHTML('beforeend', markup);
 };
