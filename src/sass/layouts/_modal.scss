@@ -7,7 +7,7 @@
   z-index: 10;
   margin-left: auto;
   margin-right: auto;
-  background-color: var(--backdrop-cl);
+  filter: blur(4px);
   opacity: 1;
   transition: opacity 250ms linear, visibility 250ms linear;
   overflow-y: scroll;
@@ -19,10 +19,11 @@
 }
 .modal-close {
   position: absolute;
+  z-index: 11;
   top: 0;
   right: 0;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   padding: 0;
   transform: translate(-50%, 50%);
   display: flex;

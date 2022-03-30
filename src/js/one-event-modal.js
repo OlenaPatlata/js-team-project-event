@@ -1,27 +1,14 @@
 // Функция создающая разметку для одного события
 export default function makeOneEventMarkup(dataEvent) {
-  const {
-    title,
-    poster_path,
-    genres,
-    vote_average,
-    vote_count,
-    original_title,
-    overview,
-    popularity,
-    watched,
-    queued,
-    videos,
-  } = dataEvent;
-  const genresNames = genres.map(genre => genre.name).join(', ');
-  const poster = poster_path ? `https://image.tmdb.org/t/p/w342${poster_path}` : notFoundImg;
-  const poster2x = poster_path
-    ? `https://image.tmdb.org/t/p/w500${poster_path}`
-    : notFoundImgRetina;
-  const posterBig = poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : notFoundImgBig;
-  const posterBig2x = poster_path
-    ? `https://image.tmdb.org/t/p/w780${poster_path}`
-    : notFoundImgBigRetina;
+  const { info, dates, name, priceRanges, _embedded } = dataEvent;
+  //   const poster = poster_path ? `https://image.tmdb.org/t/p/w342${poster_path}` : notFoundImg;
+  //   const poster2x = poster_path
+  //     ? `https://image.tmdb.org/t/p/w500${poster_path}`
+  //     : notFoundImgRetina;
+  //   const posterBig = poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : notFoundImgBig;
+  //   const posterBig2x = poster_path
+  //     ? `https://image.tmdb.org/t/p/w780${poster_path}`
+  //     : notFoundImgBigRetina;
 
   return `<div class="round__wrapper">
   <picture>
@@ -51,8 +38,8 @@ export default function makeOneEventMarkup(dataEvent) {
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">WHERE</h3>
-        <p class="event__item--info"></p>
-        <p class="event__item--info"></p>
+        <p class="event__item--info">${_embedded.venues[0].city.name},${_embedded.venues[0].country.name}</p>
+        <p class="event__item--info">${_embedded.venues[0].address.line1}</p>
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">WHO</h3>
