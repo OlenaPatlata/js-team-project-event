@@ -49,16 +49,52 @@
     );
     backdrop-filter: blur(30px);
     border-bottom-right-radius: 100%;
+
+    @media screen and (min-width: 480px) {
+      width: 150px;
+      height: 120px;
+    }
+
+    @include mq(tablet) {
+      width: 180px;
+      height: 150px;
+    }
+
+    @include mq(desktop) {
+      width: 240px;
+      height: 200px;
+    }
   }
 
   &__logo {
     position: absolute;
     display: block;
-    top: 0;
-    left: 0;
-    width: 111px;
-    height: 95px;
+    top: 20px;
+    left: 20px;
+    width: 60px;
+    height: 30px;
     z-index: 100;
+
+    @media screen and (min-width: 480px) {
+      top: 30px;
+      left: 30px;
+      width: 80px;
+      height: 50px;
+    }
+
+    @include mq(tablet) {
+      top: 35px;
+      left: 40px;
+      width: 100px;
+      height: 50px;
+    }
+
+    @include mq(desktop) {
+      top: 40px;
+      left: 40px;
+      width: 136px;
+      height: 68px;
+    }
   }
 
   &__title-wrapper {
