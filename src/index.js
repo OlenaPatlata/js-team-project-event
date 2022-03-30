@@ -3,3 +3,5 @@ import './js/ticketmasterAPI';
 
 import './js/eventGallery';
 import './js/pagination';
+
+import './js/moreByAuthor';
