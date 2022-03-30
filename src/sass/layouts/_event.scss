@@ -12,7 +12,7 @@
   padding-right: 12px;
   background-color: var(--primary-white-color);
   color: var(--primary-black-color);
-  border-radius: 50% 0%;
+  border-radius: 100px 0%;
   transform: translatex(-50%) scale(1);
   transition: transform 0.25s linear;
   @include mq(mobile) {
@@ -28,11 +28,9 @@
   }
   @include mq(desktop) {
     padding-top: 62px;
-    padding-left: 50px;
-    padding-right: 17px;
     padding-bottom: 68px;
     width: 930px;
-    min-height: 1029px;
+    max-height: 1029px;
   }
 
   &__icon--close {
@@ -41,7 +39,9 @@
   }
   &__wrapper {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -104,18 +104,33 @@
   &__list {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    color: var(--main-text-cl);
+    color: var(--primary-black-color);
+    @include mq(tablet) {
+      align-items: flex-start;
+    }
   }
   &__item:not(:last-child) {
     margin-bottom: 10px;
   }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    @include mq(tablet) {
+      align-items: start;
+    }
+  }
 
   &__item--title {
-    display: flex;
     font-size: 20px;
     line-height: 1.219;
     margin-bottom: 5px;
+    color: var(--primary-pink-color);
   }
 
   &__item--info {
@@ -125,18 +140,51 @@
   &__item--link {
     padding-top: 10px;
     padding-bottom: 10px;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: var(--primary-blue-color);
+    color: var(--primary-white-color);
+    padding-left: 19px;
+    padding-right: 19px;
+    border-radius: 5px;
+    transition: background-color 250ms linear;
+    &:hover,
+    &:focus {
+      background-color: var(--primary-pink-color);
+    }
+  }
+  &__item--link:not(:last-child) {
+    margin-bottom: 20px;
   }
 }
 
-.buttons__container.event__btn {
+.button__container.event__btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
+  padding-top: 25px;
   @include mq(mobile) {
     width: 230px;
   }
   @include mq(tablet) {
     width: 255px;
+  }
+}
+.btn--modal {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+  border-radius: 5px;
+  border: 1px solid var(--primary-blue-color);
+  color: var(--primary-blue-color);
+  cursor: pointer;
+  transition: color 250ms linear, border 250ms linear;
+  &:hover,
+  &:focus {
+    border: 1px solid var(--primary-pink-color);
+    color: var(--primary-pink-color);
   }
 }
 

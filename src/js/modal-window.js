@@ -1,20 +1,22 @@
 import API from './ticketmasterAPI';
-let dataEvent = {};
+const api = new API();
 
 import makeOneEventMarkup from './one-event-modal';
+// import moreBtnFunc from './moreByAuthor';
 
 // получаем ссылку на бэкдроп
 const backdropRef = document.querySelector(`[data-modal="event-one"]`);
 // получаем ссылку на модалку
 const modalRef = document.querySelector(`.modal`);
 // получаем ссылку на галерею в которую рендерятся карточки событий
-// const movieListRef = document.querySelector('.gallery');
-
+const eventListRef = document.querySelector('.gallery');
 // получаем ссылку на кнопку закрытия модалки
 const closeBtnRef = document.querySelector(`[data-modal-close="event-one"]`);
 // получаем ссылку на div, в который рендерится модалка
 const wrapperModalRef = document.querySelector('.modal__wrapper');
-console.log(wrapperModalRef);
+
+let dataEvent = {};
+let btnMore = '';
 
 // Функция для очищения разметки в модальном окне
 function clearModal() {
@@ -28,19 +30,21 @@ const handleError = () => {
 
 // Функция для модального окна
 async function onModalOpenClick(e) {
-  const cardRef = e.target.closest('.card-item');
+  const cardRef = e.target.closest('.gallery__item');
   if (e.target === e.currentTarget || !cardRef) {
     return;
   }
   const id = cardRef.dataset.id;
-
-  api.id = id;
+  api.EvID = id;
   dataEvent = await api.GetEventsID();
 
   wrapperModalRef.insertAdjacentHTML('beforeend', makeOneEventMarkup({ ...dataEvent }));
 
   openModal();
 
+  const btnMoreRef = document.querySelector('.btn--modal');
+  btnMore = btnMoreRef.dataset.name;
+  //   btnMoreRef.addEventListener('click', moreBtnFunc);
   closeBtnRef.addEventListener('click', closeModal);
   backdropRef.addEventListener('click', onBackdropClick);
   document.addEventListener('keydown', onEscDown);
@@ -56,6 +60,7 @@ function closeModal() {
   closeBtnRef.removeEventListener('click', onBtnClick);
   backdropRef.removeEventListener('click', onBackdropClick);
   document.removeEventListener('keydown', onEscDown);
+  //   btnMoreRef.removeEventListener('click', moreBtnFunc);
   clearModal();
 }
 function onBackdropClick(e) {
@@ -70,3 +75,7 @@ function onBtnClick(e) {
   if (e.code !== closeBtnRef) return;
   closeModal();
 }
+
+eventListRef.addEventListener('click', onModalOpenClick);
+
+export { btnMore };

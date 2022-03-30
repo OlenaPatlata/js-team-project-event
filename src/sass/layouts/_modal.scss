@@ -7,7 +7,7 @@
   z-index: 10;
   margin-left: auto;
   margin-right: auto;
-  filter: blur(4px);
+  backdrop-filter: blur(4px);
   opacity: 1;
   transition: opacity 250ms linear, visibility 250ms linear;
   overflow-y: scroll;
