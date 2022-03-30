@@ -1,0 +1,323 @@
+.header {
+  position: relative;
+  padding-top: 80px;
+  padding-bottom: 50px;
+  background-color: var(--secondary-black-color);
+  background-image: url('../images/bg-header/mobile/header-bg-mobile.jpg');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+
+  @include mq(retina) {
+    background-image: url('../images/bg-header/mobile/header-bg-mobile-2x.jpg');
+  }
+
+  @media screen and (min-width: 480px) {
+    background-image: url('../images/bg-header/tablet/header-bg-tablet.jpg');
+
+    @include mq(retina) {
+      background-image: url('../images/bg-header/tablet/header-bg-tablet-2x.jpg');
+    }
+  }
+
+  @include mq(tablet) {
+    padding-top: 40px;
+    padding-bottom: 120px;
+  }
+
+  @include mq(desktop) {
+    padding-bottom: 130px;
+    background-image: url('../images/bg-header/desktop/header-bg-desktop.jpg');
+
+    @include mq(retina) {
+      background-image: url('../images/bg-header/desktop/header-bg-desktop-2x.jpg');
+    }
+  }
+
+  &__logo-bg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 110px;
+    height: 80px;
+
+    background: linear-gradient(
+      136.07deg,
+      rgba(196, 196, 196, 0.03) 10.75%,
+      rgba(196, 196, 196, 0) 92.33%
+    );
+    backdrop-filter: blur(30px);
+    border-bottom-right-radius: 100%;
+
+    @media screen and (min-width: 480px) {
+      width: 150px;
+      height: 120px;
+    }
+
+    @include mq(tablet) {
+      width: 180px;
+      height: 150px;
+    }
+
+    @include mq(desktop) {
+      width: 240px;
+      height: 200px;
+    }
+  }
+
+  &__logo {
+    position: absolute;
+    display: block;
+    top: 20px;
+    left: 20px;
+    width: 60px;
+    height: 30px;
+    z-index: 100;
+
+    @media screen and (min-width: 480px) {
+      top: 30px;
+      left: 30px;
+      width: 80px;
+      height: 50px;
+    }
+
+    @include mq(tablet) {
+      top: 35px;
+      left: 40px;
+      width: 100px;
+      height: 50px;
+    }
+
+    @include mq(desktop) {
+      top: 40px;
+      left: 40px;
+      width: 136px;
+      height: 68px;
+    }
+  }
+
+  &__title-wrapper {
+    margin: 0 auto 25px;
+    width: 220px;
+    @include mq(tablet) {
+      width: 370px;
+    }
+
+    @include mq(desktop) {
+      width: 600px;
+    }
+  }
+
+  &__title {
+    text-align: center;
+    text-transform: uppercase;
+    @include font(900, 18px, 1.2, 0.01em);
+    font-family: 'Montserrat';
+    color: var(--primary-pink-color);
+
+    @include mq(tablet) {
+      @include font(900, 30px, 1.23, 0.01em);
+    }
+
+    @include mq(desktop) {
+      @include font(900, 50px, 1.22, 0.01em);
+    }
+  }
+
+  &__search-wrapper {
+    position: relative;
+    @include mq(tablet) {
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__search-icon {
+    position: absolute;
+    top: 14px;
+    right: 35px;
+
+    @include mq(tablet) {
+      left: 240px;
+    }
+
+    @include mq(desktop) {
+      left: 280px;
+    }
+  }
+
+  &__countries,
+  &__input {
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 25px;
+    padding-left: 30px;
+    padding-right: 50px;
+    width: 270px;
+    height: 40px;
+    outline: transparent;
+    border: transparent;
+    border-radius: 20px;
+    background-color: var(--tertiary-gray-color);
+    color: var(--primary-pink-color);
+
+    &::placeholder {
+      color: rgba(147, 147, 147, 1);
+    }
+
+    &:focus {
+      border: 1px solid var(--primary-pink-color);
+    }
+
+    @include mq(tablet) {
+      margin: unset;
+    }
+  }
+
+  &__wrapper-country {
+    position: relative;
+    @include mq(tablet) {
+      margin-left: 30px;
+    }
+  }
+
+  &__countries {
+    padding-right: 50px;
+    margin-bottom: unset;
+    color: var(--input-gray-color);
+    appearance: none;
+    position: relative;
+    order: 0;
+  }
+
+  &__custom-arrow {
+    display: block;
+    position: absolute;
+    top: 18px;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    pointer-events: none;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+  }
+
+  &__custom-arrow::before {
+    border-left: 0.5em solid transparent;
+    border-right: 0.5em solid transparent;
+    border-top: 0.5em solid var(--input-gray-color);
+  }
+}
+
+/////////////////////// Dropdown //////////////////////////
+
+.select-box {
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+.select-box .options-container {
+  position: absolute;
+  background-color: var(--tertiary-gray-color);
+  color: var(--primary-pink-color);
+  max-height: 0;
+  width: 270px;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.select-box .options-container.active {
+  position: absolute;
+  top: 86px;
+  left: 6px;
+  max-height: 240px;
+  opacity: 1;
+  overflow-y: scroll;
+
+  @include mq(tablet) {
+    left: 0;
+  }
+}
+
+.select-box .options-container::-webkit-scrollbar {
+  display: none;
+}
+
+.select-box .options-container::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+.select-box .option,
+.selected {
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.select-box .option:hover {
+  background-color: var(--tertiary-gray-color);
+  border-radius: 20px;
+}
+
+.select-box label {
+  cursor: pointer;
+}
+
+.select-box .option .radio {
+  display: none;
+}
+
+.search-box input {
+  position: absolute;
+  top: 43px;
+  left: 6px;
+  width: 270px;
+  height: 40px;
+  padding: 12px;
+  padding-left: 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  border-radius: 20px;
+  z-index: 100;
+  color: var(--primary-pink-color);
+  background-color: var(--tertiary-gray-color);
+  border: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+
+  @include mq(tablet) {
+    left: 0;
+  }
+}
+
+.search-box input::placeholder {
+  color: var(--input-gray-color);
+}
+
+.select-box .search-box input.active {
+  opacity: 1;
+}
+
+.search-box input:focus {
+  outline: none;
+}
