@@ -18,7 +18,7 @@ async function TEST_API_FUNC() {
     const testA = await newA.GetEventsByKeyWord()
     console.log('testA:', testA);
 }
-TEST_API_FUNC();
+// TEST_API_FUNC();
 
 
 
