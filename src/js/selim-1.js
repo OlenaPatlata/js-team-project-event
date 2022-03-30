@@ -9,11 +9,13 @@ moreBtn.addEventListener('click', MORE_BTN_FUNC);
 // заменить привязку к рабочему инпуту
 const valueInput = document.querySelector('.example__input');
 const authorList = document.querySelector('.author__list');
+// заменить привязку к основной странице
+const fieldToClear = document.querySelector('.example');
 // перед использованием функции необходимо изменить ключевое слово методом .eventKeyWord
 APIeventsByKey.eventKeyWord = 'sting';
 // это ОСНОВНАЯ ФУНКЦИЯ, заЭкспортить и подключить к нужной кнопке
 export default async function MORE_BTN_FUNC() {
-    
+    fieldToClear.innerHTML = '';
     const result = await APIeventsByKey.GetEventsByKeyWord()
     console.log('testA:', result);
     const resultArray = result._embedded.events;
@@ -54,4 +56,9 @@ export default async function MORE_BTN_FUNC() {
     </li>`
     }).join("");
     authorList.insertAdjacentHTML("beforebegin", markup);
+
+    
 }
+
+
+
