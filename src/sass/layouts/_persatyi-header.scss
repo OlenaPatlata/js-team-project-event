@@ -1,4 +1,7 @@
 .header {
+  & .container {
+    margin: 0 auto;
+  }
   position: relative;
   padding-top: 80px;
   padding-bottom: 50px;
@@ -140,11 +143,11 @@
     right: 35px;
 
     @include mq(tablet) {
-      left: 240px;
+      left: 290px;
     }
 
     @include mq(desktop) {
-      left: 280px;
+      left: 410px;
     }
   }
 
@@ -254,6 +257,7 @@
   max-height: 240px;
   opacity: 1;
   overflow-y: scroll;
+  z-index: 100;
 
   @include mq(tablet) {
     left: 0;
