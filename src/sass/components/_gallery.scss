@@ -4,18 +4,6 @@
 
 .gallery-container {
   margin: 0 auto;
-  // Check this
-  padding: 0 25px;
-
-  @include mq(tablet) {
-    padding: 0 35px;
-  }
-
-  @include mq(desktop) {
-    padding: 0 45px;
-  }
-
-  // Delete before
 
   &.on-loading {
     height: 100vh;
