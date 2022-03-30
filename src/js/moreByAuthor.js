@@ -1,5 +1,6 @@
 import APIQuery from './ticketmasterAPI';
-import {renderMarkup} from './templates/eventCard';
+import { renderMarkup } from './templates/eventCard';
+// import { btnMore } from './modal-window';
 // строку ниже удалить после слияния
 import newAPIQuery from './newAPI'; 
 
@@ -7,7 +8,7 @@ import newAPIQuery from './newAPI';
 const APIeventsByKey = new newAPIQuery();
 // строку ниже удалить посли слияния
 const moreBtn = document.querySelector('.more-btn');
-moreBtn.addEventListener('click', MORE_BTN_FUNC);
+moreBtn.addEventListener('click', moreBtnFunc);
 
 // заменить привязку к рабочему инпуту
 const valueInput = document.querySelector('.searchbar');
@@ -17,10 +18,10 @@ const valueInput = document.querySelector('.searchbar');
 const fieldToClear = document.querySelector('.gallery');
 
 // перед использованием функции необходимо изменить ключевое слово методом .eventKeyWord
-APIeventsByKey.eventKeyWord = 'sting';
+APIeventsByKey.eventKeyWord = 'killer';
 
 // это ОСНОВНАЯ ФУНКЦИЯ, заЭкспортить и подключить к нужной кнопке
-export default async function MORE_BTN_FUNC() {
+export default async function moreBtnFunc() {
   fieldToClear.innerHTML = '';
   try {
     const result = await APIeventsByKey.GetEventsByKeyWord()
@@ -37,6 +38,5 @@ export default async function MORE_BTN_FUNC() {
   }
     
 }
-
 
 
