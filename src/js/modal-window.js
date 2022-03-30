@@ -32,7 +32,7 @@ async function onModalOpenClick(e) {
   if (e.target === e.currentTarget || !cardRef) {
     return;
   }
-  const id = Number(cardRef.dataset.id);
+  const id = cardRef.dataset.id;
 
   api.id = id;
   dataEvent = await api.GetEventsID();
