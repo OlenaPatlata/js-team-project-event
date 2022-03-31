@@ -1,9 +1,7 @@
-import API from './ticketmasterAPI';
+import apiQuery from './ticketmasterAPI';
 import Pagination from 'tui-pagination';
 // import 'tui-pagination/dist/tui-pagination.css';
 import { renderMarkup } from './templates/eventCard';
-
-const apiMovies = new API();
 
 //=====================================================
 
@@ -16,7 +14,7 @@ const refs = {
 async function takeEvents(api) {
   //   api.currentSize = 3;
 
-  const response = await api.GetEvents();
+  const response = await api.getEvents();
   const events = response._embedded.events;
 
   renderMarkup(events);
@@ -62,11 +60,11 @@ async function pagination({ size, totalElements }) {
     if (prevArrow) prevArrow.innerHTML = '&#8592';
 
     const currentPage = event.page;
-    apiMovies.currentPage = currentPage;
+    apiQuery.currentPage = currentPage;
 
     correctionPages(currentPage);
 
-    const res = await apiMovies.GetEvents();
+    const res = await apiQuery.getEvents();
     const events = res._embedded.events;
 
     renderMarkup(events);
@@ -96,4 +94,4 @@ function correctionPages(currentPage) {
 //   //   console.log('qwe');
 // }
 
-takeEvents(apiMovies);
+takeEvents(apiQuery);

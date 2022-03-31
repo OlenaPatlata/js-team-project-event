@@ -1,0 +1,66 @@
+.footer {
+  & .container {
+    margin: 0 auto;
+  }
+
+  background-color: var(--primary-black-color);
+  padding-top: 60px;
+  padding-bottom: 30px;
+
+  @include mq(tablet) {
+    br {
+      display: none;
+    }
+  }
+
+  @include mq(desktop) {
+    padding-top: 80px;
+  }
+
+  &__text {
+    position: relative;
+    text-align: center;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: var(--secondary-gray-color);
+    @include font(400, 14px, 1.2, 0.01em);
+
+    @include mq(tablet) {
+      @include font(400, 16px, 1.25, 0.01em);
+    }
+  }
+
+  &__svg {
+    position: absolute;
+    bottom: 2px;
+    left: calc(100% / 2 - 13px);
+    display: block;
+    height: 13px;
+    width: 14px;
+    background-image: url('../images/favorite.svg');
+
+    @include mq(tablet) {
+      left: calc(65% + 1px);
+    }
+    @include mq(desktop) {
+      left: calc(65% - 38px);
+    }
+  }
+
+  &__underline {
+    text-decoration: underline;
+  }
+}
+
+.bottom__text {
+  display: block;
+  margin-top: 10px;
+  @include mq(tablet) {
+    margin: 0;
+    display: inline;
+  }
+}

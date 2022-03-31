@@ -6,6 +6,7 @@ const eventCardMarkup = events =>
       ({
         images,
         name,
+        id,
         dates: {
           start: { localDate },
         },
@@ -27,7 +28,7 @@ const eventCardMarkup = events =>
         )[0].url;
 
         return `
-        <li class="gallery__item"> 
+        <li class="gallery__item data-id="${id}"> 
         <picture>
           <source
           srcset="
@@ -80,9 +81,9 @@ function checkDeviceForSubtitle(el, className) {
 
 function checkDeviceForLocation(el, className) {
   if (window.innerWidth < 768) {
-    return checkLength(el, 12, className);
+    return checkLength(el, 8, className);
   } else {
-    return checkLength(el, 18, className);
+    return checkLength(el, 15, className);
   }
 }
 

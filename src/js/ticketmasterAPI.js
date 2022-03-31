@@ -1,5 +1,6 @@
-export default class APIQuery {
+class APIQuery {
   #keyword = ''; //приватная переменная класса
+  #country = ''; //приватная переменная класса
   constructor() {
     this.API_KEY = 'RmnlUoo1ahrXxdghcRDQ1mLYffidaAYw';
     this.ROOT_URL = 'https://app.ticketmaster.com/discovery/v2/';
@@ -7,7 +8,7 @@ export default class APIQuery {
     this.page = 0;
     this.size = 20;
   }
-  async GetEvents() {
+  async getEvents() {
     try {
       const projAPI = await fetch(
         `${this.ROOT_URL}events.json?apikey=${this.API_KEY}&size=${this.size}&page=${this.page}`,
@@ -18,7 +19,7 @@ export default class APIQuery {
       console.log(error);
     }
   }
-  async GetEventsID() {
+  async getEventsID() {
     try {
       const projAPI = await fetch(
         `${this.ROOT_URL}events/${this.EvID}.json?apikey=${this.API_KEY}`,
@@ -29,9 +30,9 @@ export default class APIQuery {
       console.log(error);
     }
   }
-  async testme() {
+  async search() {
     const res = await fetch(
-      `${this.ROOT_URL}events.json?keyword=${this.keyword}&apikey=${this.API_KEY}`,
+      `${this.ROOT_URL}events.json?&size=${this.size}&page=${this.page}&keyword=${this.keyword}&countryCode=${this.country}&apikey=${this.API_KEY}`,
     );
     console.log('res: ', res);
     if (!res.ok) {
@@ -60,4 +61,12 @@ export default class APIQuery {
   set currentSize(size) {
     this.size = size;
   }
+  get country() {
+    return this.#country;
+  }
+  set country(newCountry) {
+    this.#country = newCountry;
+  }
 }
+const apiQuery = new APIQuery();
+export default apiQuery;
