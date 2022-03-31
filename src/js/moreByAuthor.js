@@ -17,12 +17,25 @@ const refs = {
 
 // это ОСНОВНАЯ ФУНКЦИЯ, заЭкспортить и подключить к нужной кнопке
 export default async function moreBtnFunc() {
-  APIeventsByKey.eventKeyWord = btnMore;
-  
+  // APIeventsByKey.eventKeyWord = btnMore;
+  apiQuery.keyword = btnMore;
   refs.fieldToClear.innerHTML = '';
   closeModal();
+  // try {
+  //   const result = await APIeventsByKey.GetEventsByKeyWord();
+  //   console.log('result:', result);
+  //   const resultArray = result._embedded.events;
+  //   const { name } = resultArray[0];
+  //   // запись значения поиска в инпут
+  //   refs.valueInput.value = name;
+
+  //   renderMarkup(resultArray);
+  // } catch (error) {
+  //   console.log(error.message);
+  // }
+
   try {
-    const result = await APIeventsByKey.GetEventsByKeyWord();
+    const result = await apiQuery.search();
     console.log('result:', result);
     const resultArray = result._embedded.events;
     const { name } = resultArray[0];
