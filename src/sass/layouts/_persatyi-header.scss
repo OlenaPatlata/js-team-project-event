@@ -176,10 +176,6 @@
       @include font(400, 14px, 1.2, 0.03em);
     }
 
-    &:focus {
-      border: 1px solid var(--primary-pink-color);
-    }
-
     @include mq(tablet) {
       margin: unset;
     }
