@@ -1,5 +1,6 @@
 import API from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
+import { takeEvents } from './pagination';
 
 const api = new API();
 
@@ -24,6 +25,8 @@ async function renderGallery() {
     renderMarkup(events._embedded.events);
     refs.loader.classList.add('is-hiden');
     refs.loaderDiv.classList.remove('on-loading');
+    //adrian-pagination
+    takeEvents(events.page);
   } catch (error) {
     console.log(error);
   }

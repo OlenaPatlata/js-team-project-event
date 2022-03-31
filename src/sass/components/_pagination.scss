@@ -1,19 +1,21 @@
-#pagination {
+.container_pagination {
+  background-color: var(--primary-black-color);
   text-align: center;
   padding-top: 80px;
   padding-bottom: 10px;
-
-  background-color: var(--primary-black-color);
-  // padding: 80px 50%;
-  // #tui-arrow {
-  //   display: none;
-  //   padding: 0;
-  // }
-  .tui-ico-prev {
+  .spinner {
+    color: red;
+  }
+}
+.is-hidden {
+  display: none;
+}
+#pagination {
+  .tui-prev {
     display: none;
     padding: 0;
   }
-  .tui-ico-next {
+  .tui-next {
     display: none;
     padding: 0;
   }
@@ -24,15 +26,11 @@
     font-size: 16px;
     color: var(--primary-white-color);
     padding: 5px 10px;
-    .tui-ico-first {
-      // display: none;
-      // color: red;
-      // background-color: red;
+    .tui-next {
+      display: none;
     }
   }
   .tui-is-selected {
-    // display: none;
-    // background-color: grey;
     border-radius: 10px 0;
     color: rgba(220, 86, 197, 1);
     border: 1px solid rgba(220, 86, 197, 1);
