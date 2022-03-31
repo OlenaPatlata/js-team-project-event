@@ -11,29 +11,37 @@ export default function makeOneEventMarkup(dataEvent) {
     _embedded: { venues, attractions },
     images,
   } = dataEvent;
-  //   const poster = poster_path ? `https://image.tmdb.org/t/p/w342${poster_path}` : notFoundImg;
-  //   const poster2x = poster_path
-  //     ? `https://image.tmdb.org/t/p/w500${poster_path}`
-  //     : notFoundImgRetina;
-  //   const posterBig = poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : notFoundImgBig;
-  //   const posterBig2x = poster_path
-  //     ? `https://image.tmdb.org/t/p/w780${poster_path}`
-  //     : notFoundImgBigRetina;
+  const standardImage = images.filter(
+    ({ url, width, ratio }) =>
+      url.toLowerCase().includes('tablet_landscape') &&
+      width >= 640 &&
+      width < 2040 &&
+      ratio === '3_2',
+  )[0].url;
+
+  const retinaImage = images.filter(
+    ({ url, width, ratio }) =>
+      url.toLowerCase().includes('retina') && width >= 640 && ratio === '3_2',
+  )[0].url;
 
   return `<div class="round__wrapper">
   <picture>
-    <source srcset="${images[0].url} 1x, ${images[0].url} 2x" media="(max-width:1023px)" />
-    <source srcset="${images[0].url} 1x, ${images[0].url} 2x" media="(min-width:1024px)" />
-    <img class="round__img" alt="${name}" src="${images[0].url}" loading="lazy" />
+    <source srcset="${standardImage ? standardImage : images[0].url} 1x,
+          ${retinaImage ? retinaImage : images[0].url} 2x" class="round__img" />
+        <img class="round__img" alt="${name}" src="${
+    standardImage ? standardImage : images[0].url
+  }" loading="lazy" />
   </picture>
 </div>
 <div class="modal__content">
   <div class="poster__wrapper">
     <picture>
-      <source srcset="${images[0].url} 1x, ${images[0].url} 2x" media="(max-width:1023px)" />
-      <source srcset="${images[0].url} 1x, ${images[0].url} 2x" media="(min-width:1024px)" />
-      <img class="poster__img" alt="${name}" src="${images[0].url}" loading="lazy" />
-    </picture>
+    <source srcset="${standardImage ? standardImage : images[0].url} 1x,
+          ${retinaImage ? retinaImage : images[0].url} 2x"  class="poster__img"/>
+        <img class="poster__img" alt="${name}" src="${
+    standardImage ? standardImage : images[0].url
+  }" loading="lazy" />
+  </picture>
   </div>
   <div class="event">
     <ul class="event__list">

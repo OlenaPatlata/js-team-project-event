@@ -20,7 +20,7 @@
   }
   @include mq(tablet) {
     padding-top: 28px;
-    padding-left: 30px;
+    padding-left: 50px;
     padding-right: 30px;
     padding-bottom: 56px;
     width: 595px;
@@ -30,6 +30,7 @@
   @include mq(desktop) {
     padding-top: 62px;
     padding-bottom: 68px;
+    padding-left: 30px;
     width: 930px;
     max-height: 1029px;
   }
