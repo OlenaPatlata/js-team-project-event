@@ -141,6 +141,7 @@
     position: absolute;
     top: 14px;
     right: 35px;
+    fill: var(--input-gray-color);
 
     @include mq(tablet) {
       left: 290px;
@@ -165,11 +166,13 @@
     outline: transparent;
     border: transparent;
     border-radius: 20px;
+    @include font(400, 14px, 1.2, 0.03em);
     background-color: var(--tertiary-gray-color);
-    color: var(--primary-pink-color);
+    color: var(--input-gray-color);
 
     &::placeholder {
-      color: rgba(147, 147, 147, 1);
+      color: var(--input-gray-color);
+      @include font(400, 14px, 1.2, 0.03em);
     }
 
     &:focus {
@@ -192,6 +195,7 @@
     padding-right: 50px;
     margin-bottom: unset;
     color: var(--input-gray-color);
+    backdrop-filter: blur(20px);
     appearance: none;
     position: relative;
     order: 0;
@@ -227,7 +231,7 @@
   &__custom-arrow::before {
     border-left: 0.5em solid transparent;
     border-right: 0.5em solid transparent;
-    border-top: 0.5em solid var(--input-gray-color);
+    border-top: 0.5em solid var(--tertiary-gray-color);
   }
 }
 
@@ -243,7 +247,8 @@
 .select-box .options-container {
   position: absolute;
   background-color: var(--tertiary-gray-color);
-  color: var(--primary-pink-color);
+  color: var(--input-gray-color);
+  @include font(400, 14px, 1.2, 0.03em);
   max-height: 0;
   width: 270px;
   opacity: 0;
@@ -307,11 +312,10 @@
   height: 40px;
   padding: 12px;
   padding-left: 30px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
+  @include font(400, 14px, 1.2, 0.03em);
   border-radius: 20px;
   z-index: 100;
-  color: var(--primary-pink-color);
+  color: var(--input-gray-color);
   background-color: var(--tertiary-gray-color);
   border: none;
   opacity: 0;
@@ -324,6 +328,7 @@
 
 .search-box input::placeholder {
   color: var(--input-gray-color);
+  @include font(400, 14px, 1.2, 0.03em);
 }
 
 .select-box .search-box input.active {

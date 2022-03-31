@@ -106,6 +106,8 @@ dropdown.insertAdjacentHTML('beforeend', markup);
 selected.addEventListener('click', () => {
   dropdown.classList.toggle('active');
   searchBoxInput.classList.toggle('active');
+  searchBoxInput.addEventListener('keyup', inputValue);
+  dropdown.addEventListener('change', selectCountry);
 
   searchBoxInput.value = '';
   filterList('');
@@ -117,14 +119,11 @@ selected.addEventListener('click', () => {
 
 const optionsList = document.querySelectorAll('.option');
 
-dropdown.addEventListener('change', selectCountry);
-
 async function selectCountry(e) {
   const countryCode = e.target.value;
   selected.textContent = list[countryCode] || 'Around the world';
   apiQuery.country = countryCode;
-  dropdown.classList.remove('active');
-  searchBoxInput.classList.remove('active');
+  hideCountryDropdown();
   const searchResult = await apiQuery.search();
 
   if (!searchResult._embedded) return;
@@ -132,9 +131,16 @@ async function selectCountry(e) {
   renderMarkup(searchResult._embedded.events);
 }
 
-searchBoxInput.addEventListener('keyup', function (e) {
+function hideCountryDropdown() {
+  dropdown.removeEventListener('change', selectCountry);
+  searchBoxInput.removeEventListener('keyup', inputValue);
+  dropdown.classList.remove('active');
+  searchBoxInput.classList.remove('active');
+}
+
+function inputValue(e) {
   filterList(e.target.value);
-});
+}
 
 function filterList(searchTerm) {
   searchTerm = searchTerm.toLowerCase();
@@ -147,3 +153,5 @@ function filterList(searchTerm) {
     }
   });
 }
+
+export { hideCountryDropdown };
