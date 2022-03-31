@@ -1,3 +1,4 @@
+import { takeEvents } from './pagination';
 class APIQuery {
   #keyword = ''; //приватная переменная класса
   #country = ''; //приватная переменная класса
@@ -34,7 +35,8 @@ class APIQuery {
     const res = await fetch(
       `${this.ROOT_URL}events.json?&size=${this.size}&page=${this.page}&keyword=${this.keyword}&countryCode=${this.country}&apikey=${this.API_KEY}`,
     );
-    console.log('res: ', res);
+
+    // console.log('res: ', res);
     if (!res.ok) {
       return Promise.reject(new Error('Not found'));
     }

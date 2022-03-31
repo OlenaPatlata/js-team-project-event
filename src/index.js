@@ -3,6 +3,7 @@ import './js/ticketmasterAPI';
 import './js/persatyi-country-select';
 import './js/eventGallery';
 import './js/pagination';
+import './js/scrollUp';
 import './js/search';
 import './js/moreByAuthor';
 import './js/modal-window';

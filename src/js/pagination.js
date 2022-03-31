@@ -19,7 +19,7 @@ async function takeEvents(page) {
 
   const lastPage = Math.ceil(totalItems / page.size);
 
-  last.textContent = lastPage;
+  if (last) last.textContent = lastPage;
 }
 
 async function pagination({ size, totalElements }) {
@@ -45,22 +45,23 @@ async function pagination({ size, totalElements }) {
 
   const pagination = new Pagination('pagination', options);
 
-  // const nextArrow = refs.pagination.querySelector('.tui-ico-next');
-  // nextArrow.innerHTML = `&#8594`;
-
   pagination.on('afterMove', async event => {
     spinner.show();
-
-    // const prevArrow = refs.pagination.querySelector('.tui-ico-prev');
-    // if (prevArrow) prevArrow.innerHTML = '&#8592';
+    // const test = refs.pagination.querySelector('tui-page-btn');
+    // console.log(event);
+    // document.querySelector('#search').scrollIntoView({
+    //   behavior: 'smooth',
+    // });
 
     const currentPage = event.page - 1;
     apiQuery.currentPage = currentPage;
 
     correctionPages(currentPage);
 
-    const res = await apiQuery.getEvents();
-    const events = res._embedded.events;
+    // const res = await apiQuery.getEvents();
+    const search = await apiQuery.search();
+
+    const events = search._embedded.events;
 
     renderMarkup(events);
     spinner.hide();
