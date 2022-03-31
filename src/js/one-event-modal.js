@@ -53,23 +53,27 @@ export default function makeOneEventMarkup(dataEvent) {
     <ul class="event__list">
       <li class="event__item">
         <h3 class="event__item--title uppercase">INFO</h3>
-        <p class="event__item--info">${info ? info : attractions[0].name}</p>
+        <p class="event__item--info">${info ? info : 'Infomation missing'}</p>
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">WHEN</h3>
-        <p class="event__item--info">${localDate}</p>
+        <p class="event__item--info">${localDate ? localDate : 'Infomation missing'}</p>
         <p class="event__item--info">${localtime ? localtime : 'time unknown'} (${
     timezone ? timezone : 'timezone unknown'
   })</p>
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">WHERE</h3>
-        <p class="event__item--info">${venues[0].city.name},${venues[0].country.name}</p>
-        <p class="event__item--info">${venues[0].address.line1}</p>
+        <p class="event__item--info">${
+          venues?.[0].city?.name ? venues[0].city.name : 'Infomation missing'
+        },${venues?.[0].country?.name ? venues[0].country.name : 'Infomation missing'}</p>
+        <p class="event__item--info">${
+          venues?.[0].address?.line1 ? venues[0].address.line1 : ''
+        }</p>
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">WHO</h3>
-        <p class="event__item--info">${name}</p>
+        <p class="event__item--info">${name ? name : 'Infomation missing'}</p>
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">PRICES</h3>
@@ -104,7 +108,7 @@ export default function makeOneEventMarkup(dataEvent) {
 </div>
 <div class="event__btn button__container">
   <button type="button" class="btn--modal uppercase"  data-name="${
-    attractions[0].name ? attractions[0].name : ''
+    attractions?.[0].name ? attractions[0].name : ''
   }">MORE FROM THIS AUTHOR</button>
 </div>
     `;
