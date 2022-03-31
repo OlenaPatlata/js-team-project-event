@@ -6,6 +6,7 @@ const eventCardMarkup = events =>
       ({
         images,
         name,
+        id,
         dates: {
           start: { localDate },
         },
@@ -14,7 +15,7 @@ const eventCardMarkup = events =>
         },
       }) => {
         return `
-    <li class="gallery__item"> 
+    <li class="gallery__item" data-id="${id}"> 
         <img class="gallery__image" src=${images[0].url} alt=${name} />
         <div class="gallery__wrapper">
             <h3 class="gallery__subtitle">${name}</h3>
