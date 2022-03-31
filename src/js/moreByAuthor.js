@@ -1,4 +1,4 @@
-import APIQuery from './ticketmasterAPI';
+import apiQuery from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
 import { btnMore, closeModal } from './modal-window';
 // строку ниже удалить после слияния
@@ -11,24 +11,23 @@ const APIeventsByKey = new newAPIQuery();
 // moreBtn.addEventListener('click', moreBtnFunc);
 
 const refs = {
-  valueInput: document.querySelector('#searchbar_js'),
+  valueInput: document.querySelector('.header__input'),
   fieldToClear: document.querySelector('.gallery'),
 };
 
-// перед использованием функции необходимо изменить ключевое слово на btnMore
-APIeventsByKey.eventKeyWord = btnMore;
-
 // это ОСНОВНАЯ ФУНКЦИЯ, заЭкспортить и подключить к нужной кнопке
 export default async function moreBtnFunc() {
-  closeModal();
+  APIeventsByKey.eventKeyWord = btnMore;
+  
   refs.fieldToClear.innerHTML = '';
+  closeModal();
   try {
     const result = await APIeventsByKey.GetEventsByKeyWord();
     console.log('result:', result);
     const resultArray = result._embedded.events;
     const { name } = resultArray[0];
     // запись значения поиска в инпут
-    // refs.valueInput.value = name;
+    refs.valueInput.value = name;
 
     renderMarkup(resultArray);
   } catch (error) {
