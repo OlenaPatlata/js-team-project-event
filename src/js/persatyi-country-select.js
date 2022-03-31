@@ -94,11 +94,12 @@ const keysOfCountries = Object.keys(list);
 let markup = keysOfCountries
   .map(
     code => `<div class="option">
-    <input type="radio" class="radio" id="${code}" name="category">
-    <label for="${code}">${list[code]}</label>
+    <input type="radio" class="radio" id="${code}" value="${code}" name="category">
+    <label class="option-label" for="${code}">${list[code]}</label>
     </div>`,
   )
   .join('');
+
 dropdown.insertAdjacentHTML('beforeend', markup);
 
 selected.addEventListener('click', () => {
@@ -115,13 +116,15 @@ selected.addEventListener('click', () => {
 
 const optionsList = document.querySelectorAll('.option');
 
-optionsList.forEach(o => {
-  o.addEventListener('click', () => {
-    selectedCountry = selected.textContent = o.querySelector('label').textContent;
-    dropdown.classList.remove('active');
-    searchBoxInput.classList.remove('active');
-  });
-});
+dropdown.addEventListener('change', selectCountry);
+
+function selectCountry(e) {
+  const countryCode = e.target.value;
+  selected.textContent = list[countryCode] || 'Around the world';
+  selectedCountry = countryCode;
+  dropdown.classList.remove('active');
+  searchBoxInput.classList.remove('active');
+}
 
 searchBoxInput.addEventListener('keyup', function (e) {
   filterList(e.target.value);
