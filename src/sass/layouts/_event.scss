@@ -12,7 +12,7 @@
   padding-right: 12px;
   background-color: var(--primary-white-color);
   color: var(--primary-black-color);
-  border-radius: 100px 0%;
+  border-radius: 150px 0%;
   transform: translatex(-50%) scale(1);
   transition: transform 0.25s linear;
   @include mq(mobile) {
@@ -20,15 +20,17 @@
   }
   @include mq(tablet) {
     padding-top: 28px;
-    padding-left: 30px;
+    padding-left: 50px;
     padding-right: 30px;
     padding-bottom: 56px;
     width: 595px;
     min-height: 831px;
+    border-radius: 300px 0%;
   }
   @include mq(desktop) {
     padding-top: 62px;
     padding-bottom: 68px;
+    padding-left: 30px;
     width: 930px;
     max-height: 1029px;
   }
@@ -36,6 +38,7 @@
   &__icon--close {
     fill: currentColor;
     stroke: currentColor;
+    height: 25px;
   }
   &__wrapper {
     display: flex;
@@ -49,6 +52,7 @@
   width: 102px;
   height: 102px;
   margin-bottom: 18px;
+  border-radius: 50%;
   @include mq(tablet) {
     width: 70px;
     height: 70px;
@@ -61,13 +65,17 @@
   }
 }
 .round__img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
   border-radius: 50%;
 }
 
 .modal__content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   font-size: 16px;
   line-height: 1.25;
@@ -79,12 +87,19 @@
   }
   @include mq(tablet) {
     width: 233px;
+    height: 416px;
     margin-right: 30px;
   }
   @include mq(desktop) {
     width: 360px;
+    height: 641px;
     margin-right: 60px;
   }
+}
+.poster__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .event {
@@ -120,7 +135,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+
     @include mq(tablet) {
       align-items: start;
     }
@@ -136,6 +151,47 @@
   &__item--info {
     font-size: 16px;
     line-height: 1.219;
+    text-align: center;
+    color: var(--primary-black-color);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+    @include mq(tablet) {
+      text-align: start;
+      -webkit-line-clamp: 8;
+    }
+  }
+  &__item--bigicon {
+    width: 3px;
+    height: 16px;
+    background-color: var(--primary-black-color);
+    display: inline-block;
+    @include mq(tablet) {
+      width: 4px;
+      height: 19px;
+    }
+  }
+  &__item--smallicon {
+    width: 1px;
+    height: 16px;
+    background-color: var(--primary-black-color);
+    display: inline-block;
+    margin-right: 1px;
+    @include mq(tablet) {
+      width: 2px;
+      height: 19px;
+      margin-right: 2px;
+    }
+  }
+  &__item--bigicon:not(:last-child) {
+    margin-right: 1px;
+    @include mq(tablet) {
+      margin-right: 2px;
+    }
+  }
+  &__item--bigicon:last-child {
+    margin-right: 13px;
   }
   &__item--link {
     padding-top: 10px;

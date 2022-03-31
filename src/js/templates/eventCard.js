@@ -30,8 +30,8 @@ const eventCardMarkup = events =>
         )[0]?.url;
 
         // Проверка на наличие свойств
-        const location = place ? place : 'Click on me to see mo info';
         const eventName = name ? name : 'See more info';
+        const location = place ? place : 'Click on me to see mo info';
 
         return `
         <li class="gallery__item" data-id="${id}"> 
@@ -39,7 +39,7 @@ const eventCardMarkup = events =>
           <source
           srcset="
           ${standardImage ? standardImage : images[0].url} 1x,
-          ${retinaImage ? retinaImage : images[0].url} 2x,
+          ${retinaImage ? standardImage : images[0].url} 2x,
           " 
         />
         <img class="gallery__image" src=${
