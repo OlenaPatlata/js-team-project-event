@@ -77,6 +77,11 @@
   }
 }
 
+.gallery__marquee {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .gallery__subtitle {
   margin-bottom: 5px;
   font-family: 'Montserrat';
@@ -134,19 +139,45 @@
       line-height: 1.25;
     }
   }
+}
 
-  &-location::before {
-    display: block;
-    content: '';
-    margin-right: 3px;
-    width: 6px;
-    height: 9px;
-    background-image: url(../images/Vector.svg);
-    background-repeat: no-repeat;
+.gallery__wrapper-inner {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+}
 
-    @include mq(tablet) {
-      width: 7px;
-      height: 10px;
-    }
+.gallery__svg {
+  display: block;
+  justify-content: center;
+  margin-right: 3px;
+  min-width: 7px;
+  height: 10px;
+  background-image: url(../images/Vector.svg);
+  background-repeat: no-repeat;
+
+  @include mq(tablet) {
+    min-width: 10px;
+    height: 11px;
+  }
+
+  @include mq(desktop) {
+    height: 13px;
+  }
+}
+
+//Event card text animation
+.animated {
+  animation: marquee 8s linear infinite alternate;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(5%);
+  }
+  100% {
+    transform: translateX(-55%);
   }
 }
