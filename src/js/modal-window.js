@@ -2,7 +2,7 @@ import API from './ticketmasterAPI';
 const api = new API();
 
 import makeOneEventMarkup from './one-event-modal';
-// import moreBtnFunc from './moreByAuthor';
+import moreBtnFunc from './moreByAuthor';
 
 // получаем ссылку на бэкдроп
 const backdropRef = document.querySelector(`[data-modal="event-one"]`);
@@ -45,7 +45,7 @@ async function onModalOpenClick(e) {
   const btnMoreRef = document.querySelector('.btn--modal');
   console.log(btnMoreRef);
   btnMore = btnMoreRef.dataset.name;
-  //   btnMoreRef.addEventListener('click', moreBtnFunc);
+    btnMoreRef.addEventListener('click', moreBtnFunc);
   closeBtnRef.addEventListener('click', closeModal);
   backdropRef.addEventListener('click', onBackdropClick);
   document.addEventListener('keydown', onEscDown);
@@ -61,7 +61,7 @@ function closeModal() {
   closeBtnRef.removeEventListener('click', onBtnClick);
   backdropRef.removeEventListener('click', onBackdropClick);
   document.removeEventListener('keydown', onEscDown);
-  //   btnMoreRef.removeEventListener('click', moreBtnFunc);
+    btnMoreRef.removeEventListener('click', moreBtnFunc);
   clearModal();
 }
 function onBackdropClick(e) {
