@@ -103,7 +103,9 @@ export default function makeOneEventMarkup(dataEvent) {
   </div>
 </div>
 <div class="event__btn button__container">
-  <button type="button" class="btn--modal uppercase"  data-name="${attractions[0].name ? attractions[0].name : ''}">MORE FROM THIS AUTHOR</button>
+  <button type="button" class="btn--modal uppercase"  data-name="${
+    attractions[0].name ? attractions[0].name : ''
+  }">MORE FROM THIS AUTHOR</button>
 </div>
     `;
 }
