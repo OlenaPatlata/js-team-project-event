@@ -1,3 +1,6 @@
+import apiQuery from './ticketmasterAPI';
+import { renderMarkup } from './templates/eventCard';
+
 const list = {
   US: 'United States Of America',
   AD: 'Andorra',
@@ -88,8 +91,6 @@ const dropdown = document.querySelector('.options-container');
 const selected = document.querySelector('[data-selected-country]');
 const searchBoxInput = document.querySelector('.search-box input');
 
-let selectedCountry = '';
-
 const keysOfCountries = Object.keys(list);
 let markup = keysOfCountries
   .map(
@@ -118,12 +119,17 @@ const optionsList = document.querySelectorAll('.option');
 
 dropdown.addEventListener('change', selectCountry);
 
-function selectCountry(e) {
+async function selectCountry(e) {
   const countryCode = e.target.value;
   selected.textContent = list[countryCode] || 'Around the world';
-  selectedCountry = countryCode;
+  apiQuery.country = countryCode;
   dropdown.classList.remove('active');
   searchBoxInput.classList.remove('active');
+  const searchResult = await apiQuery.search();
+
+  if (!searchResult._embedded) return;
+
+  renderMarkup(searchResult._embedded.events);
 }
 
 searchBoxInput.addEventListener('keyup', function (e) {
@@ -141,5 +147,3 @@ function filterList(searchTerm) {
     }
   });
 }
-
-export { selectedCountry };
