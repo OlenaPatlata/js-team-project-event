@@ -1,3 +1,6 @@
+import apiQuery from './ticketmasterAPI';
+import { renderMarkup } from './templates/eventCard';
+
 const list = {
   US: 'United States Of America',
   AD: 'Andorra',
@@ -88,22 +91,23 @@ const dropdown = document.querySelector('.options-container');
 const selected = document.querySelector('[data-selected-country]');
 const searchBoxInput = document.querySelector('.search-box input');
 
-let selectedCountry = '';
-
 const keysOfCountries = Object.keys(list);
 let markup = keysOfCountries
   .map(
     code => `<div class="option">
-    <input type="radio" class="radio" id="${code}" name="category">
-    <label for="${code}">${list[code]}</label>
+    <input type="radio" class="radio" id="${code}" value="${code}" name="category">
+    <label class="option-label" for="${code}">${list[code]}</label>
     </div>`,
   )
   .join('');
+
 dropdown.insertAdjacentHTML('beforeend', markup);
 
 selected.addEventListener('click', () => {
   dropdown.classList.toggle('active');
   searchBoxInput.classList.toggle('active');
+  searchBoxInput.addEventListener('keyup', inputValue);
+  dropdown.addEventListener('change', selectCountry);
 
   searchBoxInput.value = '';
   filterList('');
@@ -115,17 +119,28 @@ selected.addEventListener('click', () => {
 
 const optionsList = document.querySelectorAll('.option');
 
-optionsList.forEach(o => {
-  o.addEventListener('click', () => {
-    selectedCountry = selected.textContent = o.querySelector('label').textContent;
-    dropdown.classList.remove('active');
-    searchBoxInput.classList.remove('active');
-  });
-});
+async function selectCountry(e) {
+  const countryCode = e.target.value;
+  selected.textContent = list[countryCode] || 'Around the world';
+  apiQuery.country = countryCode;
+  hideCountryDropdown();
+  const searchResult = await apiQuery.search();
 
-searchBoxInput.addEventListener('keyup', function (e) {
+  if (!searchResult._embedded) return;
+
+  renderMarkup(searchResult._embedded.events);
+}
+
+function hideCountryDropdown() {
+  dropdown.removeEventListener('change', selectCountry);
+  searchBoxInput.removeEventListener('keyup', inputValue);
+  dropdown.classList.remove('active');
+  searchBoxInput.classList.remove('active');
+}
+
+function inputValue(e) {
   filterList(e.target.value);
-});
+}
 
 function filterList(searchTerm) {
   searchTerm = searchTerm.toLowerCase();
@@ -139,4 +154,4 @@ function filterList(searchTerm) {
   });
 }
 
-export { selectedCountry };
+export { hideCountryDropdown };
