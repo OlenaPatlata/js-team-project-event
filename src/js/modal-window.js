@@ -45,6 +45,7 @@ async function onModalOpenClick(e) {
 
   btnMoreRef = document.querySelector('.btn--modal');
   btnMore = btnMoreRef.dataset.name;
+  console.log(btnMore);
   btnMoreRef.addEventListener('click', moreBtnFunc);
   console.log(btnMore);
 
@@ -78,6 +79,7 @@ function onBtnClick(e) {
   if (e.code !== closeBtnRef) return;
   closeModal();
 }
+
 
 eventListRef.addEventListener('click', onModalOpenClick);
 

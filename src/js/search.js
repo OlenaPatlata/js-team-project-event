@@ -3,7 +3,6 @@ import debounce from 'lodash.debounce'; //лодаш(дебаунс)
 // var debounce = require('lodash.debounce');
 import { displayWindowSize } from './windowChangeListener';
 import { renderMarkup } from './templates/eventCard'; //импорт функции отрисовки
-import { selectedCountry } from './persatyi-country-select'; //импорт переменной со значением страны
 let search = document.getElementById('search'); //поиск елемента(инпута) по айди
 search.addEventListener('input', debounce(listenToSearch, 250)); //добавление слушателя на инпут
 displayWindowSize();
@@ -11,7 +10,6 @@ displayWindowSize();
 async function listenToSearch(a) {
   //   console.log(a.target.value);
   apiQuery.keyword = a.target.value.trim(); //установка поискового слова в запрос поиска
-  console.log('selectedCountry: ', selectedCountry);
   try {
     const searchResult = await apiQuery.search(); //присвоение результатов запроса в переменную
     console.log('searchResult: ', searchResult);
