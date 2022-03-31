@@ -1,6 +1,6 @@
 import APIQuery from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
-import { btnMore } from './modal-window';
+import { btnMore, closeModal, } from './modal-window';
 // строку ниже удалить после слияния
 import newAPIQuery from './newAPI'; 
 
@@ -16,11 +16,12 @@ const refs = {
 }
 
 // перед использованием функции необходимо изменить ключевое слово на btnMore
-APIeventsByKey.eventKeyWord = 'adele';
+APIeventsByKey.eventKeyWord = btnMore;
 
 // это ОСНОВНАЯ ФУНКЦИЯ, заЭкспортить и подключить к нужной кнопке
 export default async function moreBtnFunc() {
   refs.fieldToClear.innerHTML = '';
+  closeModal();
   try {
     const result = await APIeventsByKey.GetEventsByKeyWord()
     console.log('result:', result);

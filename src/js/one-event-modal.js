@@ -9,7 +9,7 @@ export default function makeOneEventMarkup(dataEvent) {
     },
     name,
     priceRanges,
-    _embedded,
+    _embedded: { venues, attractions },
     images,
   } = dataEvent;
   //   const poster = poster_path ? `https://image.tmdb.org/t/p/w342${poster_path}` : notFoundImg;
@@ -51,10 +51,10 @@ export default function makeOneEventMarkup(dataEvent) {
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">WHERE</h3>
-        <p class="event__item--info">${_embedded.venues[0].city.name},${
-    _embedded.venues[0].country.name
+        <p class="event__item--info">${venues[0].city.name},${
+    venues[0].country.name
   }</p>
-        <p class="event__item--info">${_embedded.venues[0].address.line1}</p>
+        <p class="event__item--info">${venues[0].address.line1}</p>
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">WHO</h3>
@@ -83,7 +83,7 @@ export default function makeOneEventMarkup(dataEvent) {
   </div>
 </div>
 <div class="event__btn button__container">
-  <button type="button" class="btn--modal uppercase"  data-name="${name}">MORE FROM THIS AUTHOR</button>
+  <button type="button" class="btn--modal uppercase"  data-name="${attractions[0].name ? attractions[0].name : '' }">MORE FROM THIS AUTHOR</button>
 </div>
     `;
 }

@@ -17,6 +17,7 @@ const wrapperModalRef = document.querySelector('.modal__wrapper');
 
 let dataEvent = {};
 let btnMore = '';
+let btnMoreRef = '';
 
 // Функция для очищения разметки в модальном окне
 function clearModal() {
@@ -42,9 +43,10 @@ async function onModalOpenClick(e) {
 
   openModal();
 
-  const btnMoreRef = document.querySelector('.btn--modal');
+  btnMoreRef = document.querySelector('.btn--modal');
   btnMore = btnMoreRef.dataset.name;
-    btnMoreRef.addEventListener('click', moreBtnFunc);
+  console.log(btnMore);
+  btnMoreRef.addEventListener('click', moreBtnFunc);
   closeBtnRef.addEventListener('click', closeModal);
   backdropRef.addEventListener('click', onBackdropClick);
   document.addEventListener('keydown', onEscDown);
@@ -60,7 +62,7 @@ function closeModal() {
   closeBtnRef.removeEventListener('click', onBtnClick);
   backdropRef.removeEventListener('click', onBackdropClick);
   document.removeEventListener('keydown', onEscDown);
-    btnMoreRef.removeEventListener('click', moreBtnFunc);
+  btnMoreRef.removeEventListener('click', moreBtnFunc);
   clearModal();
 }
 function onBackdropClick(e) {
@@ -76,6 +78,7 @@ function onBtnClick(e) {
   closeModal();
 }
 
+
 eventListRef.addEventListener('click', onModalOpenClick);
 
-export { btnMore };
+export { btnMore, closeModal, };
