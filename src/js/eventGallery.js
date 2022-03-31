@@ -1,8 +1,7 @@
-import API from './ticketmasterAPI';
+import apiQuery from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
 import { takeEvents } from './pagination';
-
-const api = new API();
+import { displayWindowSize } from './windowChangeListener';
 
 const refs = {
   loader: document.querySelector('.loader'),
@@ -14,14 +13,9 @@ async function renderGallery() {
     refs.loaderDiv.classList.add('on-loading');
     refs.loader.classList.remove('is-hiden');
 
-    //Layout template for the tablet version
-    // if (window.innerWidth > 767 && window.innerWidth < 1024) {
-    //
-    // } else {
-    //
-    // }
+    displayWindowSize();
 
-    const events = await api.GetEvents();
+    const events = await apiQuery.getEvents();
     renderMarkup(events._embedded.events);
     refs.loader.classList.add('is-hiden');
     refs.loaderDiv.classList.remove('on-loading');
