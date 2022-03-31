@@ -2,6 +2,7 @@
 export default function makeOneEventMarkup(dataEvent) {
   const {
     info,
+    pleaseNote,
     dates: {
       timezone,
       start: { localDate, localtime },
@@ -39,7 +40,7 @@ export default function makeOneEventMarkup(dataEvent) {
     <ul class="event__list">
       <li class="event__item">
         <h3 class="event__item--title uppercase">INFO</h3>
-        <p class="event__item--info">${info}</p>
+        <p class="event__item--info">${info ? info : pleaseNote}</p>
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">WHEN</h3>
