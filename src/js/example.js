@@ -1,7 +1,6 @@
 //template
-import API from './ticketmasterAPI';
+import apiQuery from './ticketmasterAPI';
 var debounce = require('lodash.debounce');
-const APIinstance = new API();
 
 async function TEST_API_FUNC() {
   // const test = await APIinstance.GetEvents();
