@@ -11,6 +11,7 @@ export default function makeOneEventMarkup(dataEvent) {
     _embedded: { venues, attractions },
     images,
   } = dataEvent;
+
   const standardImage = images.filter(
     ({ url, width, ratio }) =>
       url.toLowerCase().includes('tablet_landscape') &&
@@ -24,12 +25,17 @@ export default function makeOneEventMarkup(dataEvent) {
       url.toLowerCase().includes('retina') && width >= 640 && ratio === '3_2',
   )[0].url;
 
+  const smallImage = images.filter(
+    ({ url, width, ratio }) =>
+      url.toLowerCase().includes('custom') && width < 640 && ratio === '4_3',
+  )[0].url;
+
   return `<div class="round__wrapper">
   <picture>
-    <source srcset="${standardImage ? standardImage : images[0].url} 1x,
+    <source srcset="${smallImage ? smallImage : images[0].url} 1x,
           ${retinaImage ? retinaImage : images[0].url} 2x" class="round__img" />
         <img class="round__img" alt="${name}" src="${
-    standardImage ? standardImage : images[0].url
+    smallImage ? smallImage : images[0].url
   }" loading="lazy" />
   </picture>
 </div>
