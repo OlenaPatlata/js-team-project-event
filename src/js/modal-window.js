@@ -16,6 +16,7 @@ const wrapperModalRef = document.querySelector('.modal__wrapper');
 
 let dataEvent = {};
 let btnMore = '';
+let btnMoreRef = '';
 
 // Функция для очищения разметки в модальном окне
 function clearModal() {
@@ -34,6 +35,7 @@ async function onModalOpenClick(e) {
     return;
   }
   const id = cardRef.dataset.id;
+
   apiQuery.EvID = id;
   dataEvent = await apiQuery.getEventsID();
 
@@ -41,9 +43,11 @@ async function onModalOpenClick(e) {
 
   openModal();
 
-  const btnMoreRef = document.querySelector('.btn--modal');
+  btnMoreRef = document.querySelector('.btn--modal');
   btnMore = btnMoreRef.dataset.name;
   btnMoreRef.addEventListener('click', moreBtnFunc);
+  console.log(btnMore);
+
   closeBtnRef.addEventListener('click', closeModal);
   backdropRef.addEventListener('click', onBackdropClick);
   document.addEventListener('keydown', onEscDown);
@@ -77,4 +81,4 @@ function onBtnClick(e) {
 
 eventListRef.addEventListener('click', onModalOpenClick);
 
-export { btnMore };
+export { btnMore, closeModal };
