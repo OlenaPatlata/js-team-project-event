@@ -99,7 +99,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  //   overflow: hidden;
 }
 
 .event {
@@ -157,13 +156,36 @@
       text-align: start;
     }
   }
-  &__item--icon::before {
-    content: '';
-    width: 24px;
+  &__item--bigicon {
+    width: 3px;
     height: 16px;
+    background-color: var(--primary-black-color);
+    display: inline-block;
+    @include mq(tablet) {
+      width: 4px;
+      height: 19px;
+    }
+  }
+  &__item--smallicon {
+    width: 1px;
+    height: 16px;
+    background-color: var(--primary-black-color);
+    display: inline-block;
+    margin-right: 1px;
+    @include mq(tablet) {
+      width: 2px;
+      height: 19px;
+      margin-right: 2px;
+    }
+  }
+  &__item--bigicon:not(:last-child) {
+    margin-right: 1px;
+    @include mq(tablet) {
+      margin-right: 2px;
+    }
+  }
+  &__item--bigicon:last-child {
     margin-right: 13px;
-    background-image: url('../images/ticket1-sm-min.png');
-    background-size: contain;
   }
   &__item--link {
     padding-top: 10px;

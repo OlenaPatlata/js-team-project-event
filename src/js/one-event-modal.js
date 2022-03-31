@@ -59,21 +59,28 @@ export default function makeOneEventMarkup(dataEvent) {
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">PRICES</h3>
-        <p class="event__item--info event__item--icon"> 
-          ${priceRanges ? priceRanges[0].type : 'Standart tickets missing'} ${
-    priceRanges ? priceRanges[0].min : ' '
-  }-${priceRanges ? priceRanges[0].max : ' '}
+        <div class="event__item--info"> ${
+          priceRanges
+            ? '<span class="event__item--bigicon"></span><span class="event__item--smallicon"></span><span class="event__item--bigicon"></span><span class="event__item--smallicon"></span><span class="event__item--smallicon"></span><span class="event__item--smallicon"></span><span class="event__item--bigicon"></span>' +
+              priceRanges[0].type
+            : 'Standart tickets missing'
+        } ${priceRanges ? priceRanges[0].min + '-' : ' '}${priceRanges ? priceRanges[0].max : ' '}
           ${priceRanges ? priceRanges[0].currency : ' '}
-        </p>
+        </div>
         <a href="" class="event__item--link uppercase" rel="nofollow noopener noreferrer"
           >BUY TICKETS</a
         >
-        <p class="event__item--info">
-          ${priceRanges?.[1] ? priceRanges[1].type : 'VIP tickets missing'} ${
-    priceRanges?.[1] ? priceRanges[1].min : ' '
-  }-${priceRanges?.[1] ? priceRanges[1].max : ' '}
+        <div class="event__item--info">
+          ${
+            priceRanges?.[1]
+              ? '<span class="event__item--bigicon"></span><span class="event__item--smallicon"></span><span class="event__item--bigicon"></span><span class="event__item--smallicon"></span><span class="event__item--smallicon"></span><span class="event__item--smallicon"></span><span class="event__item--bigicon"></span>' +
+                priceRanges[1].type
+              : 'VIP tickets missing'
+          } ${priceRanges?.[1] ? priceRanges[1].min + '-' : ' '}${
+    priceRanges?.[1] ? priceRanges[1].max : ' '
+  }
           ${priceRanges?.[1] ? priceRanges[1].currency : ' '}
-        </p>
+        </div>
         <a href="" class="event__item--link uppercase" rel="nofollow noopener noreferrer"
           >BUY TICKETS</a
         >
