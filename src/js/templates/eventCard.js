@@ -28,7 +28,7 @@ const eventCardMarkup = events =>
         )[0].url;
 
         return `
-        <li class="gallery__item data-id="${id}"> 
+        <li class="gallery__item" data-id="${id}"> 
         <picture>
           <source
           srcset="
@@ -72,10 +72,8 @@ const renderMarkup = events => {
 function checkDeviceForSubtitle(el, className) {
   if (window.innerWidth < 768) {
     return checkLength(el, 15, className);
-  } else if (window.innerWidth > 767 && window.innerWidth < 1024) {
-    return checkLength(el, 20, className);
   } else {
-    return checkLength(el, 25, className);
+    return checkLength(el, 20, className);
   }
 }
 
