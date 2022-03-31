@@ -1,5 +1,6 @@
 import apiQuery from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
+import 'animate.css';
 
 const list = {
   US: 'United States Of America',
@@ -90,6 +91,8 @@ const list = {
 const dropdown = document.querySelector('.options-container');
 const selected = document.querySelector('[data-selected-country]');
 const searchBoxInput = document.querySelector('.search-box input');
+const arrow = document.querySelector('#arrow');
+const searchIcon = document.querySelector('#search-box__icon');
 
 const keysOfCountries = Object.keys(list);
 let markup = keysOfCountries
@@ -104,8 +107,10 @@ let markup = keysOfCountries
 dropdown.insertAdjacentHTML('beforeend', markup);
 
 selected.addEventListener('click', () => {
+  arrow.classList.toggle('active');
   dropdown.classList.toggle('active');
   searchBoxInput.classList.toggle('active');
+  searchIcon.classList.toggle('active');
   searchBoxInput.addEventListener('keyup', inputValue);
   dropdown.addEventListener('change', selectCountry);
 
@@ -134,6 +139,8 @@ async function selectCountry(e) {
 function hideCountryDropdown() {
   dropdown.removeEventListener('change', selectCountry);
   searchBoxInput.removeEventListener('keyup', inputValue);
+  searchIcon.classList.remove('active');
+  arrow.classList.remove('active');
   dropdown.classList.remove('active');
   searchBoxInput.classList.remove('active');
 }

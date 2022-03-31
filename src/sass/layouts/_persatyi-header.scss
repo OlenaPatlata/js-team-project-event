@@ -142,6 +142,7 @@
     top: 14px;
     right: 35px;
     fill: var(--input-gray-color);
+    z-index: 200;
 
     @include mq(tablet) {
       left: 290px;
@@ -204,34 +205,17 @@
   &__custom-arrow {
     display: block;
     position: absolute;
-    top: 18px;
-    right: 5px;
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    top: 16px;
+    right: 32px;
+    fill: var(--input-gray-color);
+    z-index: 300;
+    transition: transform 0.2s;
     pointer-events: none;
 
-    &::before {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 0;
+    &.active {
+      transform: rotate(180deg);
+      transition: transform 0.2s;
     }
-
-    &::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 0;
-    }
-  }
-
-  &__custom-arrow::before {
-    border-left: 0.5em solid transparent;
-    border-right: 0.5em solid transparent;
-    border-top: 0.5em solid var(--tertiary-gray-color);
   }
 }
 
@@ -272,11 +256,17 @@
 }
 
 .select-box .options-container::-webkit-scrollbar {
-  display: none;
+  width: 18px;
+  background-color: var(--tertiary-gray-color);
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
 }
 
 .select-box .options-container::-webkit-scrollbar-thumb {
-  display: none;
+  min-height: 60px;
+  background-color: var(--input-gray-color);
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
 
 .select-box .option,
@@ -287,6 +277,8 @@
 .select-box .option:hover {
   background-color: var(--tertiary-gray-color);
   border-radius: 20px;
+  // border-bottom-right-radius: 0%;
+  // border-top-right-radius: 0%;
 }
 
 .select-box label {
@@ -302,6 +294,10 @@
   width: 100%;
   height: 100%;
   padding: 12px 24px;
+}
+
+.search-box:focus {
+  border: 1px solid var(--primary-pink-color);
 }
 
 .search-box input {
@@ -323,6 +319,23 @@
 
   @include mq(tablet) {
     left: 0;
+  }
+}
+
+.search-box__icon {
+  position: absolute;
+  top: 57px;
+  right: 33px;
+  fill: var(--input-gray-color);
+  z-index: 200;
+  display: none;
+
+  @include mq(desktop) {
+    top: 57px;
+  }
+
+  &.active {
+    display: block;
   }
 }
 
