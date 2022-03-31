@@ -35,6 +35,7 @@ async function onModalOpenClick(e) {
     return;
   }
   const id = cardRef.dataset.id;
+
   apiQuery.EvID = id;
   dataEvent = await apiQuery.getEventsID();
 
@@ -46,6 +47,8 @@ async function onModalOpenClick(e) {
   btnMore = btnMoreRef.dataset.name;
   console.log(btnMore);
   btnMoreRef.addEventListener('click', moreBtnFunc);
+  console.log(btnMore);
+
   closeBtnRef.addEventListener('click', closeModal);
   backdropRef.addEventListener('click', onBackdropClick);
   document.addEventListener('keydown', onEscDown);
@@ -80,4 +83,4 @@ function onBtnClick(e) {
 
 eventListRef.addEventListener('click', onModalOpenClick);
 
-export { btnMore, closeModal, };
+export { btnMore, closeModal };

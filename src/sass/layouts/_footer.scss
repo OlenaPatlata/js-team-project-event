@@ -44,10 +44,11 @@
     background-image: url('../images/favorite.svg');
 
     @include mq(tablet) {
-      left: calc(65% + 1px);
+      left: calc(65% + 2px);
+      bottom: 4px;
     }
     @include mq(desktop) {
-      left: calc(65% - 38px);
+      left: calc(65% - 33px);
     }
   }
 
