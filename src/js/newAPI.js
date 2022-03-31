@@ -1,15 +1,15 @@
 export default class newAPIQuery {
+    #keyWord = '';
     constructor(){
         this.API_KEY = 'RmnlUoo1ahrXxdghcRDQ1mLYffidaAYw';
         this.ROOT_URL = 'https://app.ticketmaster.com/discovery/v2/';
         this.EvID = 'Z7r9jZ1AdaeGo';
 
-        this.KeyWord = 'adele';
     }
     
     async GetEventsByKeyWord(){
         try {
-            const projAPI = await fetch(`${this.ROOT_URL}events.json?keyword=${this.KeyWord}&apikey=${this.API_KEY}`);
+            const projAPI = await fetch(`${this.ROOT_URL}events.json?keyword=${this.eventKeyWord}&apikey=${this.API_KEY}`);
             const projAPI_JSONED = await projAPI.json();
             return projAPI_JSONED;
         }
@@ -18,11 +18,11 @@ export default class newAPIQuery {
         }
 
     }
-    get eventKeyWord(){
-        return this.KeyWord;
+    get eventKeyWord() {
+        return this.#keyWord;
     }
-    set eventKeyWord(newKeyWord){
-        this.KeyWord = newKeyWord;
+    set eventKeyWord(newKeyWord) {
+        this.#keyWord = newKeyWord;
     }
     
 }

@@ -15,11 +15,10 @@ const refs = {
   fieldToClear: document.querySelector('.gallery'),
 }
 
-// перед использованием функции необходимо изменить ключевое слово на btnMore
-APIeventsByKey.eventKeyWord = 'sting';
-
 // это ОСНОВНАЯ ФУНКЦИЯ, заЭкспортить и подключить к нужной кнопке
 export default async function moreBtnFunc() {
+  APIeventsByKey.eventKeyWord = btnMore;
+  
   refs.fieldToClear.innerHTML = '';
   closeModal();
   try {
