@@ -14,18 +14,24 @@ const eventCardMarkup = events =>
           venues: [{ name: place }],
         },
       }) => {
+        // Изображение для обычных экранов
         const standardImage = images.filter(
           ({ url, width, ratio }) =>
             url.toLowerCase().includes('tablet_landscape') &&
             width >= 640 &&
             width < 2040 &&
             ratio === '3_2',
-        )[0].url;
+        )[0]?.url;
 
+        // Изображение для Retina экранов
         const retinaImage = images.filter(
           ({ url, width, ratio }) =>
             url.toLowerCase().includes('retina') && width >= 640 && ratio === '3_2',
-        )[0].url;
+        )[0]?.url;
+
+        // Проверка на наличие свойств
+        const location = place ? place : 'Click on me to see mo info';
+        const eventName = name ? name : 'See more info';
 
         return `
         <li class="gallery__item" data-id="${id}"> 
@@ -38,21 +44,24 @@ const eventCardMarkup = events =>
         />
         <img class="gallery__image" src=${
           standardImage ? standardImage : images[0].url
-        } alt=${name} />
+        } alt=${eventName} />
         </picture>
         <div class="gallery__wrapper">
             <div class="gallery__marquee ">
-              <h3 class="gallery__subtitle ${checkDeviceForSubtitle(name, 'animated')}">${name}</h3>
+              <h3 class="gallery__subtitle ${checkDeviceForSubtitle(
+                eventName,
+                'animated',
+              )}">${eventName}</h3>
             </div>
             <p class="gallery__text">${localDate}</p>   
             <div class="gallery__wrapper-inner ">
               <div class="gallery__svg"></div>
               <div class=" gallery__marquee">
                 <p class="gallery__text gallery__text-location ${checkDeviceForLocation(
-                  place,
+                  location,
                   'animated',
                 )}">
-                ${place}
+                ${location}
                 </p>
               </div>
             </div>
@@ -69,6 +78,7 @@ const renderMarkup = events => {
   eventList.insertAdjacentHTML('beforeend', markup);
 };
 
+// Проверяет длинну строки названия события в зависимости от ширины экрана
 function checkDeviceForSubtitle(el, className) {
   if (window.innerWidth < 768) {
     return checkLength(el, 15, className);
@@ -77,6 +87,7 @@ function checkDeviceForSubtitle(el, className) {
   }
 }
 
+// Проверяет длинну строки названия локиции в зависимости от ширины экрана
 function checkDeviceForLocation(el, className) {
   if (window.innerWidth < 768) {
     return checkLength(el, 8, className);
@@ -85,8 +96,11 @@ function checkDeviceForLocation(el, className) {
   }
 }
 
+// Функция для проверки длинны строки и возврата имени класса
 function checkLength(el, num, className) {
-  return el.length > num ? className : '';
+  if (el.length > num) {
+    return className;
+  }
 }
 
 export { renderMarkup };
