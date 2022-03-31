@@ -4,13 +4,13 @@ import makeOneEventMarkup from './one-event-modal';
 import moreBtnFunc from './moreByAuthor';
 
 // получаем ссылку на бэкдроп
-const backdropRef = document.querySelector(`[data-modal="event-one"]`);
+const backdropRef = document.querySelector('[data-modal="event-one"]');
 // получаем ссылку на модалку
-const modalRef = document.querySelector(`.modal`);
+const modalRef = document.querySelector('.modal');
 // получаем ссылку на галерею в которую рендерятся карточки событий
 const eventListRef = document.querySelector('.gallery');
 // получаем ссылку на кнопку закрытия модалки
-const closeBtnRef = document.querySelector(`[data-modal-close="event-one"]`);
+const closeBtnRef = document.querySelector('[data-modal-close="event-one"]');
 // получаем ссылку на div, в который рендерится модалка
 const wrapperModalRef = document.querySelector('.modal__wrapper');
 
@@ -79,7 +79,6 @@ function onBtnClick(e) {
   if (e.code !== closeBtnRef) return;
   closeModal();
 }
-
 
 eventListRef.addEventListener('click', onModalOpenClick);
 

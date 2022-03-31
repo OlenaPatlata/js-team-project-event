@@ -13,7 +13,7 @@
   visibility: hidden;
   border-radius: 40% 0;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  z-index: 90;
+  z-index: 8;
 }
 .scroll-up::before {
   position: absolute;
