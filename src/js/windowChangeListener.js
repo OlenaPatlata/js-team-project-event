@@ -1,15 +1,13 @@
-import API from './ticketmasterAPI'; //испорт апишки
-const APIinstance = new API(); //новый екземпляр класса
+import apiQuery from './ticketmasterAPI';
 export function displayWindowSize() {
   // Get width and height of the window excluding scrollbars
-  var w = document.documentElement.clientWidth;
-
+  const width = document.documentElement.clientWidth;
   //   console.log('w: ', w);
-  if (w > 720 && w < 1024) {
-    APIinstance.size = 21;
+  if (width > 768 && width < 1024) {
+    apiQuery.size = 21;
     // console.log('size = 21');
     return;
   }
-  APIinstance.size = 20;
+  apiQuery.size = 20;
   //   console.log('size = 20');
 }

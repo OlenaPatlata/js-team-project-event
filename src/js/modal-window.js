@@ -1,5 +1,4 @@
-import API from './ticketmasterAPI';
-const api = new API();
+import apiQuery from './ticketmasterAPI';
 
 import makeOneEventMarkup from './one-event-modal';
 import moreBtnFunc from './moreByAuthor';
@@ -35,8 +34,8 @@ async function onModalOpenClick(e) {
     return;
   }
   const id = cardRef.dataset.id;
-  api.EvID = id;
-  dataEvent = await api.GetEventsID();
+  apiQuery.EvID = id;
+  dataEvent = await apiQuery.getEventsID();
 
   wrapperModalRef.insertAdjacentHTML('beforeend', makeOneEventMarkup({ ...dataEvent }));
 
@@ -44,7 +43,7 @@ async function onModalOpenClick(e) {
 
   const btnMoreRef = document.querySelector('.btn--modal');
   btnMore = btnMoreRef.dataset.name;
-    btnMoreRef.addEventListener('click', moreBtnFunc);
+  btnMoreRef.addEventListener('click', moreBtnFunc);
   closeBtnRef.addEventListener('click', closeModal);
   backdropRef.addEventListener('click', onBackdropClick);
   document.addEventListener('keydown', onEscDown);
@@ -60,7 +59,7 @@ function closeModal() {
   closeBtnRef.removeEventListener('click', onBtnClick);
   backdropRef.removeEventListener('click', onBackdropClick);
   document.removeEventListener('keydown', onEscDown);
-    btnMoreRef.removeEventListener('click', moreBtnFunc);
+  btnMoreRef.removeEventListener('click', moreBtnFunc);
   clearModal();
 }
 function onBackdropClick(e) {
