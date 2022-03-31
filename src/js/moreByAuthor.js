@@ -1,4 +1,4 @@
-import APIQuery from './ticketmasterAPI';
+import apiQuery from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
 import { btnMore, closeModal, } from './modal-window';
 // строку ниже удалить после слияния
@@ -16,7 +16,7 @@ const refs = {
 }
 
 // перед использованием функции необходимо изменить ключевое слово на btnMore
-APIeventsByKey.eventKeyWord = btnMore;
+APIeventsByKey.eventKeyWord = 'sting';
 
 // это ОСНОВНАЯ ФУНКЦИЯ, заЭкспортить и подключить к нужной кнопке
 export default async function moreBtnFunc() {

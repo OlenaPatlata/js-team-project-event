@@ -44,6 +44,7 @@ async function onModalOpenClick(e) {
 
   btnMoreRef = document.querySelector('.btn--modal');
   btnMore = btnMoreRef.dataset.name;
+  console.log(btnMore);
   btnMoreRef.addEventListener('click', moreBtnFunc);
   closeBtnRef.addEventListener('click', closeModal);
   backdropRef.addEventListener('click', onBackdropClick);
