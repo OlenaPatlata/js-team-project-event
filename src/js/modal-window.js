@@ -1,5 +1,4 @@
-import API from './ticketmasterAPI';
-const api = new API();
+import apiQuery from './ticketmasterAPI';
 
 import makeOneEventMarkup from './one-event-modal';
 import moreBtnFunc from './moreByAuthor';
@@ -35,8 +34,9 @@ async function onModalOpenClick(e) {
     return;
   }
   const id = cardRef.dataset.id;
-  api.EvID = id;
-  dataEvent = await api.getEventsID();
+
+  apiQuery.EvID = id;
+  dataEvent = await apiQuery.getEventsID();
 
   wrapperModalRef.insertAdjacentHTML('beforeend', makeOneEventMarkup({ ...dataEvent }));
 
