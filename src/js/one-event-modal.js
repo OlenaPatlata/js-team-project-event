@@ -2,14 +2,13 @@
 export default function makeOneEventMarkup(dataEvent) {
   const {
     info,
-    pleaseNote,
     dates: {
       timezone,
       start: { localDate, localtime },
     },
     name,
     priceRanges,
-    _embedded,
+    _embedded: { venues, attractions },
     images,
   } = dataEvent;
   //   const poster = poster_path ? `https://image.tmdb.org/t/p/w342${poster_path}` : notFoundImg;
@@ -40,7 +39,7 @@ export default function makeOneEventMarkup(dataEvent) {
     <ul class="event__list">
       <li class="event__item">
         <h3 class="event__item--title uppercase">INFO</h3>
-        <p class="event__item--info">${info ? info : pleaseNote}</p>
+        <p class="event__item--info">${info ? info : attractions[0].name}</p>
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">WHEN</h3>
@@ -51,10 +50,8 @@ export default function makeOneEventMarkup(dataEvent) {
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">WHERE</h3>
-        <p class="event__item--info">${_embedded.venues[0].city.name},${
-    _embedded.venues[0].country.name
-  }</p>
-        <p class="event__item--info">${_embedded.venues[0].address.line1}</p>
+        <p class="event__item--info">${venues[0].city.name},${venues[0].country.name}</p>
+        <p class="event__item--info">${venues[0].address.line1}</p>
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">WHO</h3>
@@ -62,18 +59,20 @@ export default function makeOneEventMarkup(dataEvent) {
       </li>
       <li class="event__item">
         <h3 class="event__item--title uppercase">PRICES</h3>
-        <p class="event__item--info">
-          ${priceRanges[0].type} ${priceRanges[0].min}-${priceRanges[0].max}
-          ${priceRanges[0].currency}
+        <p class="event__item--info event__item--icon"> 
+          ${priceRanges ? priceRanges[0].type : 'Standart tickets missing'} ${
+    priceRanges ? priceRanges[0].min : ' '
+  }-${priceRanges ? priceRanges[0].max : ' '}
+          ${priceRanges ? priceRanges[0].currency : ' '}
         </p>
         <a href="" class="event__item--link uppercase" rel="nofollow noopener noreferrer"
           >BUY TICKETS</a
         >
         <p class="event__item--info">
-          ${priceRanges[1] ? priceRanges[1].type : 'VIP tickets missing'} ${
-    priceRanges[1] ? priceRanges[1].min : ' '
-  }-${priceRanges[1] ? priceRanges[1].max : ' '}
-          ${priceRanges[1] ? priceRanges[1].currency : ' '}
+          ${priceRanges?.[1] ? priceRanges[1].type : 'VIP tickets missing'} ${
+    priceRanges?.[1] ? priceRanges[1].min : ' '
+  }-${priceRanges?.[1] ? priceRanges[1].max : ' '}
+          ${priceRanges?.[1] ? priceRanges[1].currency : ' '}
         </p>
         <a href="" class="event__item--link uppercase" rel="nofollow noopener noreferrer"
           >BUY TICKETS</a
@@ -83,7 +82,9 @@ export default function makeOneEventMarkup(dataEvent) {
   </div>
 </div>
 <div class="event__btn button__container">
-  <button type="button" class="btn--modal uppercase"  data-name="${name}">MORE FROM THIS AUTHOR</button>
+  <button type="button" class="btn--modal uppercase"  data-name="${
+    attractions[0].name ? attractions[0].name : ''
+  }">MORE FROM THIS AUTHOR</button>
 </div>
     `;
 }
