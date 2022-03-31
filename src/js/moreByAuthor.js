@@ -11,7 +11,7 @@ const APIeventsByKey = new newAPIQuery();
 // moreBtn.addEventListener('click', moreBtnFunc);
 
 const refs = {
-  valueInput: document.querySelector('#searchbar_js'),
+  valueInput: document.querySelector('.header__input'),
   fieldToClear: document.querySelector('.gallery'),
 }
 
@@ -27,7 +27,7 @@ export default async function moreBtnFunc() {
     const resultArray = result._embedded.events;
     const {name} = resultArray[0];
     // запись значения поиска в инпут
-    // refs.valueInput.value = name;
+    refs.valueInput.value = name;
 
     renderMarkup(resultArray);
 
