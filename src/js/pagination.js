@@ -48,15 +48,14 @@ async function pagination({ size, totalElements, totalPages }) {
   }
   pagination.on('afterMove', async event => {
     refs.pagination.style.display = 'none';
-    const test = document.querySelector('#search');
-    // Инициализация спинера
-    // refs.
+    window.scrollTo({
+      top: 150,
+      behavior: 'smooth',
+    });
+
     refsSpinner.gallery.innerHTML = '';
     refsSpinner.loaderDiv.classList.add('on-loading');
     refsSpinner.loader.classList.remove('is-hiden');
-
-    // const prevArrow = refs.pagination.querySelector('.tui-ico-prev');
-    // if (prevArrow) prevArrow.innerHTML = '&#8592';
 
     const currentPage = event.page - 1;
     apiQuery.currentPage = currentPage;
@@ -68,9 +67,8 @@ async function pagination({ size, totalElements, totalPages }) {
     const events = search._embedded.events;
 
     renderMarkup(events);
-    refs.pagination.style.display = 'block';
 
-    // Прячем спинер
+    refs.pagination.style.display = 'block';
     refsSpinner.loader.classList.add('is-hiden');
     refsSpinner.loaderDiv.classList.remove('on-loading');
   });
