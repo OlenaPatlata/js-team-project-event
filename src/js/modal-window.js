@@ -3,10 +3,12 @@ import apiQuery from './ticketmasterAPI';
 import makeOneEventMarkup from './one-event-modal';
 import moreBtnFunc from './moreByAuthor';
 
+import 'animate.css';
+
 // получаем ссылку на бэкдроп
 const backdropRef = document.querySelector(`[data-modal="event-one"]`);
 // получаем ссылку на модалку
-const modalRef = document.querySelector(`.modal`);
+const modalRef = document.querySelector('.modal');
 // получаем ссылку на галерею в которую рендерятся карточки событий
 const eventListRef = document.querySelector('.gallery');
 // получаем ссылку на кнопку закрытия модалки
@@ -57,12 +59,20 @@ async function onModalOpenClick(e) {
 function openModal() {
   backdropRef.classList.remove('is-hidden');
   document.body.classList.add('modal-open');
+
+  modalRef.classList.add('animate__animated');
+  modalRef.classList.add('animate__pulse');
+
   eventListRef.removeEventListener('click', onModalOpenClick);
 }
 
 function closeModal() {
   backdropRef.classList.add('is-hidden');
   document.body.classList.remove('modal-open');
+
+  modalRef.classList.remove('animate__animated');
+  modalRef.classList.remove('animate__pulse');
+
   closeBtnRef.removeEventListener('click', onBtnClick);
   backdropRef.removeEventListener('click', onBackdropClick);
   document.removeEventListener('keydown', onEscDown);
