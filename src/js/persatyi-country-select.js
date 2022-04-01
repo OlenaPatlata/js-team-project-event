@@ -1,5 +1,6 @@
 import apiQuery from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
+import refs from './eventGallery'; //импорт ссылок на элементы для спинера
 import 'animate.css';
 
 const list = {
@@ -129,11 +130,21 @@ async function selectCountry(e) {
   selected.textContent = list[countryCode] || 'Around the world';
   apiQuery.country = countryCode;
   hideCountryDropdown();
+
+  // Инициализация спинера
+  refs.gallery.innerHTML = '';
+  refs.loaderDiv.classList.add('on-loading');
+  refs.loader.classList.remove('is-hiden');
+
   const searchResult = await apiQuery.search();
 
   if (!searchResult._embedded) return;
 
   renderMarkup(searchResult._embedded.events);
+
+  // Прячем спинер
+  refs.loader.classList.add('is-hiden');
+  refs.loaderDiv.classList.remove('on-loading');
 }
 
 function hideCountryDropdown() {

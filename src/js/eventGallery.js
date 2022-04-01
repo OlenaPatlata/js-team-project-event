@@ -5,6 +5,7 @@ import { displayWindowSize } from './windowChangeListener';
 const refs = {
   loader: document.querySelector('.loader'),
   loaderDiv: document.querySelector('.gallery-container'),
+  gallery: document.querySelector('.gallery'),
 };
 
 async function renderGallery() {
@@ -16,6 +17,7 @@ async function renderGallery() {
 
     const events = await apiQuery.getEvents();
     renderMarkup(events._embedded.events);
+
     refs.loader.classList.add('is-hiden');
     refs.loaderDiv.classList.remove('on-loading');
   } catch (error) {
@@ -24,3 +26,5 @@ async function renderGallery() {
 }
 
 renderGallery();
+
+export default refs;
