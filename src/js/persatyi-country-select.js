@@ -134,8 +134,8 @@ async function selectCountry(e) {
 
   if (!searchResult._embedded) return;
 
-  paginationByEvents(searchResult.page); //pagination
   renderMarkup(searchResult._embedded.events);
+  paginationByEvents(searchResult.page); //pagination
 }
 
 function hideCountryDropdown() {

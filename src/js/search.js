@@ -33,7 +33,7 @@ async function listenToSearch(a) {
     }
     //console.log('searchResult: ', searchResult._embedded.events);
     renderMarkup(searchResult._embedded.events); //отрисовка карточек
-    paginationByEvents(searchResult.page); //pagination
+    paginationByEvents(searchResult.page);
     // console.log('renderMarkup: ', renderMarkup);
   } catch (error) {
     console.log(error.message);
