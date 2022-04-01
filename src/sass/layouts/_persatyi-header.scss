@@ -2,10 +2,13 @@
   & .container {
     margin: 0 auto;
   }
+
+  max-width: 480px;
+  margin: 0 auto;
   position: relative;
   padding-top: 80px;
   padding-bottom: 50px;
-  background-color: var(--secondary-black-color);
+  background-color: var(--primary-black-color);
   background-image: url('../images/bg-header/mobile/header-bg-mobile.jpg');
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -16,6 +19,7 @@
   }
 
   @media screen and (min-width: 480px) {
+    max-width: 1024px;
     background-image: url('../images/bg-header/tablet/header-bg-tablet.jpg');
 
     @include mq(retina) {
@@ -29,6 +33,7 @@
   }
 
   @include mq(desktop) {
+    max-width: 1600px;
     padding-bottom: 130px;
     background-image: url('../images/bg-header/desktop/header-bg-desktop.jpg');
 
@@ -314,6 +319,7 @@
   border: none;
   opacity: 0;
   transition: opacity 0.4s;
+  pointer-events: none;
 
   @include mq(tablet) {
     left: 0;
@@ -344,6 +350,7 @@
 
 .select-box .search-box input.active {
   opacity: 1;
+  pointer-events: all;
 }
 
 .search-box input:focus {

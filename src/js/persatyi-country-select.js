@@ -122,7 +122,6 @@ const selected = document.querySelector('[data-selected-country]');
 const searchBoxInput = document.querySelector('.search-box input');
 const arrow = document.querySelector('#arrow');
 const searchIcon = document.querySelector('#search-box__icon');
-const selectBox = document.querySelector('.header__search-wrapper');
 
 const keysOfCountries = Object.keys(list);
 let markup = keysOfCountries
@@ -135,15 +134,15 @@ let markup = keysOfCountries
   .join('');
 
 dropdown.insertAdjacentHTML('beforeend', markup);
+searchBoxInput.addEventListener('keyup', inputValue);
+dropdown.addEventListener('change', selectCountry);
+document.addEventListener('click', closeDropdownByClick);
 
 selected.addEventListener('click', () => {
   arrow.classList.toggle('active');
-  dropdown.classList.toggle('active');
   searchBoxInput.classList.toggle('active');
   searchIcon.classList.toggle('active');
-  // window.addEventListener('click', closeDropdownByClick);
-  searchBoxInput.addEventListener('keyup', inputValue);
-  dropdown.addEventListener('change', selectCountry);
+  dropdown.classList.toggle('active');
 
   searchBoxInput.value = '';
   filterList('');
@@ -188,19 +187,18 @@ async function selectCountry(e) {
   paginationByEvents(searchResult.page); //pagination
 }
 
-// function closeDropdownByClick(e) {
-//   console.log(e);
-//   if (e.target !== selectBox) {
-//     console.log(e);
-//     hideCountryDropdown();
-//     return;
-//   }
-// }
+function closeDropdownByClick(e) {
+  if (
+    dropdown.classList.contains('active') &&
+    e.target !== selected &&
+    e.target !== searchBoxInput
+  ) {
+    hideCountryDropdown();
+    return;
+  }
+}
 
 function hideCountryDropdown() {
-  // window.removeEventListener('click', closeDropdownByClick);
-  dropdown.removeEventListener('change', selectCountry);
-  searchBoxInput.removeEventListener('keyup', inputValue);
   searchIcon.classList.remove('active');
   arrow.classList.remove('active');
   dropdown.classList.remove('active');
