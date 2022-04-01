@@ -12,14 +12,15 @@
   transition: opacity 250ms linear, visibility 250ms linear;
   overflow-y: scroll;
   transition-property: transform;
-  transition-duration: 500ms;
+  transition-duration: 250ms;
   transition-timing-function: linear;
+  transform: scale(1);
 
   &.is-hidden {
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
-    transform: rotate(180deg);
+    transform: scale(0);
   }
 }
 
