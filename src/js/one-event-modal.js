@@ -2,6 +2,7 @@
 export default function makeOneEventMarkup(dataEvent) {
   const {
     info,
+    url,
     dates: {
       timezone,
       start: { localDate, localtime },
@@ -85,7 +86,9 @@ export default function makeOneEventMarkup(dataEvent) {
         } ${priceRanges ? priceRanges[0].min + '-' : ' '}${priceRanges ? priceRanges[0].max : ' '}
           ${priceRanges ? priceRanges[0].currency : ' '}
         </div>
-        <a href="" class="event__item--link uppercase" rel="nofollow noopener noreferrer"
+        <a href="${priceRanges ? url : ''}" class="event__item--link uppercase" ${
+    priceRanges ? 'target="_blank"' : ''
+  } rel="nofollow noopener noreferrer"
           >BUY TICKETS</a
         >
         <div class="event__item--info">
@@ -99,7 +102,9 @@ export default function makeOneEventMarkup(dataEvent) {
   }
           ${priceRanges?.[1] ? priceRanges[1].currency : ' '}
         </div>
-        <a href="" class="event__item--link uppercase" rel="nofollow noopener noreferrer"
+        <a href="${priceRanges?.[1] ? url : ''}" class="event__item--link uppercase" ${
+    priceRanges?.[1] ? 'target="_blank"' : ''
+  } rel="nofollow noopener noreferrer"
           >BUY TICKETS</a
         >
       </li>
