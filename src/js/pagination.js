@@ -8,6 +8,10 @@ import { renderMarkup } from './templates/eventCard';
 const refs = {
   cards: document.querySelector('#example_render_films'),
   pagination: document.querySelector('#pagination'),
+  //Ссылки на элементы для спинера
+  loader: document.querySelector('.loader'),
+  loaderDiv: document.querySelector('.gallery-container'),
+  gallery: document.querySelector('.gallery'),
 };
 // console.log(refs.cards.querySelector('.cards'));
 
@@ -51,6 +55,11 @@ async function pagination({ size, totalElements, totalPages }) {
   // nextArrow.innerHTML = `&#8594`;
 
   pagination.on('afterMove', async event => {
+    // Инициализация спинера
+    refs.gallery.innerHTML = '';
+    refs.loaderDiv.classList.add('on-loading');
+    refs.loader.classList.remove('is-hiden');
+
     // const prevArrow = refs.pagination.querySelector('.tui-ico-prev');
     // if (prevArrow) prevArrow.innerHTML = '&#8592';
 
@@ -65,6 +74,9 @@ async function pagination({ size, totalElements, totalPages }) {
     const events = search._embedded.events;
 
     renderMarkup(events);
+    // Прячем спинер
+    refs.loader.classList.add('is-hiden');
+    refs.loaderDiv.classList.remove('on-loading');
   });
 }
 
