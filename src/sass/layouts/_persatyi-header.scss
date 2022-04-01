@@ -280,8 +280,6 @@
 .select-box .option:hover {
   background-color: var(--tertiary-gray-color);
   border-radius: 20px;
-  // border-bottom-right-radius: 0%;
-  // border-top-right-radius: 0%;
 }
 
 .select-box label {
@@ -359,4 +357,29 @@
 
 .notiflix-notify-info {
   @include font(400, 14px, 1.2, 0.03em);
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: var(--primary-black-color);
+  border-radius: 100vw;
+  margin-block: 0.2em;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--input-gray-color);
+  border-radius: 100vw;
+  &:hover {
+    background: var(--tertiary-gray-color);
+  }
+}
+
+@supports (scrollbar-color: red blue) {
+  * {
+    scrollbar-color: var(--input-gray-color) var(--tertiary-gray-color);
+    scrollbar-width: thin;
+  }
 }
