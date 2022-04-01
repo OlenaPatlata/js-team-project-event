@@ -24,6 +24,7 @@ async function listenToSearch(a) {
     countrySearchIcon.classList.remove('active');
   }
   apiQuery.keyword = a.target.value.trim(); //установка поискового слова в запрос поиска
+  apiQuery.currentPage = 0;
   try {
     // Инициализация спинера
     refs.gallery.innerHTML = '';
@@ -39,7 +40,7 @@ async function listenToSearch(a) {
     }
     //console.log('searchResult: ', searchResult._embedded.events);
     renderMarkup(searchResult._embedded.events); //отрисовка карточек
-    paginationByEvents(searchResult.page); //pagination
+    paginationByEvents(searchResult.page);
     // console.log('renderMarkup: ', renderMarkup);
 
     // Прячем спинер
