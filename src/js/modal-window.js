@@ -34,6 +34,7 @@ async function onModalOpenClick(e) {
   if (e.target === e.currentTarget || !cardRef) {
     return;
   }
+
   const id = cardRef.dataset.id;
 
   apiQuery.EvID = id;
@@ -56,6 +57,7 @@ async function onModalOpenClick(e) {
 function openModal() {
   backdropRef.classList.remove('is-hidden');
   document.body.classList.add('modal-open');
+  eventListRef.removeEventListener('click', onModalOpenClick);
 }
 
 function closeModal() {
@@ -66,6 +68,7 @@ function closeModal() {
   document.removeEventListener('keydown', onEscDown);
   btnMoreRef.removeEventListener('click', moreBtnFunc);
   clearModal();
+  eventListRef.addEventListener('click', onModalOpenClick);
 }
 function onBackdropClick(e) {
   if (e.target !== backdropRef) return;
@@ -79,7 +82,6 @@ function onBtnClick(e) {
   if (e.code !== closeBtnRef) return;
   closeModal();
 }
-
 
 eventListRef.addEventListener('click', onModalOpenClick);
 
