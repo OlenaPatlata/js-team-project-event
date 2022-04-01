@@ -2,6 +2,7 @@ import apiQuery from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
 import refs from './eventGallery'; //импорт ссылок на элементы для спинера
 import 'animate.css';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { paginationByEvents } from './pagination';
 
 const list = {
@@ -90,11 +91,38 @@ const list = {
   VE: 'Venezuela',
 };
 
+Notify.init({
+  timeout: 3000,
+  fontFamily: 'Montserrat',
+  fontSize: '14px',
+  cssAnimationStyle: 'from-top',
+  fontAwesomeIconSize: '50px',
+  info: {
+    background: 'rgba(128, 128, 128, 0.8)',
+    textColor: '#dc56c5',
+    notiflixIconColor: '#dc56c5',
+    childClassName: 'notiflix-notify-info',
+    fontAwesomeClassName: 'fas fa-info-circle',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
+    backOverlayColor: 'rgba(38,192,211,0.2)',
+  },
+  warning: {
+    background: 'rgba(128, 128, 128, 0.8)',
+    textColor: 'rgb(134, 23, 23)',
+    childClassName: 'notiflix-notify-warning',
+    notiflixIconColor: 'rgb(134, 23, 23)',
+    fontAwesomeClassName: 'fas fa-exclamation-circle',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
+    backOverlayColor: 'rgba(238,191,49,0.2)',
+  },
+});
+
 const dropdown = document.querySelector('.options-container');
 const selected = document.querySelector('[data-selected-country]');
 const searchBoxInput = document.querySelector('.search-box input');
 const arrow = document.querySelector('#arrow');
 const searchIcon = document.querySelector('#search-box__icon');
+const selectBox = document.querySelector('.header__search-wrapper');
 
 const keysOfCountries = Object.keys(list);
 let markup = keysOfCountries
@@ -113,6 +141,7 @@ selected.addEventListener('click', () => {
   dropdown.classList.toggle('active');
   searchBoxInput.classList.toggle('active');
   searchIcon.classList.toggle('active');
+  // window.addEventListener('click', closeDropdownByClick);
   searchBoxInput.addEventListener('keyup', inputValue);
   dropdown.addEventListener('change', selectCountry);
 
@@ -127,37 +156,49 @@ selected.addEventListener('click', () => {
 const optionsList = document.querySelectorAll('.option');
 
 async function selectCountry(e) {
-  const countryCode = e.target.value;
-  selected.textContent = list[countryCode] || 'Around the world';
-  apiQuery.country = countryCode;
-  apiQuery.currentPage = 0;
-  hideCountryDropdown();
+  try {
+    const countryCode = e.target.value;
+    selected.textContent = list[countryCode] || 'Around the world';
+    apiQuery.country = countryCode;
+    apiQuery.currentPage = 0;
+    hideCountryDropdown();
 
-  // Инициализация спинера
-  refs.gallery.innerHTML = '';
-  refs.loaderDiv.classList.add('on-loading');
-  refs.loader.classList.remove('is-hiden');
+    // Инициализация спинера
+    refs.gallery.innerHTML = '';
+    refs.loaderDiv.classList.add('on-loading');
+    refs.loader.classList.remove('is-hiden');
 
-  const searchResult = await apiQuery.search();
+    const searchResult = await apiQuery.search();
 
-  // if (!searchResult._embedded) return;
+    if (!searchResult._embedded) {
+      Notify.info('Unfortunately nothing found, please try to choose another country.');
+      refs.loader.classList.add('is-hiden');
+      return;
+    }
 
-  if (!searchResult._embedded) {
-    //доп проверка на нежелательный результат
-    //здесь можно поставить свою заплатку в случае если ничего не найдено
+    renderMarkup(searchResult._embedded.events);
+    // Прячем спиннер
     refs.loader.classList.add('is-hiden');
-    return;
+    refs.loaderDiv.classList.remove('on-loading');
+  } catch (error) {
+    Notify.warning('Oops, something went wrong...');
+    console.log(error.message);
+    refs.loader.classList.add('is-hiden');
   }
-
-  renderMarkup(searchResult._embedded.events);
   paginationByEvents(searchResult.page); //pagination
-
-  // Прячем спинер
-  refs.loader.classList.add('is-hiden');
-  refs.loaderDiv.classList.remove('on-loading');
 }
 
+// function closeDropdownByClick(e) {
+//   console.log(e);
+//   if (e.target !== selectBox) {
+//     console.log(e);
+//     hideCountryDropdown();
+//     return;
+//   }
+// }
+
 function hideCountryDropdown() {
+  // window.removeEventListener('click', closeDropdownByClick);
   dropdown.removeEventListener('change', selectCountry);
   searchBoxInput.removeEventListener('keyup', inputValue);
   searchIcon.classList.remove('active');

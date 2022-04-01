@@ -1,5 +1,6 @@
 import apiQuery from './ticketmasterAPI'; //испорт апишки
 import debounce from 'lodash.debounce'; //лодаш(дебаунс)
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // var debounce = require('lodash.debounce');
 import { displayWindowSize } from './windowChangeListener';
 import { renderMarkup } from './templates/eventCard'; //импорт функции отрисовки
@@ -35,6 +36,8 @@ async function listenToSearch(a) {
     console.log('searchResult: ', searchResult);
 
     if (!searchResult._embedded) {
+      refs.loader.classList.add('is-hiden');
+      Notify.info('Sorry, there are no events on your request.');
       //доп проверка на нежелательный результат
       //здесь можно поставить свою заплатку в случае если ничего не найдено
       refs.loader.classList.add('is-hiden');
@@ -49,6 +52,8 @@ async function listenToSearch(a) {
     refs.loader.classList.add('is-hiden');
     refs.loaderDiv.classList.remove('on-loading');
   } catch (error) {
+    refs.loader.classList.add('is-hiden');
+    Notify.warning('Oops, something went wrong...');
     console.log(error.message);
   }
 }
