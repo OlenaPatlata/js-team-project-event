@@ -25,7 +25,6 @@ async function listenToSearch(a) {
   apiQuery.keyword = a.target.value.trim(); //установка поискового слова в запрос поиска
   try {
     const searchResult = await apiQuery.search(); //присвоение результатов запроса в переменную
-    paginationByEvents(searchResult.page); //pagination
     // console.log('searchResult: ', searchResult);
     if (!searchResult._embedded) {
       //доп проверка на нежелательный результат
@@ -34,6 +33,7 @@ async function listenToSearch(a) {
     }
     //console.log('searchResult: ', searchResult._embedded.events);
     renderMarkup(searchResult._embedded.events); //отрисовка карточек
+    paginationByEvents(searchResult.page); //pagination
     // console.log('renderMarkup: ', renderMarkup);
   } catch (error) {
     console.log(error.message);

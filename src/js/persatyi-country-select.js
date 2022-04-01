@@ -136,7 +136,6 @@ async function selectCountry(e) {
 
   paginationByEvents(searchResult.page); //pagination
   renderMarkup(searchResult._embedded.events);
-  console.log(searchResult);
 }
 
 function hideCountryDropdown() {

@@ -22,7 +22,7 @@ async function paginationByEvents(page) {
   if (last) last.textContent = lastPage;
 }
 
-async function pagination({ size, totalElements }) {
+async function pagination({ size, totalElements, totalPages }) {
   const options = {
     totalItems: totalElements > 980 ? 980 : totalElements,
     itemsPerPage: size,
@@ -44,7 +44,9 @@ async function pagination({ size, totalElements }) {
   };
 
   const pagination = new Pagination('pagination', options);
+  const lastPage = refs.pagination.querySelector('.tui-ico-last');
 
+  if (lastPage && totalPages <= 3) lastPage.style.display = 'none';
   // const nextArrow = refs.pagination.querySelector('.tui-ico-next');
   // nextArrow.innerHTML = `&#8594`;
 
