@@ -121,6 +121,7 @@ const selected = document.querySelector('[data-selected-country]');
 const searchBoxInput = document.querySelector('.search-box input');
 const arrow = document.querySelector('#arrow');
 const searchIcon = document.querySelector('#search-box__icon');
+const selectBox = document.querySelector('.header__search-wrapper');
 
 const keysOfCountries = Object.keys(list);
 let markup = keysOfCountries
@@ -139,6 +140,7 @@ selected.addEventListener('click', () => {
   dropdown.classList.toggle('active');
   searchBoxInput.classList.toggle('active');
   searchIcon.classList.toggle('active');
+  // window.addEventListener('click', closeDropdownByClick);
   searchBoxInput.addEventListener('keyup', inputValue);
   dropdown.addEventListener('change', selectCountry);
 
@@ -172,7 +174,17 @@ async function selectCountry(e) {
   }
 }
 
+// function closeDropdownByClick(e) {
+//   console.log(e);
+//   if (e.target !== selectBox) {
+//     console.log(e);
+//     hideCountryDropdown();
+//     return;
+//   }
+// }
+
 function hideCountryDropdown() {
+  // window.removeEventListener('click', closeDropdownByClick);
   dropdown.removeEventListener('change', selectCountry);
   searchBoxInput.removeEventListener('keyup', inputValue);
   searchIcon.classList.remove('active');
