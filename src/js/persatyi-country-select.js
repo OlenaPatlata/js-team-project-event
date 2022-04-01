@@ -4,6 +4,7 @@ import refs from './eventGallery'; //импорт ссылок на элемен
 import 'animate.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { paginationByEvents } from './pagination';
+import pageShowHide from './templates/paginationShowHide';
 
 const list = {
   US: 'United States Of America',
@@ -173,10 +174,13 @@ async function selectCountry(e) {
     if (!searchResult._embedded) {
       Notify.info('Unfortunately nothing found, please try to choose another country.');
       refs.loader.classList.add('is-hiden');
+      pageShowHide.hide();
       return;
     }
 
     renderMarkup(searchResult._embedded.events);
+    paginationByEvents(searchResult.page);
+    pageShowHide.show();
     // Прячем спиннер
     refs.loader.classList.add('is-hiden');
     refs.loaderDiv.classList.remove('on-loading');
@@ -185,7 +189,6 @@ async function selectCountry(e) {
     console.log(error.message);
     refs.loader.classList.add('is-hiden');
   }
-  paginationByEvents(searchResult.page); //pagination
 }
 
 // function closeDropdownByClick(e) {
