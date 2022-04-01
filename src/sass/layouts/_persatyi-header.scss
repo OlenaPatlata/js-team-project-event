@@ -349,3 +349,7 @@
 .search-box input:focus {
   outline: none;
 }
+
+.notiflix-notify-info {
+  @include font(400, 14px, 1.2, 0.03em);
+}

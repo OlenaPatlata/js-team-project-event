@@ -1,5 +1,6 @@
 import apiQuery from './ticketmasterAPI'; //испорт апишки
 import debounce from 'lodash.debounce'; //лодаш(дебаунс)
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // var debounce = require('lodash.debounce');
 import { displayWindowSize } from './windowChangeListener';
 import { renderMarkup } from './templates/eventCard'; //импорт функции отрисовки
@@ -25,6 +26,7 @@ async function listenToSearch(a) {
     const searchResult = await apiQuery.search(); //присвоение результатов запроса в переменную
     // console.log('searchResult: ', searchResult);
     if (!searchResult._embedded) {
+      Notify.info('Sorry, there are no events on your request.');
       //доп проверка на нежелательный результат
       //здесь можно поставить свою заплатку в случае если ничего не найдено
       return;
@@ -33,6 +35,7 @@ async function listenToSearch(a) {
     renderMarkup(searchResult._embedded.events); //отрисовка карточек
     // console.log('renderMarkup: ', renderMarkup);
   } catch (error) {
+    Notify.warning('Oops, something went wrong...');
     console.log(error.message);
   }
 }

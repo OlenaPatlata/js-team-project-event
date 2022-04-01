@@ -1,6 +1,8 @@
 import apiQuery from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
 import 'animate.css';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const list = {
   US: 'United States Of America',
@@ -88,6 +90,32 @@ const list = {
   VE: 'Venezuela',
 };
 
+Notify.init({
+  timeout: 3000,
+  fontFamily: 'Montserrat',
+  fontSize: '14px',
+  cssAnimationStyle: 'from-top',
+  fontAwesomeIconSize: '50px',
+  info: {
+    background: 'rgba(128, 128, 128, 0.8)',
+    textColor: '#dc56c5',
+    notiflixIconColor: '#dc56c5',
+    childClassName: 'notiflix-notify-info',
+    fontAwesomeClassName: 'fas fa-info-circle',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
+    backOverlayColor: 'rgba(38,192,211,0.2)',
+  },
+  warning: {
+    background: 'rgba(128, 128, 128, 0.8)',
+    textColor: 'rgb(134, 23, 23)',
+    childClassName: 'notiflix-notify-warning',
+    notiflixIconColor: 'rgb(134, 23, 23)',
+    fontAwesomeClassName: 'fas fa-exclamation-circle',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
+    backOverlayColor: 'rgba(238,191,49,0.2)',
+  },
+});
+
 const dropdown = document.querySelector('.options-container');
 const selected = document.querySelector('[data-selected-country]');
 const searchBoxInput = document.querySelector('.search-box input');
@@ -125,15 +153,23 @@ selected.addEventListener('click', () => {
 const optionsList = document.querySelectorAll('.option');
 
 async function selectCountry(e) {
-  const countryCode = e.target.value;
-  selected.textContent = list[countryCode] || 'Around the world';
-  apiQuery.country = countryCode;
-  hideCountryDropdown();
-  const searchResult = await apiQuery.search();
+  try {
+    const countryCode = e.target.value;
+    selected.textContent = list[countryCode] || 'Around the world';
+    apiQuery.country = countryCode;
+    hideCountryDropdown();
+    const searchResult = await apiQuery.search();
 
-  if (!searchResult._embedded) return;
+    if (!searchResult._embedded) {
+      Notify.info('Unfortunately nothing found, please try to choose another country.');
+      return;
+    }
 
-  renderMarkup(searchResult._embedded.events);
+    renderMarkup(searchResult._embedded.events);
+  } catch (error) {
+    Notify.warning('Oops, something went wrong...');
+    console.log(error.message);
+  }
 }
 
 function hideCountryDropdown() {
