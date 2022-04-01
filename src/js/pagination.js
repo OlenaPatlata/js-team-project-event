@@ -2,6 +2,7 @@ import apiQuery from './ticketmasterAPI';
 import Pagination from 'tui-pagination';
 import { renderMarkup } from './templates/eventCard';
 import refsSpinner from './eventGallery';
+import pageShowHide from './templates/paginationShowHide';
 
 const refs = {
   cards: document.querySelector('#example_render_films'),
@@ -47,7 +48,7 @@ async function pagination({ size, totalElements, totalPages }) {
     lastPage.style.display = 'none';
   }
   pagination.on('afterMove', async event => {
-    refs.pagination.style.display = 'none';
+    pageShowHide.hide();
     window.scrollTo({
       top: 150,
       behavior: 'smooth',
@@ -68,7 +69,7 @@ async function pagination({ size, totalElements, totalPages }) {
 
     renderMarkup(events);
 
-    refs.pagination.style.display = 'block';
+    pageShowHide.show();
     refsSpinner.loader.classList.add('is-hiden');
     refsSpinner.loaderDiv.classList.remove('on-loading');
   });
