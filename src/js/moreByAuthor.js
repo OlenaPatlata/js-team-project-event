@@ -3,6 +3,7 @@ import { renderMarkup } from './templates/eventCard';
 import { btnMore, closeModal } from './modal-window';
 // строку ниже удалить после слияния
 import newAPIQuery from './newAPI';
+import { paginationByEvents } from './pagination';
 
 // заменить newAPIQuery на APIQuery после слияния
 const APIeventsByKey = new newAPIQuery();
@@ -42,6 +43,7 @@ export default async function moreBtnFunc() {
     // запись значения поиска в инпут
     refs.valueInput.value = name;
 
+    paginationByEvents(result.page);
     renderMarkup(resultArray);
   } catch (error) {
     console.log(error.message);

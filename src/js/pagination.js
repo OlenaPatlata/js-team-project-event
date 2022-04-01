@@ -11,25 +11,18 @@ const refs = {
 };
 // console.log(refs.cards.querySelector('.cards'));
 
-async function takeEvents(api) {
-  //   api.currentSize = 3;
-
-  const response = await api.getEvents();
-  const events = response._embedded.events;
-
-  renderMarkup(events);
-  pagination(response.page);
+async function paginationByEvents(page) {
+  pagination(page);
 
   const last = refs.pagination.querySelector('.tui-ico-last');
-  const totalItems = response.page.totalElements > 980 ? 980 : response.page.totalElements;
+  const totalItems = page.totalElements > 980 ? 980 : page.totalElements;
 
-  const lastPage = Math.ceil(totalItems / response.page.size);
+  const lastPage = Math.ceil(totalItems / page.size);
 
-  last.textContent = lastPage;
-  //   last.textContent = response.page.totalPages;
+  if (last) last.textContent = lastPage;
 }
 
-async function pagination({ size, totalElements }) {
+async function pagination({ size, totalElements, totalPages }) {
   const options = {
     totalItems: totalElements > 980 ? 980 : totalElements,
     itemsPerPage: size,
@@ -51,21 +44,25 @@ async function pagination({ size, totalElements }) {
   };
 
   const pagination = new Pagination('pagination', options);
+  const lastPage = refs.pagination.querySelector('.tui-ico-last');
 
-  const nextArrow = refs.pagination.querySelector('.tui-ico-next');
-  nextArrow.innerHTML = `&#8594`;
+  if (lastPage && totalPages <= 3) lastPage.style.display = 'none';
+  // const nextArrow = refs.pagination.querySelector('.tui-ico-next');
+  // nextArrow.innerHTML = `&#8594`;
 
   pagination.on('afterMove', async event => {
-    const prevArrow = refs.pagination.querySelector('.tui-ico-prev');
-    if (prevArrow) prevArrow.innerHTML = '&#8592';
+    // const prevArrow = refs.pagination.querySelector('.tui-ico-prev');
+    // if (prevArrow) prevArrow.innerHTML = '&#8592';
 
-    const currentPage = event.page;
+    const currentPage = event.page - 1;
     apiQuery.currentPage = currentPage;
 
     correctionPages(currentPage);
 
-    const res = await apiQuery.getEvents();
-    const events = res._embedded.events;
+    // const res = await apiQuery.getEvents();
+    const search = await apiQuery.search();
+
+    const events = search._embedded.events;
 
     renderMarkup(events);
   });
@@ -73,8 +70,8 @@ async function pagination({ size, totalElements }) {
 
 function correctionPages(currentPage) {
   const first = refs.pagination.querySelector('.tui-ico-first');
-  // console.log(currentPage <= 5);
-  if (first && currentPage <= 3) {
+
+  if (first && currentPage < 3) {
     first.style.display = 'none';
   } else if (first) {
     first.style.display = 'inline';
@@ -82,16 +79,4 @@ function correctionPages(currentPage) {
   if (first) first.textContent = 1;
 }
 
-// function renderEvents(items) {
-//   const list = refs.cards.querySelector('.cards');
-//   list.innerHTML = '';
-
-//   for (const item of items) {
-//     list.innerHTML += `<li>
-//         <img src="${item.images.map(image => image.url)[0]}" alt="">
-//     </li>`;
-//   }
-//   //   console.log('qwe');
-// }
-
-takeEvents(apiQuery);
+export { paginationByEvents };
