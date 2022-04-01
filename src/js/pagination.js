@@ -65,7 +65,7 @@ async function pagination({ size, totalElements, totalPages }) {
 }
 
 function checkFirstPage(currentPage) {
-  const first = refs.pagination.querySelector('.tui-ico-first');
+  const first = refs.pagination.querySelector('.tui-first');
 
   if (first && currentPage < 3) {
     first.style.display = 'none';
