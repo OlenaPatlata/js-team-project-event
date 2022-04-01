@@ -48,6 +48,7 @@ async function pagination({ size, totalElements, totalPages }) {
   }
   pagination.on('afterMove', async event => {
     refs.pagination.style.display = 'none';
+    const test = document.querySelector('#search');
     // Инициализация спинера
     // refs.
     refsSpinner.gallery.innerHTML = '';
