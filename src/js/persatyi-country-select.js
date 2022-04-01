@@ -130,6 +130,7 @@ async function selectCountry(e) {
   const countryCode = e.target.value;
   selected.textContent = list[countryCode] || 'Around the world';
   apiQuery.country = countryCode;
+  apiQuery.currentPage = 0;
   hideCountryDropdown();
 
   // Инициализация спинера
@@ -148,8 +149,8 @@ async function selectCountry(e) {
     return;
   }
 
-  paginationByEvents(searchResult.page); //pagination
   renderMarkup(searchResult._embedded.events);
+  paginationByEvents(searchResult.page); //pagination
 
   // Прячем спинер
   refs.loader.classList.add('is-hiden');
