@@ -14,6 +14,10 @@ const APIeventsByKey = new newAPIQuery();
 const refs = {
   valueInput: document.querySelector('.header__input'),
   fieldToClear: document.querySelector('.gallery'),
+  //Ссылки на элементы для спинера
+  loader: document.querySelector('.loader'),
+  loaderDiv: document.querySelector('.gallery-container'),
+  gallery: document.querySelector('.gallery'),
 };
 
 // это ОСНОВНАЯ ФУНКЦИЯ, заЭкспортить и подключить к нужной кнопке
@@ -37,6 +41,11 @@ export default async function moreBtnFunc() {
   // }
 
   try {
+    // Инициализация спинера
+    refs.gallery.innerHTML = '';
+    refs.loaderDiv.classList.add('on-loading');
+    refs.loader.classList.remove('is-hiden');
+
     const result = await apiQuery.search();
     console.log('result:', result);
     const resultArray = result._embedded.events;
@@ -46,6 +55,10 @@ export default async function moreBtnFunc() {
 
     paginationByEvents(result.page);
     renderMarkup(resultArray);
+
+    // Прячем спинер
+    refs.loader.classList.add('is-hiden');
+    refs.loaderDiv.classList.remove('on-loading');
   } catch (error) {
     console.log(error.message);
   }

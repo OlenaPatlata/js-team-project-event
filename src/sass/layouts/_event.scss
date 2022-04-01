@@ -15,6 +15,7 @@
   border-radius: 150px 0%;
   transform: translatex(-50%) scale(1);
   transition: transform 0.25s linear;
+
   @include mq(mobile) {
     width: 272px;
   }

@@ -11,13 +11,18 @@
   opacity: 1;
   transition: opacity 250ms linear, visibility 250ms linear;
   overflow-y: scroll;
+  transition-property: transform;
+  transition-duration: 500ms;
+  transition-timing-function: linear;
 
   &.is-hidden {
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
+    transform: rotate(180deg);
   }
 }
+
 .modal-close {
   position: absolute;
   z-index: 11;

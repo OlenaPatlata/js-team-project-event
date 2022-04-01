@@ -1,15 +1,12 @@
 import apiQuery from './ticketmasterAPI';
 import Pagination from 'tui-pagination';
-// import 'tui-pagination/dist/tui-pagination.css';
 import { renderMarkup } from './templates/eventCard';
-
-//=====================================================
+import refsSpinner from './eventGallery';
 
 const refs = {
   cards: document.querySelector('#example_render_films'),
   pagination: document.querySelector('#pagination'),
 };
-// console.log(refs.cards.querySelector('.cards'));
 
 async function paginationByEvents(page) {
   pagination(page);
@@ -50,6 +47,16 @@ async function pagination({ size, totalElements, totalPages }) {
     lastPage.style.display = 'none';
   }
   pagination.on('afterMove', async event => {
+    refs.pagination.style.display = 'none';
+    // Инициализация спинера
+    // refs.
+    refsSpinner.gallery.innerHTML = '';
+    refsSpinner.loaderDiv.classList.add('on-loading');
+    refsSpinner.loader.classList.remove('is-hiden');
+
+    // const prevArrow = refs.pagination.querySelector('.tui-ico-prev');
+    // if (prevArrow) prevArrow.innerHTML = '&#8592';
+
     const currentPage = event.page - 1;
     apiQuery.currentPage = currentPage;
 
@@ -60,6 +67,11 @@ async function pagination({ size, totalElements, totalPages }) {
     const events = search._embedded.events;
 
     renderMarkup(events);
+    refs.pagination.style.display = 'block';
+
+    // Прячем спинер
+    refsSpinner.loader.classList.add('is-hiden');
+    refsSpinner.loaderDiv.classList.remove('on-loading');
   });
   console.log(totalElements);
 }
