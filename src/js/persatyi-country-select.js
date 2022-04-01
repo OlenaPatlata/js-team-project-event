@@ -1,8 +1,9 @@
 import apiQuery from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
+import refs from './eventGallery'; //импорт ссылок на элементы для спинера
 import 'animate.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { Report } from 'notiflix/build/notiflix-report-aio';
+import { paginationByEvents } from './pagination';
 
 const list = {
   US: 'United States Of America',
@@ -159,7 +160,14 @@ async function selectCountry(e) {
     const countryCode = e.target.value;
     selected.textContent = list[countryCode] || 'Around the world';
     apiQuery.country = countryCode;
+    apiQuery.currentPage = 0;
     hideCountryDropdown();
+
+    // Инициализация спинера
+    refs.gallery.innerHTML = '';
+    refs.loaderDiv.classList.add('on-loading');
+    refs.loader.classList.remove('is-hiden');
+
     const searchResult = await apiQuery.search();
 
     if (!searchResult._embedded) {
@@ -172,6 +180,11 @@ async function selectCountry(e) {
     Notify.warning('Oops, something went wrong...');
     console.log(error.message);
   }
+  paginationByEvents(searchResult.page); //pagination
+
+  // Прячем спинер
+  refs.loader.classList.add('is-hiden');
+  refs.loaderDiv.classList.remove('on-loading');
 }
 
 // function closeDropdownByClick(e) {

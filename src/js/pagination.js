@@ -1,35 +1,25 @@
 import apiQuery from './ticketmasterAPI';
 import Pagination from 'tui-pagination';
-// import 'tui-pagination/dist/tui-pagination.css';
 import { renderMarkup } from './templates/eventCard';
-
-//=====================================================
+import refsSpinner from './eventGallery';
 
 const refs = {
   cards: document.querySelector('#example_render_films'),
   pagination: document.querySelector('#pagination'),
 };
-// console.log(refs.cards.querySelector('.cards'));
 
-async function takeEvents(api) {
-  //   api.currentSize = 3;
-
-  const response = await api.getEvents();
-  const events = response._embedded.events;
-
-  renderMarkup(events);
-  pagination(response.page);
+async function paginationByEvents(page) {
+  pagination(page);
 
   const last = refs.pagination.querySelector('.tui-ico-last');
-  const totalItems = response.page.totalElements > 980 ? 980 : response.page.totalElements;
+  const totalItems = page.totalElements > 980 ? 980 : page.totalElements;
 
-  const lastPage = Math.ceil(totalItems / response.page.size);
+  const lastPage = Math.ceil(totalItems / page.size);
 
-  last.textContent = lastPage;
-  //   last.textContent = response.page.totalPages;
+  if (last) last.textContent = lastPage;
 }
 
-async function pagination({ size, totalElements }) {
+async function pagination({ size, totalElements, totalPages }) {
   const options = {
     totalItems: totalElements > 980 ? 980 : totalElements,
     itemsPerPage: size,
@@ -51,30 +41,44 @@ async function pagination({ size, totalElements }) {
   };
 
   const pagination = new Pagination('pagination', options);
+  const lastPage = refs.pagination.querySelector('.tui-last');
 
-  const nextArrow = refs.pagination.querySelector('.tui-ico-next');
-  nextArrow.innerHTML = `&#8594`;
-
+  if (lastPage && totalPages <= 3) {
+    lastPage.style.display = 'none';
+  }
   pagination.on('afterMove', async event => {
-    const prevArrow = refs.pagination.querySelector('.tui-ico-prev');
-    if (prevArrow) prevArrow.innerHTML = '&#8592';
+    refs.pagination.style.display = 'none';
+    window.scrollTo({
+      top: 150,
+      behavior: 'smooth',
+    });
 
-    const currentPage = event.page;
+    refsSpinner.gallery.innerHTML = '';
+    refsSpinner.loaderDiv.classList.add('on-loading');
+    refsSpinner.loader.classList.remove('is-hiden');
+
+    const currentPage = event.page - 1;
     apiQuery.currentPage = currentPage;
 
-    correctionPages(currentPage);
+    checkFirstPage(currentPage);
+    checkLastPage(currentPage);
 
-    const res = await apiQuery.getEvents();
-    const events = res._embedded.events;
+    const search = await apiQuery.search();
+    const events = search._embedded.events;
 
     renderMarkup(events);
+
+    refs.pagination.style.display = 'block';
+    refsSpinner.loader.classList.add('is-hiden');
+    refsSpinner.loaderDiv.classList.remove('on-loading');
   });
+  console.log(totalElements);
 }
 
-function correctionPages(currentPage) {
-  const first = refs.pagination.querySelector('.tui-ico-first');
-  // console.log(currentPage <= 5);
-  if (first && currentPage <= 3) {
+function checkFirstPage(currentPage) {
+  const first = refs.pagination.querySelector('.tui-first');
+
+  if (first && currentPage < 3) {
     first.style.display = 'none';
   } else if (first) {
     first.style.display = 'inline';
@@ -82,16 +86,17 @@ function correctionPages(currentPage) {
   if (first) first.textContent = 1;
 }
 
-// function renderEvents(items) {
-//   const list = refs.cards.querySelector('.cards');
-//   list.innerHTML = '';
+function checkLastPage(currentPage) {
+  const lastPage = refs.pagination.querySelector('.tui-last');
 
-//   for (const item of items) {
-//     list.innerHTML += `<li>
-//         <img src="${item.images.map(image => image.url)[0]}" alt="">
-//     </li>`;
-//   }
-//   //   console.log('qwe');
-// }
+  const theLastPage = +lastPage.textContent;
+  const prevLastPage = currentPage + 2 === theLastPage;
+  const underPrevLastPage = currentPage + 3 === theLastPage;
+  if (prevLastPage || underPrevLastPage) {
+    lastPage.style.display = 'none';
+  } else {
+    lastPage.style.display = 'inline';
+  }
+}
 
-takeEvents(apiQuery);
+export { paginationByEvents };
