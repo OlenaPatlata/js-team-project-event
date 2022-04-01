@@ -24,7 +24,7 @@ async function pagination({ size, totalElements, totalPages }) {
   const options = {
     totalItems: totalElements > 980 ? 980 : totalElements,
     itemsPerPage: size,
-    visiblePages: 3,
+    visiblePages: 5,
     page: 1,
     centerAlign: false,
     firstItemClassName: 'tui-first-child',
