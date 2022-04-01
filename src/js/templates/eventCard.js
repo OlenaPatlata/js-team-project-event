@@ -10,9 +10,7 @@ const eventCardMarkup = events =>
         dates: {
           start: { localDate },
         },
-        _embedded: {
-          venues: [{ name: place }],
-        },
+        _embedded,
       }) => {
         // Изображение для обычных экранов
         const standardImage = images.filter(
@@ -30,21 +28,20 @@ const eventCardMarkup = events =>
         )[0]?.url;
 
         // Проверка на наличие свойств
-        const eventName = name ? name : 'See more info';
-        const location = place ? place : 'Click on me to see mo info';
+        const isVenuesTrue = _embedded?.venues[0]?.name;
+        const eventName = name || 'See more info';
+        const location = isVenuesTrue || 'Click on me to see mo info';
 
         return `
         <li class="gallery__item" data-id="${id}"> 
         <picture>
           <source
           srcset="
-          ${standardImage ? standardImage : images[0].url} 1x,
-          ${retinaImage ? standardImage : images[0].url} 2x,
+          ${standardImage || images[0].url} 1x,
+          ${retinaImage || images[0].url} 2x,
           " 
         />
-        <img class="gallery__image" src=${
-          standardImage ? standardImage : images[0].url
-        } alt=${eventName} />
+        <img class="gallery__image" src=${standardImage || images[0].url} alt=${eventName} />
         </picture>
         <div class="gallery__wrapper">
             <div class="gallery__marquee ">
