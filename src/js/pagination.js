@@ -1,19 +1,12 @@
 import apiQuery from './ticketmasterAPI';
 import Pagination from 'tui-pagination';
-// import 'tui-pagination/dist/tui-pagination.css';
 import { renderMarkup } from './templates/eventCard';
-
-//=====================================================
+import refsSpinner from './eventGallery';
 
 const refs = {
   cards: document.querySelector('#example_render_films'),
   pagination: document.querySelector('#pagination'),
-  //Ссылки на элементы для спинера
-  loader: document.querySelector('.loader'),
-  loaderDiv: document.querySelector('.gallery-container'),
-  gallery: document.querySelector('.gallery'),
 };
-// console.log(refs.cards.querySelector('.cards'));
 
 async function paginationByEvents(page) {
   pagination(page);
@@ -48,40 +41,42 @@ async function pagination({ size, totalElements, totalPages }) {
   };
 
   const pagination = new Pagination('pagination', options);
-  const lastPage = refs.pagination.querySelector('.tui-ico-last');
+  const lastPage = refs.pagination.querySelector('.tui-last');
 
-  if (lastPage && totalPages <= 3) lastPage.style.display = 'none';
-  // const nextArrow = refs.pagination.querySelector('.tui-ico-next');
-  // nextArrow.innerHTML = `&#8594`;
-
+  if (lastPage && totalPages <= 3) {
+    lastPage.style.display = 'none';
+  }
   pagination.on('afterMove', async event => {
-    // Инициализация спинера
-    refs.gallery.innerHTML = '';
-    refs.loaderDiv.classList.add('on-loading');
-    refs.loader.classList.remove('is-hiden');
+    refs.pagination.style.display = 'none';
+    window.scrollTo({
+      top: 150,
+      behavior: 'smooth',
+    });
 
-    // const prevArrow = refs.pagination.querySelector('.tui-ico-prev');
-    // if (prevArrow) prevArrow.innerHTML = '&#8592';
+    refsSpinner.gallery.innerHTML = '';
+    refsSpinner.loaderDiv.classList.add('on-loading');
+    refsSpinner.loader.classList.remove('is-hiden');
 
     const currentPage = event.page - 1;
     apiQuery.currentPage = currentPage;
 
-    correctionPages(currentPage);
+    checkFirstPage(currentPage);
+    checkLastPage(currentPage);
 
-    // const res = await apiQuery.getEvents();
     const search = await apiQuery.search();
-
     const events = search._embedded.events;
 
     renderMarkup(events);
-    // Прячем спинер
-    refs.loader.classList.add('is-hiden');
-    refs.loaderDiv.classList.remove('on-loading');
+
+    refs.pagination.style.display = 'block';
+    refsSpinner.loader.classList.add('is-hiden');
+    refsSpinner.loaderDiv.classList.remove('on-loading');
   });
+  console.log(totalElements);
 }
 
-function correctionPages(currentPage) {
-  const first = refs.pagination.querySelector('.tui-ico-first');
+function checkFirstPage(currentPage) {
+  const first = refs.pagination.querySelector('.tui-first');
 
   if (first && currentPage < 3) {
     first.style.display = 'none';
@@ -89,6 +84,19 @@ function correctionPages(currentPage) {
     first.style.display = 'inline';
   }
   if (first) first.textContent = 1;
+}
+
+function checkLastPage(currentPage) {
+  const lastPage = refs.pagination.querySelector('.tui-last');
+
+  const theLastPage = +lastPage.textContent;
+  const prevLastPage = currentPage + 2 === theLastPage;
+  const underPrevLastPage = currentPage + 3 === theLastPage;
+  if (prevLastPage || underPrevLastPage) {
+    lastPage.style.display = 'none';
+  } else {
+    lastPage.style.display = 'inline';
+  }
 }
 
 export { paginationByEvents };

@@ -1,5 +1,6 @@
 import apiQuery from './ticketmasterAPI'; //испорт апишки
 import debounce from 'lodash.debounce'; //лодаш(дебаунс)
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // var debounce = require('lodash.debounce');
 import { displayWindowSize } from './windowChangeListener';
 import { renderMarkup } from './templates/eventCard'; //импорт функции отрисовки
@@ -24,6 +25,7 @@ async function listenToSearch(a) {
     countrySearchIcon.classList.remove('active');
   }
   apiQuery.keyword = a.target.value.trim(); //установка поискового слова в запрос поиска
+  apiQuery.currentPage = 0;
   try {
     // Инициализация спинера
     refs.gallery.innerHTML = '';
@@ -31,21 +33,27 @@ async function listenToSearch(a) {
     refs.loader.classList.remove('is-hiden');
 
     const searchResult = await apiQuery.search(); //присвоение результатов запроса в переменную
-    // console.log('searchResult: ', searchResult);
+    console.log('searchResult: ', searchResult);
+
     if (!searchResult._embedded) {
+      refs.loader.classList.add('is-hiden');
+      Notify.info('Sorry, there are no events on your request.');
       //доп проверка на нежелательный результат
       //здесь можно поставить свою заплатку в случае если ничего не найдено
+      refs.loader.classList.add('is-hiden');
       return;
     }
     //console.log('searchResult: ', searchResult._embedded.events);
     renderMarkup(searchResult._embedded.events); //отрисовка карточек
-    paginationByEvents(searchResult.page); //pagination
+    paginationByEvents(searchResult.page);
     // console.log('renderMarkup: ', renderMarkup);
 
     // Прячем спинер
     refs.loader.classList.add('is-hiden');
     refs.loaderDiv.classList.remove('on-loading');
   } catch (error) {
+    refs.loader.classList.add('is-hiden');
+    Notify.warning('Oops, something went wrong...');
     console.log(error.message);
   }
 }
