@@ -20,6 +20,7 @@ const refs = {
 export default async function moreBtnFunc() {
   // APIeventsByKey.eventKeyWord = btnMore;
   apiQuery.keyword = btnMore;
+  apiQuery.currentPage = 0;
   refs.fieldToClear.innerHTML = '';
   closeModal();
   // try {

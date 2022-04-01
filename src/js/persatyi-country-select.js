@@ -129,6 +129,7 @@ async function selectCountry(e) {
   const countryCode = e.target.value;
   selected.textContent = list[countryCode] || 'Around the world';
   apiQuery.country = countryCode;
+  apiQuery.currentPage = 0;
   hideCountryDropdown();
   const searchResult = await apiQuery.search();
 

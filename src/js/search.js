@@ -23,6 +23,7 @@ async function listenToSearch(a) {
     countrySearchIcon.classList.remove('active');
   }
   apiQuery.keyword = a.target.value.trim(); //установка поискового слова в запрос поиска
+  apiQuery.currentPage = 0;
   try {
     const searchResult = await apiQuery.search(); //присвоение результатов запроса в переменную
     // console.log('searchResult: ', searchResult);

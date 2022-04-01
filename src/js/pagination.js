@@ -60,8 +60,8 @@ async function pagination({ size, totalElements, totalPages }) {
     const events = search._embedded.events;
 
     renderMarkup(events);
-    console.log(lastPage);
   });
+  console.log(totalElements);
 }
 
 function checkFirstPage(currentPage) {
