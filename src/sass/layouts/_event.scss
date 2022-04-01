@@ -1,7 +1,7 @@
 .modal {
   position: absolute;
   top: 5%;
-  left: 50%;
+  left: calc(50% - 465px);
   transform: translate(-50%, -50%);
   width: 100%;
   min-height: 915px;
@@ -14,10 +14,11 @@
   color: var(--primary-black-color);
   border-radius: 150px 0%;
   transform: translatex(-50%) scale(1);
-  transition: transform 0.25s linear;
+  transition: transform 0.1ms linear;
 
   @include mq(mobile) {
     width: 272px;
+    left: calc(50% - 136px);
   }
   @include mq(tablet) {
     padding-top: 28px;
@@ -27,6 +28,7 @@
     width: 595px;
     min-height: 831px;
     border-radius: 300px 0%;
+    left: calc(50% - 298px);
   }
   @include mq(desktop) {
     padding-top: 62px;
@@ -34,6 +36,7 @@
     padding-left: 30px;
     width: 930px;
     max-height: 1029px;
+    left: calc(50% - 465px);
   }
 
   &__icon--close {
@@ -48,6 +51,10 @@
     align-items: center;
   }
 }
+
+// .animate__animated.animate__rubberBand {
+//   animate-duration: 500ms;
+// }
 
 .round__wrapper {
   width: 102px;

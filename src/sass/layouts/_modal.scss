@@ -11,9 +11,9 @@
   opacity: 1;
   transition: opacity 250ms linear, visibility 250ms linear;
   overflow-y: scroll;
-  transition-property: transform;
-  transition-duration: 250ms;
-  transition-timing-function: linear;
+  // transition-property: transform;
+  // transition-duration: 250ms;
+  // transition-timing-function: linear;
   transform: scale(1);
 
   &.is-hidden {
