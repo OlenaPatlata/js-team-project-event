@@ -16,6 +16,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   color: var(--primary-white-color);
   @include font(400, 14px, 1.2, 0.03em);
+  background-color: var(--primary-black-color);
 }
 
 .container {
