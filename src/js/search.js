@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce'; //лодаш(дебаунс)
 // var debounce = require('lodash.debounce');
 import { displayWindowSize } from './windowChangeListener';
 import { renderMarkup } from './templates/eventCard'; //импорт функции отрисовки
-
+import { paginationByEvents } from './pagination';
 import refs from './eventGallery'; //импорт ссылок на элементы для спинера
 
 let search = document.getElementById('search'); //поиск елемента(инпута) по айди
@@ -39,6 +39,7 @@ async function listenToSearch(a) {
     }
     //console.log('searchResult: ', searchResult._embedded.events);
     renderMarkup(searchResult._embedded.events); //отрисовка карточек
+    paginationByEvents(searchResult.page); //pagination
     // console.log('renderMarkup: ', renderMarkup);
 
     // Прячем спинер

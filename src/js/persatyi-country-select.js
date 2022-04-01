@@ -2,6 +2,7 @@ import apiQuery from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
 import refs from './eventGallery'; //импорт ссылок на элементы для спинера
 import 'animate.css';
+import { paginationByEvents } from './pagination';
 
 const list = {
   US: 'United States Of America',
@@ -140,6 +141,7 @@ async function selectCountry(e) {
 
   if (!searchResult._embedded) return;
 
+  paginationByEvents(searchResult.page); //pagination
   renderMarkup(searchResult._embedded.events);
 
   // Прячем спинер

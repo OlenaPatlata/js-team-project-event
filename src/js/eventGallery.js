@@ -1,6 +1,7 @@
 import apiQuery from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
 import { displayWindowSize } from './windowChangeListener';
+import { paginationByEvents } from './pagination';
 
 const refs = {
   loader: document.querySelector('.loader'),
@@ -20,6 +21,8 @@ async function renderGallery() {
 
     refs.loader.classList.add('is-hiden');
     refs.loaderDiv.classList.remove('on-loading');
+
+    paginationByEvents(events.page);
   } catch (error) {
     console.log(error);
   }
