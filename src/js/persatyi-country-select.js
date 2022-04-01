@@ -172,19 +172,20 @@ async function selectCountry(e) {
 
     if (!searchResult._embedded) {
       Notify.info('Unfortunately nothing found, please try to choose another country.');
+      refs.loader.classList.add('is-hiden');
       return;
     }
 
     renderMarkup(searchResult._embedded.events);
+    // Прячем спиннер
+    refs.loader.classList.add('is-hiden');
+    refs.loaderDiv.classList.remove('on-loading');
   } catch (error) {
     Notify.warning('Oops, something went wrong...');
     console.log(error.message);
+    refs.loader.classList.add('is-hiden');
   }
   paginationByEvents(searchResult.page); //pagination
-
-  // Прячем спинер
-  refs.loader.classList.add('is-hiden');
-  refs.loaderDiv.classList.remove('on-loading');
 }
 
 // function closeDropdownByClick(e) {

@@ -35,6 +35,7 @@ async function listenToSearch(a) {
     const searchResult = await apiQuery.search(); //присвоение результатов запроса в переменную
     // console.log('searchResult: ', searchResult);
     if (!searchResult._embedded) {
+      refs.loader.classList.add('is-hiden');
       Notify.info('Sorry, there are no events on your request.');
       //доп проверка на нежелательный результат
       //здесь можно поставить свою заплатку в случае если ничего не найдено
@@ -49,6 +50,7 @@ async function listenToSearch(a) {
     refs.loader.classList.add('is-hiden');
     refs.loaderDiv.classList.remove('on-loading');
   } catch (error) {
+    refs.loader.classList.add('is-hiden');
     Notify.warning('Oops, something went wrong...');
     console.log(error.message);
   }
