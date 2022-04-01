@@ -86,9 +86,9 @@ export default function makeOneEventMarkup(dataEvent) {
         } ${priceRanges ? priceRanges[0].min + '-' : ' '}${priceRanges ? priceRanges[0].max : ' '}
           ${priceRanges ? priceRanges[0].currency : ' '}
         </div>
-        <a href="${priceRanges ? url : ''}" class="event__item--link uppercase" ${
-    priceRanges ? 'target="_blank"' : ''
-  } rel="nofollow noopener noreferrer"
+        <a ${priceRanges ? 'href="' + url + '"' : ''} class="event__item--link uppercase ${
+    priceRanges ? '' : 'disabled'
+  }" ${priceRanges ? 'target="_blank"' : ''} rel="nofollow noopener noreferrer"
           >BUY TICKETS</a
         >
         <div class="event__item--info">
@@ -102,9 +102,9 @@ export default function makeOneEventMarkup(dataEvent) {
   }
           ${priceRanges?.[1] ? priceRanges[1].currency : ' '}
         </div>
-        <a href="${priceRanges?.[1] ? url : ''}" class="event__item--link uppercase" ${
-    priceRanges?.[1] ? 'target="_blank"' : ''
-  } rel="nofollow noopener noreferrer"
+        <a ${priceRanges?.[1] ? 'href="' + url + '"' : ''} class="event__item--link uppercase ${
+    priceRanges?.[1] ? '' : 'disabled'
+  }" ${priceRanges?.[1] ? 'target="_blank"' : ''} rel="nofollow noopener noreferrer"
           >BUY TICKETS</a
         >
       </li>

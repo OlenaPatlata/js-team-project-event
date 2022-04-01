@@ -213,6 +213,9 @@
   &__item--link:not(:last-child) {
     margin-bottom: 20px;
   }
+  &__item--link.disabled {
+    background-color: #b2a0db;
+  }
 }
 
 .button__container.event__btn {
