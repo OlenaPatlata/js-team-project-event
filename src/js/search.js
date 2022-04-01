@@ -32,10 +32,12 @@ async function listenToSearch(a) {
     refs.loader.classList.remove('is-hiden');
 
     const searchResult = await apiQuery.search(); //присвоение результатов запроса в переменную
-    // console.log('searchResult: ', searchResult);
+    console.log('searchResult: ', searchResult);
+
     if (!searchResult._embedded) {
       //доп проверка на нежелательный результат
       //здесь можно поставить свою заплатку в случае если ничего не найдено
+      refs.loader.classList.add('is-hiden');
       return;
     }
     //console.log('searchResult: ', searchResult._embedded.events);

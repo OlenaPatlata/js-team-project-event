@@ -140,7 +140,14 @@ async function selectCountry(e) {
 
   const searchResult = await apiQuery.search();
 
-  if (!searchResult._embedded) return;
+  // if (!searchResult._embedded) return;
+
+  if (!searchResult._embedded) {
+    //доп проверка на нежелательный результат
+    //здесь можно поставить свою заплатку в случае если ничего не найдено
+    refs.loader.classList.add('is-hiden');
+    return;
+  }
 
   renderMarkup(searchResult._embedded.events);
   paginationByEvents(searchResult.page); //pagination
