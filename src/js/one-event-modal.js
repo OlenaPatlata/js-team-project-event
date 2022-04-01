@@ -18,17 +18,17 @@ export default function makeOneEventMarkup(dataEvent) {
       width >= 640 &&
       width < 2040 &&
       ratio === '3_2',
-  )[0].url;
+  )[0]?.url;
 
   const retinaImage = images.filter(
     ({ url, width, ratio }) =>
       url.toLowerCase().includes('retina') && width >= 640 && ratio === '3_2',
-  )[0].url;
+  )[0]?.url;
 
   const smallImage = images.filter(
     ({ url, width, ratio }) =>
       url.toLowerCase().includes('custom') && width < 640 && ratio === '4_3',
-  )[0].url;
+  )[0]?.url;
 
   return `<div class="round__wrapper">
   <picture>
