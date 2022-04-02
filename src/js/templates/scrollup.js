@@ -1,7 +1,7 @@
 //Get the button:
 scrollUp = document.getElementById('scroll_up');
 
-// When the user scrolls down 20px from the top of the document, show the button
+// When the user scrolls down 180px from the top of the document, show the button
 window.onscroll = function () {
   scrollFunction();
 };

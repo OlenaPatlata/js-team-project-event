@@ -44,7 +44,7 @@ async function pagination({ size, totalElements, totalPages }) {
   const pagination = new Pagination('pagination', options);
   const lastPage = refs.pagination.querySelector('.tui-last');
 
-  if (lastPage && totalPages <= 3) {
+  if (lastPage && totalPages <= 5) {
     lastPage.style.display = 'none';
   }
   pagination.on('afterMove', async event => {
@@ -62,7 +62,7 @@ async function pagination({ size, totalElements, totalPages }) {
     apiQuery.currentPage = currentPage;
 
     checkFirstPage(currentPage);
-    checkLastPage(currentPage);
+    checkLastPage(currentPage, totalPages);
 
     const search = await apiQuery.search();
     const events = search._embedded.events;
@@ -73,13 +73,12 @@ async function pagination({ size, totalElements, totalPages }) {
     refsSpinner.loader.classList.add('is-hiden');
     refsSpinner.loaderDiv.classList.remove('on-loading');
   });
-  console.log(totalElements);
 }
 
 function checkFirstPage(currentPage) {
   const first = refs.pagination.querySelector('.tui-first');
 
-  if (first && currentPage < 3) {
+  if (first && currentPage < 5) {
     first.style.display = 'none';
   } else if (first) {
     first.style.display = 'inline';
@@ -87,13 +86,11 @@ function checkFirstPage(currentPage) {
   if (first) first.textContent = 1;
 }
 
-function checkLastPage(currentPage) {
+function checkLastPage(currentPage, totalPages) {
   const lastPage = refs.pagination.querySelector('.tui-last');
 
-  const theLastPage = +lastPage.textContent;
-  const prevLastPage = currentPage + 2 === theLastPage;
-  const underPrevLastPage = currentPage + 3 === theLastPage;
-  if (prevLastPage || underPrevLastPage) {
+  const paginationElements = refs.pagination.querySelectorAll('a').length;
+  if ((paginationElements < 10 && currentPage > 6) || totalPages <= 5) {
     lastPage.style.display = 'none';
   } else {
     lastPage.style.display = 'inline';
