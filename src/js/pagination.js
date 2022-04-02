@@ -60,8 +60,9 @@ async function pagination({ size, totalElements, totalPages }) {
 
     const currentPage = event.page - 1;
     apiQuery.currentPage = currentPage;
+
     checkFirstPage(currentPage);
-    checkLastPage(currentPage);
+    checkLastPage(currentPage, totalPages);
 
     const search = await apiQuery.search();
     const events = search._embedded.events;
@@ -85,11 +86,11 @@ function checkFirstPage(currentPage) {
   if (first) first.textContent = 1;
 }
 
-function checkLastPage(currentPage) {
+function checkLastPage(currentPage, totalPages) {
   const lastPage = refs.pagination.querySelector('.tui-last');
 
   const paginationElements = refs.pagination.querySelectorAll('a').length;
-  if (paginationElements < 10 && currentPage > 6) {
+  if ((paginationElements < 10 && currentPage > 6) || totalPages <= 5) {
     lastPage.style.display = 'none';
   } else {
     lastPage.style.display = 'inline';
