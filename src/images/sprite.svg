@@ -26,6 +26,9 @@
 </symbol>
     <symbol id="icon-polygon" viewBox="0 0 52 32">
 <path d="M26 32l-25.981-30h51.962l-25.981 30z"></path>
+<symbol id="icon-to-top" viewBox="0 0 32 32">
+<path d="M14 24.238v7.762l-12-12 12-12v7.932c13.961 0.327 13.362-9.493 9.808-15.932 8.772 9.482 6.909 24.674-9.808 24.238z"></path>
+</symbol>
 </symbol>
 </defs>
 </svg>

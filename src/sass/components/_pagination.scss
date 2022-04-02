@@ -1,10 +1,13 @@
-#pagination {
+.container_pagination {
+  background-color: var(--primary-black-color);
   text-align: center;
   padding-top: 80px;
   padding-bottom: 10px;
-
-  background-color: var(--primary-black-color);
-
+}
+.is-hidden {
+  display: none;
+}
+#pagination {
   .tui-prev {
     display: none;
     padding: 0;

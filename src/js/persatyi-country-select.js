@@ -4,6 +4,7 @@ import refs from './eventGallery'; //импорт ссылок на элемен
 import 'animate.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { paginationByEvents } from './pagination';
+import pageShowHide from './templates/paginationShowHide';
 
 const list = {
   US: 'United States Of America',
@@ -122,7 +123,6 @@ const selected = document.querySelector('[data-selected-country]');
 const searchBoxInput = document.querySelector('.search-box input');
 const arrow = document.querySelector('#arrow');
 const searchIcon = document.querySelector('#search-box__icon');
-const selectBox = document.querySelector('.header__search-wrapper');
 
 const keysOfCountries = Object.keys(list);
 let markup = keysOfCountries
@@ -135,15 +135,15 @@ let markup = keysOfCountries
   .join('');
 
 dropdown.insertAdjacentHTML('beforeend', markup);
+searchBoxInput.addEventListener('keyup', inputValue);
+dropdown.addEventListener('change', selectCountry);
+document.addEventListener('click', closeDropdownByClick);
 
 selected.addEventListener('click', () => {
   arrow.classList.toggle('active');
-  dropdown.classList.toggle('active');
   searchBoxInput.classList.toggle('active');
   searchIcon.classList.toggle('active');
-  // window.addEventListener('click', closeDropdownByClick);
-  searchBoxInput.addEventListener('keyup', inputValue);
-  dropdown.addEventListener('change', selectCountry);
+  dropdown.classList.toggle('active');
 
   searchBoxInput.value = '';
   filterList('');
@@ -173,10 +173,13 @@ async function selectCountry(e) {
     if (!searchResult._embedded) {
       Notify.info('Unfortunately nothing found, please try to choose another country.');
       refs.loader.classList.add('is-hiden');
+      pageShowHide.hide();
       return;
     }
 
     renderMarkup(searchResult._embedded.events);
+    paginationByEvents(searchResult.page);
+    pageShowHide.show();
     // Прячем спиннер
     refs.loader.classList.add('is-hiden');
     refs.loaderDiv.classList.remove('on-loading');
@@ -185,22 +188,20 @@ async function selectCountry(e) {
     console.log(error.message);
     refs.loader.classList.add('is-hiden');
   }
-  paginationByEvents(searchResult.page); //pagination
 }
 
-// function closeDropdownByClick(e) {
-//   console.log(e);
-//   if (e.target !== selectBox) {
-//     console.log(e);
-//     hideCountryDropdown();
-//     return;
-//   }
-// }
+function closeDropdownByClick(e) {
+  if (
+    dropdown.classList.contains('active') &&
+    e.target !== selected &&
+    e.target !== searchBoxInput
+  ) {
+    hideCountryDropdown();
+    return;
+  }
+}
 
 function hideCountryDropdown() {
-  // window.removeEventListener('click', closeDropdownByClick);
-  dropdown.removeEventListener('change', selectCountry);
-  searchBoxInput.removeEventListener('keyup', inputValue);
   searchIcon.classList.remove('active');
   arrow.classList.remove('active');
   dropdown.classList.remove('active');

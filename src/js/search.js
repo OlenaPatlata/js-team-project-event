@@ -5,6 +5,8 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { displayWindowSize } from './windowChangeListener';
 import { renderMarkup } from './templates/eventCard'; //импорт функции отрисовки
 import { paginationByEvents } from './pagination';
+import pageShowHide from './templates/paginationShowHide';
+
 import refs from './eventGallery'; //импорт ссылок на элементы для спинера
 
 let search = document.getElementById('search'); //поиск елемента(инпута) по айди
@@ -40,12 +42,14 @@ async function listenToSearch(a) {
       Notify.info('Sorry, there are no events on your request.');
       //доп проверка на нежелательный результат
       //здесь можно поставить свою заплатку в случае если ничего не найдено
+      pageShowHide.hide();
       refs.loader.classList.add('is-hiden');
       return;
     }
     //console.log('searchResult: ', searchResult._embedded.events);
     renderMarkup(searchResult._embedded.events); //отрисовка карточек
     paginationByEvents(searchResult.page);
+    pageShowHide.show();
     // console.log('renderMarkup: ', renderMarkup);
 
     // Прячем спинер
