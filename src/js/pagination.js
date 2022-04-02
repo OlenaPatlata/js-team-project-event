@@ -3,6 +3,7 @@ import Pagination from 'tui-pagination';
 import { renderMarkup } from './templates/eventCard';
 import refsSpinner from './eventGallery';
 import pageShowHide from './templates/paginationShowHide';
+import { removeElement } from './background';
 
 const refs = {
   cards: document.querySelector('#example_render_films'),
@@ -68,6 +69,7 @@ async function pagination({ size, totalElements, totalPages }) {
     const events = search._embedded.events;
 
     renderMarkup(events);
+    removeElement();
 
     pageShowHide.show();
     refsSpinner.loader.classList.add('is-hiden');

@@ -1,6 +1,44 @@
 .header {
   & .container {
     margin: 0 auto;
+
+    @include mq(tablet) {
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0px;
+        right: calc(100% / 2 - 384px);
+        width: 1px;
+        height: 300px;
+        background-color: var(--decor-gray-color);
+      }
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0px;
+        left: calc(100% / 2 - 384px);
+        width: 1px;
+        height: 300px;
+        background-color: var(--decor-gray-color);
+      }
+    }
+
+    @include mq(desktop) {
+      &::after {
+        content: '';
+        height: 400px;
+        right: calc(100% / 2 - 512px);
+      }
+
+      &::before {
+        content: '';
+        height: 400px;
+        left: calc(100% / 2 - 512px);
+      }
+    }
   }
 
   max-width: 480px;
