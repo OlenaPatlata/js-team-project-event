@@ -1,7 +1,7 @@
 #scroll_up {
   display: none;
   position: fixed;
-  bottom: 20px;
+  bottom: 85px;
   right: 30px;
   z-index: 8;
   border: 1px solid var(--primary-pink-color);
@@ -13,6 +13,8 @@
   border-radius: 10px;
   transform: rotateY(180deg);
   @media screen and (min-width: 768px) {
+    bottom: 80px;
+    right: 50px;
     padding: 5px;
     &:hover {
       background-color: var(--tertiary-gray-color);
