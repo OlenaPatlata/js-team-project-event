@@ -15,10 +15,7 @@ const eventCardMarkup = events =>
         // Изображение для обычных экранов
         const standardImage = images.filter(
           ({ url, width, ratio }) =>
-            url.toLowerCase().includes('tablet_landscape') &&
-            width >= 640 &&
-            width < 2040 &&
-            ratio === '3_2',
+            !url.toLowerCase().includes('retina') && width < 700 && ratio === '3_2',
         )[0]?.url;
 
         // Изображение для Retina экранов
@@ -41,7 +38,10 @@ const eventCardMarkup = events =>
           ${retinaImage || images[0].url} 2x,
           " 
         />
-        <img class="gallery__image" src=${standardImage || images[0].url} alt=${eventName} />
+        <img class="gallery__image" src=${standardImage || images[0].url} 
+        alt=${eventName}
+        loading="lazy" 
+        />
         </picture>
         <div class="gallery__wrapper">
             <div class="gallery__marquee ">

@@ -19,14 +19,20 @@ async function renderGallery() {
     const events = await apiQuery.getEvents();
     renderMarkup(events._embedded.events);
 
+    const cards = document.querySelectorAll('.gallery__item');
+    cards.forEach(card => card.classList.add('showCard'));
+
     refs.loader.classList.add('is-hiden');
     refs.loaderDiv.classList.remove('on-loading');
-
     paginationByEvents(events.page);
   } catch (error) {
     console.log(error);
   }
 }
+
+// function removeClass(el) {
+//   el.forEach(card => card.classList.remove('showCard'));
+// }
 
 renderGallery();
 
