@@ -50,6 +50,14 @@
 
   &__underline {
     text-decoration: underline;
+    padding: 2px 0;
+    &:hover,
+    &:focus {
+      border-radius: 5px;
+      cursor: pointer;
+      color: var(--primary-pink-color);
+      box-shadow: 0 5px 2px 0px rgba(220, 86, 197, 0.3), 5px 2px 2px 0px rgba(220, 86, 197, 0.3);
+    }
   }
 }
 
