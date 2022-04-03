@@ -8,3 +8,4 @@ import './js/search';
 import './js/moreByAuthor';
 import './js/modal-window';
 import './js/team-list';
+import './js/background';

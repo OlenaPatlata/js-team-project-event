@@ -2,6 +2,7 @@ import apiQuery from './ticketmasterAPI';
 import { renderMarkup } from './templates/eventCard';
 import { displayWindowSize } from './windowChangeListener';
 import { paginationByEvents } from './pagination';
+import { removeElement } from './background';
 
 const refs = {
   loader: document.querySelector('.loader'),
@@ -12,12 +13,14 @@ const refs = {
 async function renderGallery() {
   try {
     refs.loaderDiv.classList.add('on-loading');
+    removeElement();
     refs.loader.classList.remove('is-hiden');
 
     displayWindowSize();
 
     const events = await apiQuery.getEvents();
     renderMarkup(events._embedded.events);
+    removeElement();
 
     const cards = document.querySelectorAll('.gallery__item');
     cards.forEach(card => card.classList.add('showCard'));
