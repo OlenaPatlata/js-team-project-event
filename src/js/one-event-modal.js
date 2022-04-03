@@ -9,7 +9,7 @@ export default function makeOneEventMarkup(dataEvent) {
     },
     name,
     priceRanges,
-    _embedded: { venues, attractions },
+    _embedded,
     images,
   } = dataEvent;
 
@@ -30,6 +30,11 @@ export default function makeOneEventMarkup(dataEvent) {
     ({ url, width, ratio }) =>
       url.toLowerCase().includes('custom') && width < 640 && ratio === '4_3',
   )[0]?.url;
+
+  const vipArr = priceRanges?.filter(({ type }) => type.toLowerCase().includes('vip'));
+  console.log(vipArr);
+
+  let shortName = _embedded?.attractions?.[0].name || name || '';
 
   return `<div class="round__wrapper">
   <picture>
@@ -66,10 +71,12 @@ export default function makeOneEventMarkup(dataEvent) {
       <li class="event__item">
         <h3 class="event__item--title uppercase">WHERE</h3>
         <p class="event__item--info">${
-          venues?.[0].city?.name ? venues[0].city.name : 'Infomation missing'
-        },${venues?.[0].country?.name ? venues[0].country.name : 'Infomation missing'}</p>
+          _embedded?.venues?.[0].city?.name ? _embedded?.venues[0].city.name : 'Infomation missing'
+        },${
+    _embedded?.venues?.[0].country?.name ? _embedded?.venues[0].country.name : 'Infomation missing'
+  }</p>
         <p class="event__item--info">${
-          venues?.[0].address?.line1 ? venues[0].address.line1 : ''
+          _embedded?.venues?.[0].address?.line1 ? _embedded?.venues[0].address.line1 : ''
         }</p>
       </li>
       <li class="event__item">
@@ -81,15 +88,15 @@ export default function makeOneEventMarkup(dataEvent) {
         <div class="event__item--info"> ${
           priceRanges
             ? '<span class="event__item--bigicon"></span><span class="event__item--smallicon"></span><span class="event__item--bigicon"></span><span class="event__item--smallicon"></span><span class="event__item--smallicon"></span><span class="event__item--smallicon"></span><span class="event__item--bigicon"></span>' +
-              priceRanges[0].type
+              priceRanges[0]?.type
             : 'Standart tickets missing'
-        } ${priceRanges ? priceRanges[0].min + '-' : ' '}${priceRanges ? priceRanges[0].max : ' '}
-          ${priceRanges ? priceRanges[0].currency : ' '}
+        } ${priceRanges ? priceRanges[0]?.min + '-' : ' '}${priceRanges ? priceRanges[0]?.max : ' '}
+          ${priceRanges ? priceRanges[0]?.currency : ' '}
         </div>
-        <a ${priceRanges ? 'href="' + url + '"' : ''} class="event__item--link uppercase ${
-    priceRanges ? '' : 'disabled'
-  }" ${priceRanges ? 'target="_blank"' : ''} rel="nofollow noopener noreferrer"
-          >BUY TICKETS</a
+        <a ${url ? 'href="' + url + '"' : ''} class="event__item--link uppercase ${
+    url ? '' : 'disabled'
+  }" ${url ? 'target="_blank"' : ''} rel="nofollow noopener noreferrer"
+          >${priceRanges ? 'BUY TICKETS' : 'Continue...'}</a
         >
         <div class="event__item--info">
           ${
@@ -112,9 +119,9 @@ export default function makeOneEventMarkup(dataEvent) {
   </div>
 </div>
 <div class="event__btn button__container">
-  <button type="button" class="btn--modal uppercase"  data-name="${
-    attractions?.[0].name ? attractions[0].name : ''
-  }">MORE FROM THIS AUTHOR</button>
+  <button type="button" class="btn--modal uppercase ${shortName === '' ? 'disabled' : ''}" ${
+    shortName === '' ? 'disabled' : ''
+  }  data-name="${shortName}">MORE FROM THIS AUTHOR</button>
 </div>
     `;
 }

@@ -163,7 +163,7 @@
     color: var(--primary-black-color);
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 3;
     overflow: hidden;
     @include mq(tablet) {
       text-align: start;
@@ -254,7 +254,17 @@
     color: var(--primary-pink-color);
   }
 }
+.btn--modal.disabled {
+  border: 1px solid #b2a0db;
+  color: #b2a0db;
+  cursor: default;
 
+  &:hover,
+  &:focus {
+    border: 1px solid #b2a0db;
+    color: #b2a0db;
+  }
+}
 .uppercase {
   text-transform: uppercase;
 }

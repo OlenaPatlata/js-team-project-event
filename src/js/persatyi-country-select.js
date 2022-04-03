@@ -5,6 +5,7 @@ import 'animate.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { paginationByEvents } from './pagination';
 import pageShowHide from './templates/paginationShowHide';
+import { removeElement } from './background';
 
 const list = {
   US: 'United States Of America',
@@ -137,9 +138,9 @@ let markup = keysOfCountries
 dropdown.insertAdjacentHTML('beforeend', markup);
 searchBoxInput.addEventListener('keyup', inputValue);
 dropdown.addEventListener('change', selectCountry);
-document.addEventListener('click', closeDropdownByClick);
 
 selected.addEventListener('click', () => {
+  document.addEventListener('click', closeDropdownByClick);
   arrow.classList.toggle('active');
   searchBoxInput.classList.toggle('active');
   searchIcon.classList.toggle('active');
@@ -166,6 +167,7 @@ async function selectCountry(e) {
     // Инициализация спинера
     refs.gallery.innerHTML = '';
     refs.loaderDiv.classList.add('on-loading');
+    removeElement();
     refs.loader.classList.remove('is-hiden');
 
     const searchResult = await apiQuery.search();
@@ -174,10 +176,12 @@ async function selectCountry(e) {
       Notify.info('Unfortunately nothing found, please try to choose another country.');
       refs.loader.classList.add('is-hiden');
       pageShowHide.hide();
+      removeElement();
       return;
     }
 
     renderMarkup(searchResult._embedded.events);
+    removeElement();
     paginationByEvents(searchResult.page);
     pageShowHide.show();
     // Прячем спиннер
@@ -185,6 +189,7 @@ async function selectCountry(e) {
     refs.loaderDiv.classList.remove('on-loading');
   } catch (error) {
     Notify.warning('Oops, something went wrong...');
+    removeElement();
     console.log(error.message);
     refs.loader.classList.add('is-hiden');
   }
@@ -202,6 +207,7 @@ function closeDropdownByClick(e) {
 }
 
 function hideCountryDropdown() {
+  document.removeEventListener('click', closeDropdownByClick);
   searchIcon.classList.remove('active');
   arrow.classList.remove('active');
   dropdown.classList.remove('active');
