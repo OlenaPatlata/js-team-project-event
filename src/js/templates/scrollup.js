@@ -1,36 +1,56 @@
 //Get the button:
-const search = document.querySelector('#search');
 const footer = document.querySelector('.footer__section');
 const scrolls = document.querySelector('#container_scrolls');
-const scrollUp = scrolls.querySelector('#scroll_up');
-const scrollDown = scrolls.querySelector('#scroll_down');
-
-const bottomOfPage = window.innerHeight + window.screenY >= document.body.offsetHeight;
+const scrollUp = document.querySelector('.scroll_up');
+const scrollDown = document.querySelector('.scroll_down');
 
 window.onscroll = () => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-    scrollDown.style.display = 'none';
+  if (window.innerHeight + window.scrollY + 1 >= document.body.offsetHeight) {
+    scrollDown.classList.add('scroll_hide');
   } else {
-    scrollDown.style.display = 'block';
+    scrollDown.classList.remove('scroll_hide');
   }
 
-  if (window.scrollY > 500) {
-    scrollUp.style.display = 'block';
+  if (window.scrollY > 280) {
+    scrollUp.classList.remove('scroll_hide');
   } else {
-    scrollUp.style.display = 'none';
+    scrollUp.classList.add('scroll_hide');
   }
 };
 
-scrolls.addEventListener('click', scrollFunction);
-function scrollFunction() {
-  if (scrollUp) {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+// scrollUp.onclick = () => {
+//   window.scrollTo(0, 0);
+// };
+
+// scrollDown.onclick = () => {
+//   footer.scrollIntoView();
+// };
+
+scrollUp.addEventListener('click', eventfunction);
+scrollDown.addEventListener('click', eventfunction);
+
+function eventfunction(e) {
+  if (e.currentTarget === scrollUp) {
+    window.scrollTo(0, 0);
+    return;
   }
-  if (scrollDown) {
+  if (e.currentTarget === scrollDown) {
     footer.scrollIntoView();
+    return;
   }
 }
+
+// scrolls.addEventListener('click', scrollFunction);
+// function scrollFunction(e) {
+//   console.log(e.currentTarget);
+//   if (scrollUp) {
+//     document.body.scrollTop = 0; // For Safari
+//     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+//   }
+//   // if (scrollDown) {
+//   //   footer.scrollIntoView();
+//   // }
+// }
 
 //=============================================
 // When the user scrolls down 180px from the top of the document, show the button

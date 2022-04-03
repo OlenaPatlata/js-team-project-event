@@ -1,5 +1,5 @@
-#scroll_up,
-#scroll_down {
+.scroll_up,
+.scroll_down {
   position: fixed;
   bottom: 85px;
   right: 30px;
@@ -7,14 +7,15 @@
   border: 1px solid var(--primary-pink-color);
   outline: none;
   background-color: var(--primary-black-color);
-  opacity: 0.7;
   cursor: pointer;
   padding: 3px;
   border-radius: 10px;
   transform: rotateY(180deg);
-  @media screen and (min-width: 768px) {
+  opacity: 0.7;
+  transition: opacity 250ms linear;
+  @include mq(tablet) {
     bottom: 90px;
-    right: 50px;
+    right: 40px;
     padding: 5px;
     &:hover {
       background-color: var(--tertiary-gray-color);
@@ -22,8 +23,8 @@
   }
   .scroll_up__icon,
   .scroll_down__icon {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     transform: rotateZ(90deg);
     fill: var(--primary-pink-color);
     @media screen and (min-width: 768px) {
@@ -32,18 +33,21 @@
     }
   }
 }
-#scroll_down {
+.scroll_down {
   bottom: 40px;
-  right: 30px;
-  // display: none;
   transform: rotateY(0deg);
   @media screen and (min-width: 768px) {
     bottom: 40px;
-    right: 50px;
   }
   .scroll_down__icon {
     transform: rotateZ(-90deg);
   }
+}
+
+.scroll_hide{
+  transition: opacity 250ms linear;
+  opacity: 0;
+  pointer-events: none;
 }
 
 html {
