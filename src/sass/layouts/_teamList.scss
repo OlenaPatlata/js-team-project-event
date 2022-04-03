@@ -163,6 +163,7 @@
         width: 105px;
         height: 105px;
         margin-bottom: 5px;
+        object-fit: cover;
     }
     @include mq(desktop) {
         width: 134px;
