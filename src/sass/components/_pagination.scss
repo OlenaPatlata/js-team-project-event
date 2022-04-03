@@ -10,11 +10,9 @@
 #pagination {
   .tui-prev {
     display: none;
-    padding: 0;
   }
   .tui-next {
     display: none;
-    padding: 0;
   }
   .tui-page-btn {
     width: 30px;
@@ -22,11 +20,9 @@
     border: none;
     font-size: 16px;
     color: var(--primary-white-color);
-    padding: 5px 10px;
-    .tui-ico-first {
-      // display: none;
-      // color: red;
-      // background-color: red;
+    padding: 5px 5px;
+    @media screen and (min-width: 768px) {
+          padding: 5px 10px;
     }
   }
   .tui-is-selected {

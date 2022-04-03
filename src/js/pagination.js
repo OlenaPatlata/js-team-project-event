@@ -42,6 +42,12 @@ async function pagination({ size, totalElements, totalPages }) {
   };
 
   const pagination = new Pagination('pagination', options);
+
+  const nextArrow = refs.pagination.querySelector('.tui-ico-next');
+  if (nextArrow) {
+    nextArrow.innerHTML = `&#8594`;
+  }
+
   const lastPage = refs.pagination.querySelector('.tui-last');
 
   if (lastPage && totalPages <= 5) {
@@ -72,6 +78,11 @@ async function pagination({ size, totalElements, totalPages }) {
     pageShowHide.show();
     refsSpinner.loader.classList.add('is-hiden');
     refsSpinner.loaderDiv.classList.remove('on-loading');
+
+    const prevArrow = refs.pagination.querySelector('.tui-ico-prev');
+    if (prevArrow) {
+      prevArrow.innerHTML = `&#8594`;
+    }
   });
 }
 

@@ -30,6 +30,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "notiflix": "^3.2.5",
+    "throttle": "^1.0.3",
     "tui-pagination": "^3.4.1"
   }
 }
