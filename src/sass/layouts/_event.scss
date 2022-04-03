@@ -254,7 +254,17 @@
     color: var(--primary-pink-color);
   }
 }
+.btn--modal.disabled {
+  border: 1px solid #b2a0db;
+  color: #b2a0db;
+  cursor: default;
 
+  &:hover,
+  &:focus {
+    border: 1px solid #b2a0db;
+    color: #b2a0db;
+  }
+}
 .uppercase {
   text-transform: uppercase;
 }

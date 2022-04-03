@@ -119,7 +119,9 @@ export default function makeOneEventMarkup(dataEvent) {
   </div>
 </div>
 <div class="event__btn button__container">
-  <button type="button" class="btn--modal uppercase"  data-name="${shortName}">MORE FROM THIS AUTHOR</button>
+  <button type="button" class="btn--modal uppercase ${shortName === '' ? 'disabled' : ''}" ${
+    shortName === '' ? 'disabled' : ''
+  }  data-name="${shortName}">MORE FROM THIS AUTHOR</button>
 </div>
     `;
 }
