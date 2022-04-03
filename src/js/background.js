@@ -5,20 +5,21 @@ function removeElement() {
   const galleryHeight = eventList.offsetHeight;
 
   if (galleryHeight === 0) {
-    eventList.classList.add('remove-element');
-    galleryContainer.classList.add('remove-element');
+    addClass();
   }
 
   if (galleryHeight < 1000) {
-    eventList.classList.remove('remove-element');
-    galleryContainer.classList.remove('remove-element');
-    eventList.classList.add('remove-element');
-    galleryContainer.classList.add('remove-element');
+    addClass();
     return;
   }
 
   eventList.classList.remove('remove-element');
   galleryContainer.classList.remove('remove-element');
+}
+
+function addClass() {
+  eventList.classList.add('remove-element');
+  galleryContainer.classList.add('remove-element');
 }
 
 export { removeElement };
