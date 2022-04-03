@@ -43,4 +43,4 @@ var t=arguments[3],e="Expected a function",n=NaN,r="[object Symbol]",i=/^\s+|\s+
 },{"./ticketmasterAPI":"cj27","./templates/eventCard":"rvsi","./modal-window":"WcsN","./newAPI":"ttzp","./pagination":"o8lo"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/ticketmasterAPI"),require("./js/persatyi-country-select"),require("./js/eventGallery"),require("./js/pagination"),require("./js/templates/scrollup"),require("./js/search"),require("./js/moreByAuthor"),require("./js/modal-window"),require("./js/background");
 },{"./sass/main.scss":"clu1","./js/ticketmasterAPI":"cj27","./js/persatyi-country-select":"hItn","./js/eventGallery":"BxwW","./js/pagination":"o8lo","./js/templates/scrollup":"gpkE","./js/search":"HU2o","./js/moreByAuthor":"AkJ4","./js/modal-window":"WcsN","./js/background":"JlD7"}]},{},["Focm"], null)
-//# sourceMappingURL=/Team_New_JS_Project/src.af527fd9.js.map
+//# sourceMappingURL=/Team_New_JS_Project/src.203f5c97.js.map
