@@ -32,8 +32,10 @@ const handleError = () => {
 
 // Функция для модального окна
 async function onModalOpenClick(e) {
+  eventListRef.removeEventListener('click', onModalOpenClick);
   const cardRef = e.target.closest('.gallery__item');
   if (e.target === e.currentTarget || !cardRef) {
+    eventListRef.addEventListener('click', onModalOpenClick);
     return;
   }
 
@@ -62,8 +64,6 @@ function openModal() {
 
   modalRef.classList.add('animate__animated');
   modalRef.classList.add('animate__pulse');
-
-  eventListRef.removeEventListener('click', onModalOpenClick);
 }
 
 function closeModal() {
