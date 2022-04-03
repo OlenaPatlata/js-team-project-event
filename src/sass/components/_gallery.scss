@@ -7,6 +7,7 @@
 
   @include mq(tablet) {
     padding-top: 20px;
+    padding-bottom: 15px;
     overflow-y: visible;
     overflow-x: hidden;
     border-right: 1px solid var(--decor-gray-color);
@@ -51,12 +52,14 @@
   }
 
   @media screen and(min-width:890px) {
-    padding-top: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
     overflow-x: visible;
   }
 
   @include mq(desktop) {
     padding-top: 15px;
+    padding-bottom: 15px;
     overflow-x: hidden;
 
     &::after {
@@ -76,7 +79,8 @@
   }
 
   @media screen and(min-width:1240px) {
-    padding-top: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
     overflow-x: visible;
   }
 
