@@ -20,7 +20,16 @@
     //     box-sizing: border-box;
     //     border-radius: 50px 0px;
     // }
+    @include mq(tablet) {
+        width: 698px;
+        height: 366px;
+        margin: 0;
+        margin-bottom: 15px;
+    }
     
+    @include mq(desktop) {
+        width: 930px;
+    }
 }
 
 .team__list {
@@ -32,6 +41,19 @@
     // height: 630px;
     &:hover {
         height: 730px;
+    }
+
+    @include mq(tablet) {
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 658px;
+        height: 330px;
+        &:hover {
+            height: 306px;
+        }
+    }
+    @include mq(desktop) {
+        width: 890px;
     }
 }
 
@@ -45,8 +67,8 @@
     flex-direction: column;
     overflow: hidden;
     flex-grow: 0;
-    flex-shrink: 0;
-    transition: flex-grow 500ms li;
+    transition: flex-grow 500ms linear;
+
     &:nth-child(1):hover {
         flex-grow: 2;
     }
@@ -65,15 +87,52 @@
     &:nth-child(6):hover {
         flex-grow: 2;
     }
+
+    @include mq(tablet) {
+        width: 70px;
+        height: 330px;
+        margin-right: 10px;
+        margin-left: 0;
+        justify-content: flex-start;
+    
+        &:nth-child(1):hover {
+            flex-grow: 2;
+        }
+    
+        &:nth-child(2):hover {
+            flex-grow: 2;
+        }
+    
+        &:nth-child(3):hover {
+            flex-grow: 2;
+        }
+    
+        &:nth-child(4):hover {
+            flex-grow: 2;
+        }
+    
+        &:nth-child(5):hover {
+            flex-grow: 2;
+        }
+    
+        &:nth-child(6):hover {
+            flex-grow: 2;
+        }
+    }
+    
+    @include mq(desktop) {
+        width: 110px;
+        margin-right: 15px;
+    }
 }
 
 .team__image {
-    transform: translateY();
     border-radius: 40px 0px;
-    
+    @include mq(tablet) {
+        margin-bottom: 5px;
+        transform: translateY(-75px);
     }
-    
-
+}
 
 .team__item-text {
     padding: 10px;
@@ -82,6 +141,20 @@
     border: 1px solid var(--primary-pink-color);
     box-sizing: border-box;
     border-radius: 50px 0px;
+    
+    @include mq(tablet) {
+        pointer-events: none;
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(0.1);
+        transform: translateY(260px);
+        &:hover {
+            pointer-events:visible;
+            opacity: 1;
+            visibility:visible;
+            transform: scale(1);
+        }
+    }
 }
 
 .team__item-name {
