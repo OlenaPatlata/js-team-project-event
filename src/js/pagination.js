@@ -57,6 +57,7 @@ async function pagination({ size, totalElements, totalPages }) {
 
     refsSpinner.gallery.innerHTML = '';
     refsSpinner.loaderDiv.classList.add('on-loading');
+    removeElement();
     refsSpinner.loader.classList.remove('is-hiden');
 
     const currentPage = event.page - 1;

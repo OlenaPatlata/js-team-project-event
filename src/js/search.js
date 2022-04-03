@@ -31,6 +31,7 @@ async function listenToSearch(a) {
   try {
     // Инициализация спинера
     refs.gallery.innerHTML = '';
+    removeElement();
     refs.loaderDiv.classList.add('on-loading');
     removeElement();
     refs.loader.classList.remove('is-hiden');

@@ -167,6 +167,7 @@ async function selectCountry(e) {
     // Инициализация спинера
     refs.gallery.innerHTML = '';
     refs.loaderDiv.classList.add('on-loading');
+    removeElement();
     refs.loader.classList.remove('is-hiden');
 
     const searchResult = await apiQuery.search();
