@@ -81,15 +81,15 @@ export default function makeOneEventMarkup(dataEvent) {
         <div class="event__item--info"> ${
           priceRanges
             ? '<span class="event__item--bigicon"></span><span class="event__item--smallicon"></span><span class="event__item--bigicon"></span><span class="event__item--smallicon"></span><span class="event__item--smallicon"></span><span class="event__item--smallicon"></span><span class="event__item--bigicon"></span>' +
-              priceRanges[0].type
+              priceRanges[0]?.type
             : 'Standart tickets missing'
-        } ${priceRanges ? priceRanges[0].min + '-' : ' '}${priceRanges ? priceRanges[0].max : ' '}
-          ${priceRanges ? priceRanges[0].currency : ' '}
+        } ${priceRanges ? priceRanges[0]?.min + '-' : ' '}${priceRanges ? priceRanges[0]?.max : ' '}
+          ${priceRanges ? priceRanges[0]?.currency : ' '}
         </div>
-        <a ${priceRanges ? 'href="' + url + '"' : ''} class="event__item--link uppercase ${
-    priceRanges ? '' : 'disabled'
-  }" ${priceRanges ? 'target="_blank"' : ''} rel="nofollow noopener noreferrer"
-          >BUY TICKETS</a
+        <a ${url ? 'href="' + url + '"' : ''} class="event__item--link uppercase ${
+    url ? '' : 'disabled'
+  }" ${url ? 'target="_blank"' : ''} rel="nofollow noopener noreferrer"
+          >${priceRanges ? 'BUY TICKETS' : 'Continue...'}</a
         >
         <div class="event__item--info">
           ${
