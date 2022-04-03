@@ -34,6 +34,8 @@ export default function makeOneEventMarkup(dataEvent) {
   const vipArr = priceRanges?.filter(({ type }) => type.toLowerCase().includes('vip'));
   console.log(vipArr);
 
+  let shortName = _embedded?.attractions?.[0].name || name || '';
+
   return `<div class="round__wrapper">
   <picture>
     <source srcset="${smallImage ? smallImage : images[0].url} 1x,
@@ -117,9 +119,9 @@ export default function makeOneEventMarkup(dataEvent) {
   </div>
 </div>
 <div class="event__btn button__container">
-  <button type="button" class="btn--modal uppercase"  data-name="${
-    _embedded?.attractions?.[0].name ? _embedded?.attractions[0].name : ''
-  }">MORE FROM THIS AUTHOR</button>
+  <button type="button" class="btn--modal uppercase ${shortName === '' ? 'disabled' : ''}" ${
+    shortName === '' ? 'disabled' : ''
+  }  data-name="${shortName}">MORE FROM THIS AUTHOR</button>
 </div>
     `;
 }
