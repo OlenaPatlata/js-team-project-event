@@ -10,7 +10,7 @@
       content: '';
       display: block;
       position: absolute;
-      bottom: -76px;
+      bottom: -70px;
       left: calc(100% / 2 - 384px);
       width: 1px;
       height: 500px;
@@ -38,7 +38,7 @@
   @include mq(desktop) {
     &::before {
       content: '';
-      bottom: -100px;
+      bottom: -60px;
       left: calc(100% / 2 - 512px);
       height: 500px;
     }
