@@ -3,7 +3,7 @@
 }
 
 .team {
-    width: 290px;
+    width: 280px;
     padding: 15px;
     margin: 0 auto;
     border-radius: 50px 0px;
@@ -80,7 +80,7 @@
     flex-direction: column;
     overflow: hidden;
     flex-grow: 0;
-    transition: flex-grow 500ms linear;
+    // transition: flex-grow 500ms linear;
 
     &:nth-child(1):hover {
         flex-grow: 2;
@@ -163,14 +163,6 @@
         width: 105px;
         height: 105px;
         margin-bottom: 5px;
-        
-        
-        // transform: translateY(-80px);
-        // &:nth-child(even) {
-        //     border-color: red;
-        //     background-color: red;
-        //     transform: translateY(-30px);
-        // }
     }
     @include mq(desktop) {
         width: 134px;
@@ -200,6 +192,7 @@
     @include mq(desktop) {
         width: 134px;
         height: 134px;
+        padding-top: 30px;
     }
 }
 
