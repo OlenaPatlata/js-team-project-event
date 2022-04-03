@@ -4,7 +4,7 @@
 
 .team {
     width: 290px;
-    padding: 20px;
+    padding: 15px;
     margin: 0 auto 15px auto;
     border-radius: 50px 0px;
     background-color: var(--primary-black-color);
@@ -31,13 +31,14 @@
     @include mq(tablet) {
         left: calc(50% - 349px);
         width: 698px;
-        height: 366px;
+        height: 136px;
         margin: 0;
         margin-bottom: 15px;
     }
     
     @include mq(desktop) {
         width: 930px;
+        height: 164px;
         left: calc(50% - 465px);
     }
 }
@@ -55,16 +56,16 @@
 
     @include mq(tablet) {
         flex-direction: row;
-        flex-wrap: wrap;
         // justify-content: flex-end;
         width: 658px;
-        height: 330px;
+        height: 105px;
         &:hover {
-            height: 330px;
+            height: 105px;
         }
     }
     @include mq(desktop) {
         width: 890px;
+        height: 134px;
     }
 }
 
@@ -100,16 +101,14 @@
     }
 
     @include mq(tablet) {
-        width: 100px;
-        height: 330px;
+        width: 105px;
+        height: 105px;
         margin-right: 0px;
         margin-left: 0;
-        justify-content: flex-start;
+        // justify-content: flex-start;
         flex-grow: 2;
-        &:nth-child(even) {
-            justify-content: end;
-            
-        }
+        position: relative;
+        // }
         &:not(:last-child) {
             margin-right: 5px;
         }
@@ -147,7 +146,8 @@
     }
     
     @include mq(desktop) {
-        width: 110px;
+        width: 134px;
+        height: 134px;
         align-items: center;
         &:not(:last-child) {
             margin-right: 15px;
@@ -156,11 +156,13 @@
 }
 
 .team__image {
-    border-radius: 40px 40px;
+    border-radius: 50px 0px;
     @include mq(tablet) {
         width: 105px;
         height: 105px;
         margin-bottom: 5px;
+        
+        
         // transform: translateY(-80px);
         // &:nth-child(even) {
         //     border-color: red;
@@ -169,8 +171,8 @@
         // }
     }
     @include mq(desktop) {
-        width: 130px;
-        height: 130px;
+        width: 134px;
+        height: 134px;
         margin-bottom: 10px;
     }
 }
@@ -185,9 +187,16 @@
     border-radius: 50px 0px;
     
     @include mq(tablet) {
-        // transform: translateY(350px);
+        position: absolute;
+        height: 105px;
+        width: 105px;
+        transform: (350px);
         
         
+    }
+    @include mq(desktop) {
+        width: 134px;
+        height: 134px;
     }
 }
 
