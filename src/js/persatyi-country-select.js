@@ -138,9 +138,9 @@ let markup = keysOfCountries
 dropdown.insertAdjacentHTML('beforeend', markup);
 searchBoxInput.addEventListener('keyup', inputValue);
 dropdown.addEventListener('change', selectCountry);
-document.addEventListener('click', closeDropdownByClick);
 
 selected.addEventListener('click', () => {
+  document.addEventListener('click', closeDropdownByClick);
   arrow.classList.toggle('active');
   searchBoxInput.classList.toggle('active');
   searchIcon.classList.toggle('active');
@@ -207,6 +207,7 @@ function closeDropdownByClick(e) {
 }
 
 function hideCountryDropdown() {
+  document.removeEventListener('click', closeDropdownByClick);
   searchIcon.classList.remove('active');
   arrow.classList.remove('active');
   dropdown.classList.remove('active');
