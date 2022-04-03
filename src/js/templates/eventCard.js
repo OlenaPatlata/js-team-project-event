@@ -1,4 +1,3 @@
-import { removeElement } from '../background';
 const eventList = document.querySelector('.gallery');
 
 const eventCardMarkup = events =>
