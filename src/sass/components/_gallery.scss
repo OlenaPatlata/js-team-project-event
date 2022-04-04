@@ -24,7 +24,6 @@
       height: 126px;
       border-radius: 50%;
       border: 1px solid var(--decor-gray-color);
-      backdrop-filter: blur(20px);
 
       background-image: radial-gradient(
         circle at center,
@@ -55,6 +54,14 @@
     padding-top: 0px;
     padding-bottom: 0px;
     overflow-x: visible;
+
+    &::after {
+      backdrop-filter: blur(20px);
+    }
+
+    .gallery::before {
+      backdrop-filter: blur(20px);
+    }
   }
 
   @include mq(desktop) {
@@ -120,7 +127,6 @@
       height: 126px;
       border-radius: 50%;
       border: 1px solid var(--decor-gray-color);
-      backdrop-filter: blur(20px);
 
       background-image: radial-gradient(
         circle at center,

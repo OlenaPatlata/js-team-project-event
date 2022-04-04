@@ -4,6 +4,7 @@ import { btnMore, closeModal } from './modal-window';
 // строку ниже удалить после слияния
 import newAPIQuery from './newAPI';
 import { paginationByEvents } from './pagination';
+import { removeElement } from './background';
 
 // заменить newAPIQuery на APIQuery после слияния
 const APIeventsByKey = new newAPIQuery();
@@ -43,6 +44,7 @@ export default async function moreBtnFunc() {
   try {
     // Инициализация спинера
     refs.gallery.innerHTML = '';
+    removeElement();
     refs.loaderDiv.classList.add('on-loading');
     refs.loader.classList.remove('is-hiden');
 
@@ -55,6 +57,7 @@ export default async function moreBtnFunc() {
 
     paginationByEvents(result.page);
     renderMarkup(resultArray);
+    removeElement();
 
     // Прячем спинер
     refs.loader.classList.add('is-hiden');
