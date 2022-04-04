@@ -13,7 +13,7 @@
   transform: rotateY(180deg);
   opacity: 0.7;
   transition: opacity 250ms linear;
-  @include mq(tablet) {
+  @include mq(desktop) {
     bottom: 90px;
     right: 40px;
     padding: 5px;
@@ -44,7 +44,7 @@
   }
 }
 
-.scroll_hide{
+.scroll_hide {
   transition: opacity 250ms linear;
   opacity: 0;
   pointer-events: none;
