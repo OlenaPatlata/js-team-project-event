@@ -1,0 +1,38 @@
+<section class="header">
+  <div class="container">
+    <a class="header__logo-bg animate__bounceIn" href="">
+      <svg class="header__logo animate__heartBeat" width="214px" height="180px">
+        <use href="./images/sprite.svg#icon-logo"></use>
+      </svg>
+    </a>
+    <div class="header__title-wrapper">
+      <h1 class="header__title">FIND BEST EVENTS AROUND THE WORLD</h1>
+    </div>
+    <div class="header__search-wrapper">
+      <input id="search" class="header__input" type="text" name="search" placeholder="Start searching" />
+      <svg class="header__search-icon" width="12" height="12">
+        <use href="./images/sprite.svg#search-icon"></use>
+      </svg>
+      <div class="header__wrapper-country">
+        <svg id="arrow" class="header__custom-arrow" width="15" height="10">
+          <use href="./images/sprite.svg#icon-polygon"></use>
+        </svg>
+        <div id="select-box" class="select-box">
+          <div class="selected header__countries" data-selected-country>Choose country</div>
+          <div class="search-box" id="search-box">
+            <input type="text" name="" id="country-query" placeholder="Start typing" />
+            <svg id="search-box__icon" class="search-box__icon" width="12" height="12">
+              <use href="./images/sprite.svg#search-icon"></use>
+            </svg>
+          </div>
+          <div class="options-container">
+            <div class="option">
+              <input value="" id="ALL" type="radio" class="radio" name="category" />
+              <label class="option-label" for="ALL">Around the world</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

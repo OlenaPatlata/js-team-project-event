@@ -1,0 +1,128 @@
+.footer {
+  & .container {
+    margin: 0 auto;
+
+    @include mq(tablet) {
+      position: relative;
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: -28px;
+        left: calc(100% / 2 - 450px);
+        width: 126px;
+        height: 62px;
+        border-top-left-radius: 62px;
+        border-top-right-radius: 62px;
+        border: 1px solid var(--decor-gray-color);
+        background-image: radial-gradient(
+          circle at bottom,
+          rgba(196, 196, 196, 0.03) 15%,
+          rgba(196, 196, 196, 0.03) 40%,
+          var(--primary-black-color) 40%,
+          var(--primary-black-color) 65%
+        );
+        z-index: 8;
+      }
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: -30px;
+        right: calc(100% / 2 - 384px);
+        width: 1px;
+        height: 500px;
+        background-color: var(--decor-gray-color);
+        z-index: 2;
+      }
+    }
+
+    @include mq(desktop) {
+      &::before {
+        content: '';
+        bottom: -30px;
+        left: calc(100% / 2 - 620px);
+        width: 216px;
+        height: 108px;
+        border-top-left-radius: 101px;
+        border-top-right-radius: 101px;
+      }
+
+      &::after {
+        content: '';
+        bottom: -30px;
+        right: calc(100% / 2 - 512px);
+        height: 500px;
+        z-index: 2;
+      }
+    }
+  }
+
+  background-color: var(--primary-black-color);
+  padding-top: 60px;
+  padding-bottom: 30px;
+
+  @include mq(tablet) {
+    br {
+      display: none;
+    }
+  }
+
+  @include mq(desktop) {
+    padding-top: 80px;
+    color: rgb(134, 23, 23);
+  }
+
+  &__text {
+    position: relative;
+    text-align: center;
+    font-family: 'Montserrat';
+    color: var(--secondary-gray-color);
+    @include font(400, 14px, 1.2, 0.01em);
+
+    @include mq(tablet) {
+      @include font(400, 16px, 1.25, 0.01em);
+    }
+  }
+
+  &__svg {
+    position: absolute;
+    bottom: 2px;
+    left: calc(100% / 2 - 13px);
+    display: block;
+    height: 13px;
+    width: 14px;
+    background-image: url('../images/favorite.svg');
+
+    @include mq(tablet) {
+      left: calc(65% + 2px);
+      bottom: 4px;
+    }
+    @include mq(desktop) {
+      left: calc(65% - 33px);
+    }
+  }
+
+  &__underline {
+    text-decoration: underline;
+    padding: 2px 0;
+    &:hover,
+    &:focus {
+      border-radius: 5px;
+      cursor: pointer;
+      color: var(--primary-pink-color);
+      box-shadow: 0 5px 2px 0px rgba(220, 86, 197, 0.3), 5px 2px 2px 0px rgba(220, 86, 197, 0.3);
+    }
+  }
+}
+
+.bottom__text {
+  display: block;
+  margin-top: 10px;
+  @include mq(tablet) {
+    margin: 0;
+    display: inline;
+  }
+}
