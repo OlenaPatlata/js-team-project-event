@@ -1,22 +1,41 @@
 //Get the button:
-scrollUp = document.getElementById('scroll_up');
+const footer = document.querySelector('.footer__section');
+const scrolls = document.querySelector('#container_scrolls');
+const scrollUp = document.querySelector('.scroll_up');
+const scrollDown = document.querySelector('.scroll_down');
 
-// When the user scrolls down 180px from the top of the document, show the button
-window.onscroll = function () {
-  scrollFunction();
+window.onscroll = () => {
+  if (window.innerHeight + window.scrollY + 1 >= document.body.offsetHeight) {
+    scrollDown.classList.add('scroll_hide');
+  } else {
+    scrollDown.classList.remove('scroll_hide');
+  }
+
+  if (window.scrollY > 280) {
+    scrollUp.classList.remove('scroll_hide');
+  } else {
+    scrollUp.classList.add('scroll_hide');
+  }
 };
 
-function scrollFunction() {
-  if (document.body.scrollTop > 180 || document.documentElement.scrollTop > 180) {
-    scrollUp.style.display = 'block';
-  } else {
-    scrollUp.style.display = 'none';
-  }
-}
+// scrollUp.onclick = () => {
+//   window.scrollTo(0, 0);
+// };
 
-// When the user clicks on the button, scroll to the top of the document
-scrollUp.addEventListener('click', topFunction);
-function topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+// scrollDown.onclick = () => {
+//   footer.scrollIntoView();
+// };
+
+scrollUp.addEventListener('click', eventfunction);
+scrollDown.addEventListener('click', eventfunction);
+
+function eventfunction(e) {
+  if (e.currentTarget === scrollUp) {
+    window.scrollTo(0, 0);
+    return;
+  }
+  if (e.currentTarget === scrollDown) {
+    footer.scrollIntoView();
+    return;
+  }
 }
