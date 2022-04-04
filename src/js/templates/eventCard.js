@@ -1,4 +1,5 @@
 const eventList = document.querySelector('.gallery');
+import { removeElement } from '../background';
 
 const eventCardMarkup = events =>
   events
@@ -71,8 +72,10 @@ const eventCardMarkup = events =>
 
 const renderMarkup = events => {
   eventList.innerHTML = '';
+  removeElement();
   const markup = eventCardMarkup(events);
   eventList.insertAdjacentHTML('beforeend', markup);
+  removeElement();
 };
 
 // Проверяет длинну строки названия события в зависимости от ширины экрана
