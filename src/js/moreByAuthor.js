@@ -49,7 +49,7 @@ export default async function moreBtnFunc() {
     refs.loader.classList.remove('is-hiden');
 
     const result = await apiQuery.search();
-    console.log('result:', result);
+    // console.log('result:', result);
     const resultArray = result._embedded.events;
     const { name } = resultArray[0];
     // запись значения поиска в инпут

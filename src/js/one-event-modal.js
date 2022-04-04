@@ -32,7 +32,7 @@ export default function makeOneEventMarkup(dataEvent) {
   )[0]?.url;
 
   const vipArr = priceRanges?.filter(({ type }) => type.toLowerCase().includes('vip'));
-  console.log(vipArr);
+  // console.log(vipArr);
 
   let shortName = _embedded?.attractions?.[0].name || name || '';
 
