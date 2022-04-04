@@ -58,7 +58,6 @@ async function pagination({ size, totalElements, totalPages }) {
     pageShowHide.hide();
     window.scrollTo({
       top: 150,
-      behavior: 'smooth',
     });
 
     refsSpinner.gallery.innerHTML = '';
