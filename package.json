@@ -3,20 +3,20 @@
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://olenapatlata.github.io/js-team-project-event",
+  "homepage": "https://olenapatlata.github.io/js-team-project-event/",
   "scripts": {
     "dev": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /js-team-project-event/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/olenapatlata/js-team-project-event.git"
+    "url": "git+https://github.com/OlenaPatlata/js-team-project-event.git"
   },
   "keywords": [],
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/olenapatlata/js-team-project-event/issues"
+    "url": "https://github.com/OlenaPatlata/js-team-project-event/issues"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5",
