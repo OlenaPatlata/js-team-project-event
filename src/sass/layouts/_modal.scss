@@ -45,7 +45,7 @@
   &:hover,
   &:focus {
     outline: none;
-    color: white;
+    color: var(--primary-white-color);
     background-color: var(--primary-blue-color);
   }
 }
